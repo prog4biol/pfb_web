@@ -1,0 +1,1014 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>Perl 6 - Subroutines and Modules</title>
+<link rel="stylesheet" href="../standard.css">
+</head>
+
+<body>
+
+<center>
+<h1>Perl6 - Subroutines and Modules</h1>
+<h3>Lincoln Stein</h3>
+</center>
+
+<h2>Suggested Reading</h2>
+
+<p>
+
+Chapters 4 and 11 of <cite>Learning Perl</cite>, especially the section <cite>Using Simple Modules</cite>. Chapter 6 of <cite>Beginning Perl for Bioinformatics</cite>.
+
+
+<h2>Lecture Notes</h2>
+
+<p>
+	<h3>Subroutines</h3>
+
+	<ol>
+	  <li><a href=#subroutines>Creating Subroutines</a>
+	  <li><a href=#subroutine_args>Subroutine Arguments</a>
+	  <li><a href=#subroutine_anatomy>Subroutine Position in Scripts</a>
+	</ol>
+<p>
+	<h3>Modules</h3>
+	<ol>
+	  <li><a href=#intro>Using a Module</a></li>
+	  <li><a href=#perldoc>Getting Module Documentation</a></li>
+	  <li><a href=#installing>Installing Modules</a></li>
+	  <li><a href=#where>Where are Modules Installed?</a></li>
+	  <li><a href=#anatomy>The Anatomy of a Module</a></li>
+	  <li><a href=#export>Exporting Variables &amp; Functions from Modules</a></li>
+	</ol>
+
+<h2>Problem Set</h2>
+<p>
+
+<ol>
+  <li>Write a subroutine to concatenate two strings of DNA.
+  </li>
+  <li>Write a subroutine to report the percentage of each nucleotide in DNA.
+     You've seen the plus operator +. You will also want to use the divide
+     operator / and the multiply operator *. Count the number of each
+     nucleotide, divide by the total length of the DNA, then multiply by 100
+     to get the percentage. Your arguments should be the DNA and the
+     nucleotide you want to report on. The <code>int</code> function can be
+     used to discard digits after the decimal point, if needed.
+  </li>
+  <li>Using the CPAN web site, locate a module for verifying credit
+      card numbers.  Download and build it (don't try to install it, because you need
+      root privileges to do this).
+  </li>
+  <li>Using the standard object-oriented Math::BigInt library, which
+      allows you to store really big integers, write a script that
+      will read in a 100+ digit integer and calculate its square root.
+  </li>
+  <li>(extra credit) Create a module that counts the number of times a
+      restriction site appears in a nucleotide string. The exported function
+      should be named count_sites() and should be called like this:
+      <pre>
+      $count = count_sites('name_of_site',$nucleotide_string);
+
+      # for example
+      $count = count_sites('ecoRI','GGGATTTGACCGGAATTCCGATCCCAAGGTTC');
+      </pre>
+      Hints: Use a parenthesized regular expression and assign the results
+      of a string match to an array. Store the relationships between
+      the name of a restriction site and its regular expression in a
+      hash.
+  </li>
+</ol>
+
+<hr>
+
+<a name="subroutines"><h1>Subroutines</h1></a>
+
+Subroutines are blocks of code that you can call in different places
+and contexts.  Subroutines can take arguments, and return results.
+
+<p>
+
+<i>Why is this useful?</i> Because it lets you solve a problem once
+and then reuse your solution over and over again. For example, say
+you've written a chunk of code that normalizes a DNA sequence by
+removing unwanted characters. By turning it into a named subroutine,
+you can reuse this piece of code over and over again within the same
+program without cutting and pasting. Later, you'll be able to put this
+subroutine into a personal code library and reuse it among many
+scripts.
+
+<p>
+
+Subroutines also make scripts shorter and easier to understand.
+
+<h2>Example: Cleansing a Sequence</h2>
+
+<p>Sequences that come out of GenBank are "contaminated" with line
+numbers and whitespace, like this:
+
+<blockquote><pre class="example">
+        1 aagacacgga agtagctccg aacaggaaga ggacgaaaaa aataaccgtc cgcgacgccg
+       61 agacaaaccg gacccgcaac caccatgaac agcaaaggcc aatatccaac acagccaacc
+      121 taccctgtgc agcctcctgg gaatccagta taccctcaga ccttgcatct tcctcaggct
+      181 ccaccctata ccgatgctcc acctgcctac tcagagctct atcgtccgag ctttgtgcac
+      241 ccaggggctg ccacagtccc caccatgtca gccgcatttc ctggagcctc tctgtatctt
+      301 cccatggccc agtctgtggc tgttgggcct ttaggttcca caatccccat ggcttattat
+      361 ccagtcggtc ccatctatcc acctggctcc acagtgctgg tggaaggagg gtatgatgca
+      421 ggtgccagat ttggagctgg ggctactgct ggcaacattc ctcctccacc tcctggatgc
+      481 cctcccaatg ctgctcagct tgcagtcatg cagggagcca acgtcctcgt aactcagcgg
+      541 aaggggaact tcttcatggg tggttcagat ggtggctaca ccatctggtg aggaaccaag
+      601 gccacctttg tgccgggaaa gacatcacat accttcagca cttctcacaa tgtaactgct
+      661 ttagtcatat taacctgaag ttgcagttta gacacatgtt gttggggtgt ctttctggtg
+      721 cccaaacttt caggcacttt tcaaatttaa taaggaacca tgtaatggta gcagtacctc
+      781 cctaaagcat tttgaggtag gggaggtatc cattcataaa atgaatgtgg gtgaagccgc
+      841 cctaaggatt ttcctttaat ttctctggag taatactgta ccatactggt ctttgctttt
+      901 agtaataaaa catcaaatta ggtttggagg gaactttgat cttcctaaga attaaagttg
+      961 ccaaattatt ctgattggtc tttaatctcc tttaagtctt tgatatatat tactttataa
+     1021 atggaacgca ttagttgtct gccttttcct ttccatccct tgccccaccc atcccatctc
+     1081 caaccctagt c
+</pre></blockquote>
+
+<p>
+
+You want to remove all this extraneous stuff and turn the sequence
+into a single long string:
+
+<blockquote><pre class="example">
+aagacacggaagtagctccgaacaggaagaggacgaaaaaaataaccgtccgcgacgccgagacaaaccggacccgcaaccaccatgaac...
+</pre></blockquote>
+
+<p> To do this, you've written several statements that lowercase the
+sequence, and remove whitespace. If the sequence contains unexpected
+characters after this, we die:
+
+<blockquote><pre class="code">
+$sequence = lc $sequence;  # translate everything into lower case
+$sequence =~ s/[\s\d]//g;  # remove whitespace and numbers
+$sequence =~ m/^[gatcn]+$/ or die "Sequence contains invalid characters!";
+</pre></blockquote>
+
+<p>
+
+We can turn this into a named subroutine with the following three
+steps:
+
+<ol>
+  <li>Turn it into a block:
+      <blockquote><pre class="code">
+      {
+        $sequence = lc $sequence;  # translate everything into lower case
+        $sequence =~ s/[\s\d]//g;  # remove whitespace and numbers
+        $sequence =~ m/^[gatcn]+$/ or die "Sequence contains invalid characters!";
+      }</pre></blockquote>
+  <li>Label the block with <code>sub <i>subroutine_name</i></code>:
+      <blockquote><pre class="code">
+      sub cleanup_sequence
+      {
+        $sequence = lc $sequence;  # translate everything into lower case
+        $sequence =~ s/[\s\d]//g;  # remove whitespace and numbers
+        $sequence =~ m/^[gatcn]+$/ or die "Sequence contains invalid characters!";
+      }</pre></blockquote>
+  <li>Add statements to read the subroutine argument(s) and return the
+      subroutine result(s):
+      <blockquote><pre class="code">
+      sub cleanup_sequence
+      {
+        my ($sequence) = @_;
+        $sequence = lc $sequence;  # translate everything into lower case
+        $sequence =~ s/[\s\d]//g;  # remove whitespace and numbers
+        $sequence =~ m/^[gatcn]+$/ or die "Sequence contains invalid characters!";
+        return $sequence;
+      }</pre></blockquote>
+</ol>
+
+<p>
+
+<code>cleanup_sequence()</code> now acts like a built-in function. It
+takes a list of arguments (in this case only one, the original
+sequence) and returns a list of results (in this case, only one, the
+cleaned-up sequence):
+
+
+<blockquote><pre class="code">
+my $seq;
+while (my $seqline = &lt;IN&gt;) { # read sequence from a file
+  my $clean   = cleanup_sequence($seqline);  # clean it up
+  $seq       .= $clean;                      # add it to full sequence
+}</pre></blockquote>
+
+<p>
+<hr>
+
+<a name="subroutine_args"><h1>Getting Data in and out of a Subroutine</h1></a>
+
+<p>When you invoke a subroutine, you pass it a list of arguments and
+receive a list of results:
+
+<blockquote><pre class="code">
+my @results = my_subroutine('arg1','arg2','arg3');
+</pre></blockquote>
+
+<p>
+
+You'll now see how subroutines can retrieve its arguments and return
+its results.
+
+<h2>Getting the Subroutine Arguments</h2>
+
+<p>
+
+Within the subroutine, the arguments are passed to it in an automatic
+("magic") array variable named <code>@_</code>. One common idiom is
+for the first statement in a subroutine to copy <code>@_</code> into a
+list of named variables:
+
+<blockquote><pre class="code">
+sub my_subroutine {
+   my ($arg1,$arg2,$arg3) = @_;
+   ...
+}
+</pre></blockquote>
+
+<h2>Returning the Subroutine Results</h2>
+
+<p>
+
+To return a list of results from a subroutine to its caller, use the
+<b>return</b> operator. Usually you will call <b>return</b> at the
+very end of the subroutine, but you can call it earlier in special
+cases if you want to exit the subroutine earlier.
+
+<p>
+
+This subroutine will add a PCR primer sequence to the beginning and
+end of a DNA sequence and return the result.
+
+<blockquote><pre class="code">
+sub add_linkers {
+   my ($linker,$sequence) = @_;
+   my $reverse_linker = $linker;
+   $reverse_linker    =~ tr/gatcGATC/ctagCTAG/;  # reverse complement it
+   my $result         = $linker . $sequence . $reverse_linker;
+   return $result;
+}
+</pre></blockquote>
+
+<p>
+
+You can return a single value, a list, or nothing:
+
+<blockquote><pre class="code">
+  return $single_value;  # scalar
+  return ('a','long','list','of','items');  # list
+  return @an_array;      # list contained in an array variable
+  return;                # return empty list or undef, depending on context
+</pre></blockquote>
+
+<hr>
+
+<a name="subroutine_anatomy"><h1>Subroutine Anatomy</h1></a>
+
+
+<h2>Anatomy of a Subroutine</h2>
+
+<p>
+
+<p>Lastly, the age old question, <i>Where do you put the subroutines in
+your script?</i>. Usually the subroutine definitions go at the bottom
+of the script, following the last statement.
+<br>
+<p>To visually separate the
+statements from the subroutine, you can add a comment line if you like.
+<br>
+<br>
+<table width="100%"><TR><TD class="code"><PRE>
+  #!/usr/bin/perl
+  use warnings;
+  use strict;
+  # comments describing what the script does
+  # more comments, including author and script name
+
+  my ($variables, $variables, @more_variables);   # declare some variables
+
+  while (my $line = &lt;IN&gt;) {
+     my @results = subroutine_1();
+     my $result  = subroutine_2(\@results);
+  }
+
+  do_something_at_end_of_script;
+
+
+  ### Subroutines ###
+
+  sub subroutine_1 {
+     my ($local1,$local2,$local3) = @_;
+     do_something;
+  }
+
+  sub subroutine_2 {
+     my ($local1,$local2,$local3) = @_;
+     do_something;
+  }</pre></td></tr>
+</table>
+
+<hr>
+
+<h1>Modules</h1>
+<p>
+<a name="intro"><h1>Using a Module</h1></a>
+
+<p>
+
+A module is a package of useful subroutines and variables that someone
+has put together.  Modules extend the ability of Perl.
+
+<h2>Example 1: The File::Basename Module</h2>
+
+<p>
+
+The <b>File::Basename</b> module is a standard module that is distributed
+with Perl.  When you load the <b>File::Basename</b> module, you get two
+new functions, <i>basename</i> and <i>dirname</i>.
+
+<p>
+
+<i>basename</i> takes a long UNIX path name and returns the file name at
+the end.  <i>dirname</i> takes a long UNIX path name and returns the
+directory part.
+
+<p>
+
+<table width="100%"><TR><TD class="code"><PRE>
+  
+  #!/usr/bin/perl
+  # file: basename.pl
+
+  use warnings;
+  use strict;
+  use File::Basename;
+
+  my $path = '/bush_home/bush1/lstein/C1829.fa';
+  my $base = basename($path);
+  my $dir  = dirname($path);
+
+  print "The base is $base and the directory is $dir.\n";
+</pre></td></tr></table>
+
+<p>
+
+The output of this program is:
+
+<p>
+
+<blockquote><pre>
+The base is C1829.fa and the directory is /bush_home/bush1/lstein.
+</pre></blockquote>
+
+<p>
+
+The <b>use</b> function loads up the module named
+<i>File::Basename</i> and <b>imports</b> the two functions.  If you
+didn't use <b>use</b>, then the program would print an error:
+
+<blockquote><pre>
+Undefined subroutine &amp;main::basename called at basename.pl line 8.
+</pre></blockquote>
+<p>
+
+<h2>Example 2: The Env Module</h2>
+
+<p>
+
+The <b>Env</b> module is a standard module that provides access to the
+environment variables.  When you load it, it <b>imports</b> a set of
+scalar variables corresponding to your environment.
+
+<p>
+
+<table width="100%"><TR><TD class="code"><PRE>
+#!/usr/bin/perl
+# file env.pl
+
+use warnings;
+use strict;
+use Env;
+
+print "My home is $HOME\n";
+print "My path is $PATH\n";
+print "My username is $USER\n";</pre></td></tr></table>
+
+<p>
+
+When this runs, the output is:
+
+<blockquote><pre>
+My home is /bush_home/bush1/lstein
+My path is /net/bin:/usr/bin:/bin:/usr/local/bin:/usr/X11R6/bin:/bush_home/bush1/lstein/bin:.
+My username is lstein
+</pre></blockquote>
+
+<p>
+
+<hr>
+
+<a name="perldoc"><h1>Finding out What Modules are Installed</h1></a>
+
+<p>
+
+Here are some tricks for finding out what modules are installed.
+
+<h2>Preinstalled Modules</h2>
+
+<p>
+
+To find out what modules come with perl, look in Appendix A of <i>Perl
+5 Pocket Reference</i>.  From the command line, use the <b>perldoc</b>
+command from the UNIX shell.  All the Perl documentation is available
+with this command:
+
+<blockquote><pre>
+% <b>perldoc perlmodlib</b>
+PERLMODLIB(1)  User Contributed Perl Documentation  PERLMODLIB(1)
+
+
+
+NAME
+       perlmodlib - constructing new Perl modules and finding
+       existing ones
+
+DESCRIPTION
+THE PERL MODULE LIBRARY
+       Many modules are included the Perl distribution.  These
+       are described below, and all end in .pm.  You may discover
+...
+       Standard Modules
+
+       Standard, bundled modules are all expected to behave in a
+       well-defined manner with respect to namespace pollution
+       because they use the Exporter module.  See their own docu-
+       mentation for details.
+
+       AnyDBM_File Provide framework for multiple DBMs
+
+       AutoLoader  Load subroutines only on demand
+
+       AutoSplit   Split a package for autoloading
+
+       B           The Perl Compiler
+...
+</pre></blockquote>
+
+<p>
+
+To learn more about a module, run <b>perldoc</b> with the module's
+name:
+
+<blockquote><pre>
+% <b>perldoc File::Basename</b>
+
+NAME
+       fileparse - split a pathname into pieces
+
+       basename - extract just the filename from a path
+
+       dirname - extract just the directory from a path
+
+SYNOPSIS
+           use File::Basename;
+
+           ($name,$path,$suffix) = fileparse($fullname,@suffixlist)
+           fileparse_set_fstype($os_string);
+           $basename = basename($fullname,@suffixlist);
+           $dirname = dirname($fullname);
+...
+</pre></blockquote>
+
+<br>
+<h2>Optional Modules that You May Have Installed</h2>
+
+<p>
+
+<b>perldoc perllocal</b> will list the names of locally installed
+modules.
+
+<p>
+
+<blockquote><pre>
+% <b>perldoc perllocal</b>
+       Thu Apr 27 16:01:31 2000: "Module" the DBI manpage
+
+
+       o   "installed into: /usr/lib/perl5/site_perl"
+
+       o   "LINKTYPE: dynamic"
+
+       o   "VERSION: 1.13"
+
+       o   "EXE_FILES: dbish dbiproxy"
+
+       Thu Apr 27 16:01:41 2000: "Module" the Data::ShowTable
+       manpage
+
+
+       o   "installed into: /usr/lib/perl5/site_perl"
+
+       o   "LINKTYPE: dynamic"
+
+       o   "VERSION: 3.3"
+
+       o   "EXE_FILES: showtable"
+
+       Tue May 16 18:26:27 2000: "Module" the Image::Magick man-
+       page
+...
+</pre></blockquote>
+
+<p>
+But often it's just easier to test directly using perl itself:
+
+<pre><blockquote>
+	% <b>perl -e 'use File::Basename;'</b>
+	%
+</blockquote></pre>
+If you get no error when you try to <code>use</code> the module, then the module is installed.
+<br>
+<br>
+<hr>
+
+<a name="installing"><h1>Installing Modules</h1></a>
+
+<p>
+
+You can find thousands of Perl Modules on CPAN, the Comprehensive Perl
+Archive Network:
+
+<blockquote>
+<a href="http://www.cpan.org">http://www.cpan.org</a>
+</blockquote>
+
+<h2>Installing Modules Manually</h2>
+
+<p>
+
+Search for the module on CPAN using the keyword search.  When you find
+it, download the .tar.gz module.  Then install it like this:
+
+<blockquote><pre>
+% <b>tar zxvf bioperl-1.6.1.tar.gz</b>
+bioperl-1.6.1/
+bioperl-1.6.1/Bio/
+bioperl-1.6.1/Bio/DB/
+bioperl-1.6.1/Bio/DB/Ace.pm
+bioperl-1.6.1/Bio/DB/GDB.pm
+bioperl-1.6.1/Bio/DB/GenBank.pm
+bioperl-1.6.1/Bio/DB/GenPept.pm
+bioperl-1.6.1/Bio/DB/NCBIHelper.pm
+bioperl-1.6.1/Bio/DB/RandomAccessI.pm
+bioperl-1.6.1/Bio/DB/SeqI.pm
+bioperl-1.6.1/Bio/DB/SwissProt.pm
+bioperl-1.6.1/Bio/DB/UpdateableSeqI.pm
+bioperl-1.6.1/Bio/DB/WebDBSeqI.pm
+bioperl-1.6.1/Bio/AlignIO.pm
+
+%  <b>perl Makefile.PL</b>
+Generated sub tests. go make show_tests to see available subtests
+...
+Writing Makefile for Bio
+
+% <b>make</b>
+cp Bio/Tools/Genscan.pm blib/lib/Bio/Tools/Genscan.pm
+cp Bio/Root/Err.pm blib/lib/Bio/Root/Err.pm
+cp Bio/Annotation/Reference.pm blib/lib/Bio/Annotation/Reference.pm
+cp bioback.pod blib/lib/bioback.pod
+cp Bio/AlignIO/fasta.pm blib/lib/Bio/AlignIO/fasta.pm
+cp Bio/Location/NarrowestCoordPolicy.pm blib/lib/Bio/Location/NarrowestCoordPolicy.pm
+cp Bio/AlignIO/clustalw.pm blib/lib/Bio/AlignIO/clustalw.pm
+cp Bio/Tools/Blast/Run/postclient.pl blib/lib/Bio/Tools/Blast/Run/postclient.pl
+cp Bio/LiveSeq/Intron.pm blib/lib/Bio/LiveSeq/Intron.pm
+...
+Manifying blib/man3/Bio::LiveSeq::Exon.3
+Manifying blib/man3/Bio::Location::CoordinatePolicyI.3
+Manifying blib/man3/Bio::SeqFeature::Similarity.3
+
+% <b>make test</b>
+PERL_DL_NONLAZY=1 /net/bin/perl -Iblib/arch -Iblib/lib
+ -I/net/lib/perl5/5.6.1/i686-linux -I/net/lib/perl5/5.6.1 -e 'use
+ Test::Harness qw(&runtests $verbose); $verbose=0; runtests @ARGV;' t/*.t
+t/AAChange..........ok                                                       
+t/AAReverseMutate...ok                                                       
+t/AlignIO...........ok                                                       
+t/Allele............ok
+...
+t/WWW...............ok                                                       
+All tests successful, 95 subtests skipped.
+Files=60, Tests=1011, 35 wallclock secs (25.47 cusr +  1.60 csys = 27.07 CPU)
+
+% <b>make install</b>
+Installing /net/lib/perl5/site_perl/5.6.1/bioback.pod
+Installing /net/lib/perl5/site_perl/5.6.1/biostart.pod
+Installing /net/lib/perl5/site_perl/5.6.1/biodesign.pod
+Installing /net/lib/perl5/site_perl/5.6.1/bptutorial.pl
+...
+</pre></blockquote>
+
+<p>
+
+<h2>Installing Modules Using the CPAN Shell</h2>
+
+<p>
+
+Perl has a CPAN module installer built into it.  You run it like this:
+
+<blockquote><pre>
+% <b>cpan</b>
+
+cpan shell -- CPAN exploration and modules installation (v1.59_54)
+ReadLine support enabled
+
+cpan&gt;
+</pre></blockquote>
+
+<p>
+
+From this shell, there are commands for searching for modules,
+downloading them, and installing them.
+
+<p>
+
+[The first time you run the CPAN shell, it will ask you a lot of
+configuration questions.  Generally, you can just hit return to accept
+the defaults.  The only trick comes when it asks you to select CPAN
+mirrors to download from.  Choose any ones that are in your general
+area on the Internet and it will work fine.]
+
+<p>
+
+Here is an example of searching for the Text::Wrap program and
+installing it:
+
+<blockquote><pre>
+cpan&gt; i /Wrap/
+Going to read /bush_home/bush1/lstein/.cpan/sources/authors/01mailrc.txt.gz
+CPAN: Compress::Zlib loaded ok
+Going to read /bush_home/bush1/lstein/.cpan/sources/modules/02packages.details.txt.gz
+  Database was generated on Tue, 16 Oct 2001 22:32:59 GMT
+CPAN: HTTP::Date loaded ok
+Going to read /bush_home/bush1/lstein/.cpan/sources/modules/03modlist.data.gz
+Distribution    B/BI/BINKLEY/CGI-PrintWrapper-0.8.tar.gz
+Distribution    C/CH/CHARDIN/MailQuoteWrap0.01.tgz
+Distribution    C/CJ/CJM/Text-Wrapper-1.000.tar.gz
+...
+Module          Text::NWrap     (G/GA/GABOR/Text-Format0.52+NWrap0.11.tar.gz)
+Module          Text::Quickwrap (Contact Author Ivan  Panchenko <ivan@sai.msu.ru>)
+Module          Text::Wrap      (M/MU/MUIR/modules/Text-Tabs+Wrap-2001.0929.tar.gz)
+Module          Text::Wrap::Hyphenate (Contact Author Mark-Jason Dominus <mjd@plover.com>)
+Module          Text::WrapProp  (J/JB/JBRIGGS/Text-WrapProp-0.03.tar.gz)
+Module          Text::Wrapper   (C/CJ/CJM/Text-Wrapper-1.000.tar.gz)
+Module          XML::XSLT::Wrapper (M/MU/MULL/XML-XSLT-Wrapper-0.32.tar.gz)
+41 items found
+
+cpan&gt; install Text::Wrap
+Running install for module Text::Wrap
+Running make for M/MU/MUIR/modules/Text-Tabs+Wrap-2001.0929.tar.gz
+CPAN: LWP::UserAgent loaded ok
+Fetching with LWP:
+  ftp://archive.progeny.com/CPAN/authors/id/M/MU/MUIR/modules/Text-Tabs+Wrap-2001.0929.tar.gz
+CPAN: MD5 loaded ok
+Fetching with LWP:
+  ftp://archive.progeny.com/CPAN/authors/id/M/MU/MUIR/modules/CHECKSUMS
+Checksum for /bush_home/bush1/lstein/.cpan/sources/authors/id/M/MU/MUIR/modules/Text-Tabs+Wrap-2001.0929.tar.gz ok
+Scanning cache /bush_home/bush1/lstein/.cpan/build for sizes
+Text-Tabs+Wrap-2001.0929/
+Text-Tabs+Wrap-2001.0929/MANIFEST
+Text-Tabs+Wrap-2001.0929/CHANGELOG
+Text-Tabs+Wrap-2001.0929/Makefile.PL
+Text-Tabs+Wrap-2001.0929/t/
+Text-Tabs+Wrap-2001.0929/t/fill.t
+Text-Tabs+Wrap-2001.0929/t/tabs.t
+Text-Tabs+Wrap-2001.0929/t/wrap.t
+Text-Tabs+Wrap-2001.0929/README
+Text-Tabs+Wrap-2001.0929/lib/
+Text-Tabs+Wrap-2001.0929/lib/Text/
+Text-Tabs+Wrap-2001.0929/lib/Text/Wrap.pm
+Text-Tabs+Wrap-2001.0929/lib/Text/Tabs.pm
+
+  CPAN.pm: Going to build M/MU/MUIR/modules/Text-Tabs+Wrap-2001.0929.tar.gz
+
+Checking if your kit is complete...
+Looks good
+Writing Makefile for Text
+cp lib/Text/Wrap.pm blib/lib/Text/Wrap.pm
+cp lib/Text/Tabs.pm blib/lib/Text/Tabs.pm
+Manifying blib/man3/Text::Wrap.3
+Manifying blib/man3/Text::Tabs.3
+  /usr/bin/make  -- OK
+Running make test
+PERL_DL_NONLAZY=1 /net/bin/perl -Iblib/arch -Iblib/lib
+-I/net/lib/perl5/5.6.1/i686-linux -I/net/lib/perl5/5.6.1 -e 'use
+Test::Harness qw(&runtests $verbose); $verbose=0; runtests @ARGV;' t/*.t
+t/fill..............ok
+t/tabs..............ok
+t/wrap..............ok
+All tests successful.
+Files=3, Tests=37,  0 wallclock secs ( 0.20 cusr +  0.00 csys =  0.20 CPU)
+  /usr/bin/make test -- OK
+Running make install
+Installing /net/lib/perl5/5.6.1/Text/Wrap.pm
+Installing /net/man/man3/Text::Wrap.3
+Installing /net/man/man3/Text::Tabs.3
+Writing /net/lib/perl5/5.6.1/i686-linux/auto/Text/.packlist
+Appending installation info to /net/lib/perl5/5.6.1/i686-linux/perllocal.pod
+  /usr/bin/make install UNINST=1 -- OK
+
+cpan&gt; quit
+Lockfile removed.
+</pre></blockquote>
+
+<hr>
+
+<a name="where"><h1>Where are Modules Installed?</h1></a>
+
+<p>
+
+Module files end with the extension .pm.  If the module name is a
+simple one, like <b>Env</b>, then Perl will look for a file named
+<b>Env.pm</b>.  If the module name is separated by :: sections, Perl
+will treat the :: characters like directories.  So it will look for
+the module <b>File::Basename</b> in the file <b>File/Basename.pm</b>
+
+<p>
+
+Perl searches for module files in a set of directories specified by
+the Perl library path.  This is set when Perl is first installed.  You
+can find out what directories Perl will search for modules in by
+issuing <b>perl -V</b> from the command line:
+
+<blockquote><pre>
+ % <b>perl -V</b>
+ Summary of my perl5 (revision 5.0 version 6 subversion 1) configuration:
+  Platform:
+    osname=linux, osvers=2.4.2-2smp, archname=i686-linux
+ ...
+  Compiled at Oct 11 2001 11:08:37
+  @INC:
+    /usr/lib/perl5/5.6.1/i686-linux
+    /usr/lib/perl5/5.6.1
+    /usr/lib/perl5/site_perl/5.6.1/i686-linux
+    /usr/lib/perl5/site_perl/5.6.1
+    /usr/lib/perl5/site_perl
+    .
+</pre></blockquote>
+
+<p>
+
+You can modify this path to search in other locations by placing the <b>use
+lib</b> command somewhere at the top of your script:
+<p>
+
+<table width="100%"><TR><TD class="code"><pre>
+  #!/usr/bin/perl
+
+  use warnings;
+  use strict;
+  use lib '/home/lstein/lib';
+  use MyModule;
+  ...
+</pre></td></tr></table>
+<p>
+
+This tells Perl to look in <b>/home/lstein/lib</b> for the module MyModule
+before it looks in the usual places.  Now you can install module files
+in this directory and Perl will find them.
+<br>
+<br>
+<p>Sometimes you really need to know where on your system a module is
+installed. Perldoc to the rescue again -- use the <code>-l</code> command-line option:
+	
+<blockquote><pre>
+% <b>perldoc -l File::Basename</b>
+/System/Library/Perl/5.8.8/File/Basename.pm
+</pre></blockquote>
+</p>
+<hr>
+
+<a name="anatomy"><h1>The Anatomy of a Module File</h1></a>
+
+<p>
+
+Here is a very simple module file named "MySequence.pm":
+
+<p>
+
+<table width="100%"><TR><TD class="code"><pre>
+package MySequence;
+#file: MySequence.pm
+
+use warnings;
+use strict;
+our $EcoRI = 'ggatcc';
+
+sub reverseq {
+  my $sequence = shift;
+  $sequence = reverse $sequence;
+  $sequence =~ tr/gatcGATC/ctagCTAG/;
+  return $sequence;
+}
+
+sub seqlen {
+  my $sequence = shift;
+  $sequence =~ s/[^gatcnGATCN]//g;
+  return length $sequence;
+}
+
+1;</pre></td></tr></table>
+
+<p>
+
+A module begins with the keyword <b>package</b> and ends with "1;".
+<b>package</b> gives the module a name, and the 1; is a true value
+that tells Perl that the module compiled completely without crashing.
+
+<p>
+
+The <b>our</b> keyword declares a variable to be global to the module.
+It is similar to <b>my</b>, but the variable can be shared with other
+programs and modules ("my" variables cannot be shared outside the
+current file, subroutine or block). This will let us use the variable
+in other programs that depend on this module.
+
+<p>
+
+To install this module, just put it in the Perl module path somewhere,
+or in the current directory.
+
+<h2>Using the MySequence.pm Module</h2>
+
+<p>
+
+Using this module is very simple:
+
+<table width="100%"><TR><TD class="code"><pre>
+  #!/usr/bin/perl
+  #file: sequence.pl
+
+  use warnings;
+  use strict;
+  use MySequence;
+
+  my $sequence = 'gattccggatttccaaagggttcccaatttggg';
+  my $complement = MySequence::reverseq($sequence);
+
+  print "original   = $sequence\n";
+  print "complement = $complement\n";</pre>
+</td></tr></table>
+
+<p>
+
+<blockquote><pre>
+% sequence.pl
+original   = gattccggatttccaaagggttcccaatttggg
+complement = cccaaattgggaaccctttggaaatccggaatc
+</pre></blockquote>
+
+<p>
+
+Unless you explicitly export variables or functions, the calling
+function must explicitly <i>qualify</i> each MySequence function by
+using the notation:
+
+<blockquote><pre>
+MySequence::<i>function_name</i>
+</pre></blockquote>
+
+<p>
+
+For a non-exported variable, the notation looks like this:
+
+<blockquote><pre>
+$MySequence::EcoRI
+</pre></blockquote>
+
+<hr>
+
+<a name="export"><h1>Exporting Variables and Functions from Modules</h1></a>
+
+<p>
+
+To make your module export variables and/or functions like a "real"
+module, use the Exporter module.
+
+<p>
+
+<table width="100%"><TR><TD class="code"><pre>
+package MySequence;
+#file: MySequence.pm
+
+use warnings;
+use strict;
+use base 'Exporter';
+
+our @EXPORT    = qw(reverseq seqlen);
+our @EXPORT_OK = qw($EcoRI);
+
+our $EcoRI = 'ggatcc';
+
+sub reverseq {
+  my $sequence = shift;
+  $sequence = reverse $sequence;
+  $sequence =~ tr/gatcGATC/ctagCTAG/;
+  return $sequence;
+}
+
+sub seqlen {
+  my $sequence = shift;
+  $sequence =~ s/[^gatcnGATCN]//g;
+  return length $sequence;
+}
+
+1;</pre></td></tr></table>
+
+<p>
+
+The <b>use base 'Exporter'</b> line tells Perl that this module is
+a type of "Exporter" module.  As we will see later, this is a way for
+modules to inherit properties from other modules.  The Exporter module
+(standard in Perl) knows how to export variables and functions.
+
+<p>
+
+The <b>our @EXPORT = qw(reverseq seqlen)</b> line tells Perl to export
+the functions <b>reverseq</b> and <b>seqlen</b> automatically.  The
+<b>our @EXPORT_OK = qw($EcoRI)</b> tells Perl that it is OK for the
+user to import the $EcoRI variable, but not to export it
+automatically.
+
+<p>
+
+The qw() notation is telling Perl to create a list separated by
+spaces.  These lines are equivalent to the slightly uglier:
+
+<blockquote><pre>
+our @EXPORT    = ('reverseq','seqlen');
+</pre></blockquote>
+
+
+<h2>Using the Better MySequence.pm Module</h2>
+
+<p>
+
+Now the module exports its <b>reverseq</b> and <b>seqlen</b> functions
+automatically:
+
+<table width="100%"><TR><TD class="code"><pre>
+  #!/usr/bin/perl
+  #file: sequence2.pl
+
+  use warnings;
+  use strict;
+  use MySequence;
+
+  my $sequence = 'gattccggatttccaaagggttcccaatttggg';
+  my $complement = reverseq($sequence);
+
+  print "original   = $sequence\n";
+  print "complement = $complement\n";</pre>
+</td></tr></table>
+
+<p>
+
+The calling program can also get at the value of the $EcoRI variable,
+but he has to ask for it explicitly:
+
+<table width="100%"><TR><TD class="code"><pre>
+  #!/usr/bin/perl
+  #file: sequence3.pl
+
+  use warnings;
+  use strict;
+  use MySequence;
+
+  my $sequence = 'gattccggatttccaaagggttcccaatttggg';
+  my $complement = reverseq($sequence);
+
+  print "original   = $sequence\n";
+  print "complement = $complement\n";
+
+  if ($complement =~ /$EcoRI/) {
+    print "Contains an EcoRI site.\n";
+  } else {
+    print "Doesn't contain an EcoRI site.\n";
+  }
+
+</pre>
+</td></tr></table>
+
+<p>
+
+<hr>
+<h1>POD - Documenting your code</h1>
+
+<p>We've used the <code>#</code> sign to comment out lines in our programs,
+    and they're a good form of documenting our code. But comment are only
+    visible when we look at the code, not when we run the program.</p>
+<p>But there are other ways to document your code, and the one most commonly
+    used in Perl is POD. When you add POD to your code, then you can
+    produce your very own <code>man</code> page for your program.</p>
+</body> </html>

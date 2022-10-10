@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<title>PerlPipelines</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+}
+</style>
+
+<style type="text/css">
+/**
+ * prism.js Coy theme for JavaScript, CoffeeScript, CSS and HTML
+ * Based on https://github.com/tshedor/workshop-wp-theme (Example: http://workshop.kansan.com/category/sessions/basics or http://workshop.timshedor.com/category/sessions/basics);
+ * @author Tim  Shedor
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: black;
+	background: none;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	position: relative;
+	margin: .5em 0;
+	-webkit-box-shadow: -1px 0px 0px 0px #358ccb, 0px 0px 0px 1px #dfdfdf;
+	-moz-box-shadow: -1px 0px 0px 0px #358ccb, 0px 0px 0px 1px #dfdfdf;
+	box-shadow: -1px 0px 0px 0px #358ccb, 0px 0px 0px 1px #dfdfdf;
+	border-left: 10px solid #358ccb;
+	background-color: #fdfdfd;
+	background-image: -webkit-linear-gradient(transparent 50%, rgba(69, 142, 209, 0.04) 50%);
+	background-image: -moz-linear-gradient(transparent 50%, rgba(69, 142, 209, 0.04) 50%);
+	background-image: -ms-linear-gradient(transparent 50%, rgba(69, 142, 209, 0.04) 50%);
+	background-image: -o-linear-gradient(transparent 50%, rgba(69, 142, 209, 0.04) 50%);
+	background-image: linear-gradient(transparent 50%, rgba(69, 142, 209, 0.04) 50%);
+	background-size: 3em 3em;
+	background-origin: content-box;
+	overflow: visible;
+	padding: 0;
+}
+
+code[class*="language"] {
+	max-height: inherit;
+	height: 100%;
+	padding: 0 1em;
+	display: block;
+	overflow: auto;
+}
+
+/* Margin bottom to accomodate shadow */
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background-color: #fdfdfd;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	margin-bottom: 1em;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	position: relative;
+	padding: .2em;
+	-webkit-border-radius: 0.3em;
+	-moz-border-radius: 0.3em;
+	-ms-border-radius: 0.3em;
+	-o-border-radius: 0.3em;
+	border-radius: 0.3em;
+	color: #c92c2c;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	display: inline;
+	white-space: normal;
+}
+
+pre[class*="language-"]:before,
+pre[class*="language-"]:after {
+	content: '';
+	z-index: -2;
+	display: block;
+	position: absolute;
+	bottom: 0.75em;
+	left: 0.18em;
+	width: 40%;
+	height: 20%;
+	max-height: 13em;
+	-webkit-box-shadow: 0px 13px 8px #979797;
+	-moz-box-shadow: 0px 13px 8px #979797;
+	box-shadow: 0px 13px 8px #979797;
+	-webkit-transform: rotate(-2deg);
+	-moz-transform: rotate(-2deg);
+	-ms-transform: rotate(-2deg);
+	-o-transform: rotate(-2deg);
+	transform: rotate(-2deg);
+}
+
+:not(pre) > code[class*="language-"]:after,
+pre[class*="language-"]:after {
+	right: 0.75em;
+	left: auto;
+	-webkit-transform: rotate(2deg);
+	-moz-transform: rotate(2deg);
+	-ms-transform: rotate(2deg);
+	-o-transform: rotate(2deg);
+	transform: rotate(2deg);
+}
+
+.token.comment,
+.token.block-comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: #7D8B99;
+}
+
+.token.punctuation {
+	color: #5F6364;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.function-name,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #c92c2c;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.function,
+.token.builtin,
+.token.inserted {
+	color: #2f9c0a;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.token.variable {
+	color: #a67f59;
+	background: rgba(255, 255, 255, 0.5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword,
+.token.class-name {
+	color: #1990b8;
+}
+
+.token.regex,
+.token.important {
+	color: #e90;
+}
+
+.language-css .token.string,
+.style .token.string {
+	color: #a67f59;
+	background: rgba(255, 255, 255, 0.5);
+}
+
+.token.important {
+	font-weight: normal;
+}
+
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+@media screen and (max-width: 767px) {
+	pre[class*="language-"]:before,
+	pre[class*="language-"]:after {
+		bottom: 14px;
+		-webkit-box-shadow: none;
+		-moz-box-shadow: none;
+		box-shadow: none;
+	}
+
+}
+
+/* Plugin styles */
+.token.tab:not(:empty):before,
+.token.cr:before,
+.token.lf:before {
+	color: #e0d7d1;
+}
+
+/* Plugin styles: Line Numbers */
+pre[class*="language-"].line-numbers {
+	padding-left: 0;
+}
+
+pre[class*="language-"].line-numbers code {
+	padding-left: 3.8em;
+}
+
+pre[class*="language-"].line-numbers .line-numbers-rows {
+	left: 0;
+}
+
+/* Plugin styles: Line Highlight */
+pre[class*="language-"][data-line] {
+	padding-top: 0;
+	padding-bottom: 0;
+	padding-left: 0;
+}
+pre[data-line] code {
+	position: relative;
+	padding-left: 4em;
+}
+pre .line-highlight {
+	margin-top: 0;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<h1 id="toc_0">Efficient &amp; effective Perl Pipelines</h1>
+
+<h3 id="toc_1">Simon Prochnik with code from Scott Cain</h3>
+
+<ol>
+<li><a href="#getting_help">Getting help</a></li>
+<li><a href="#debugger">One-line perl, perl debugger</a></li>
+</ol>
+
+<p><a name = "getting_help"></p>
+
+<h2 id="toc_2">Getting Help, Learning more Perl</h2>
+
+<p></a>
+You can use <code>perldoc</code> to get help on a perl topic or module and <code>perldoc -f</code> to get help on a perl function. For example</p>
+
+<div><pre><code class="language-none">% perldoc perlref
+PERLREF(1)            User Contributed Perl Documentation           PERLREF(1)
+
+NAME
+       perlref - Perl references and nested data structures
+
+NOTE
+       This is complete documentation about all aspects of references.  For a
+       shorter, tutorial introduction to just the essential features, see
+       perlreftut.
+
+DESCRIPTION
+       Before release 5 of Perl it was difficult to represent complex data
+       structures, because all references had to be symbolic--and even then it
+       was difficult to refer to a variable instead of a symbol table entry.
+       Perl now not only makes it easier to use symbolic references to
+...</code></pre></div>
+
+<div><pre><code class="language-none">% perldoc File::Basename
+
+System::Library::Perl:User8ContrSystem::Library::Perl::5.18::File::Basename(3)
+
+NAME
+       File::Basename - Parse file paths into directory, filename and suffix.
+
+SYNOPSIS
+           use File::Basename;
+
+           ($name,$path,$suffix) = fileparse($fullname,@suffixlist);
+           $name = fileparse($fullname,@suffixlist);
+
+           $basename = basename($fullname,@suffixlist);
+           $dirname  = dirname($fullname);
+
+DESCRIPTION
+       These routines allow you to parse file paths into their directory,
+       filename and suffix.
+...</code></pre></div>
+
+<div><pre><code class="language-none">% perldoc -f split
+F_EQYSRHWO(1)         User Contributed Perl Documentation        F_EQYSRHWO(1)
+
+       split /PATTERN/,EXPR,LIMIT
+       split /PATTERN/,EXPR
+       split /PATTERN/
+       split   Splits the string EXPR into a list of strings and returns the
+               list in list context, or the size of the list in scalar
+               context.
+...
+</code></pre></div>
+
+<p>You can also get online help from<br>
+<a href="http://perldoc.perl.org/">http://perldoc.perl.org/</a><br>
+<a href="http://perldoc.perl.org/functions/">http://perldoc.perl.org/functions/</a><br>
+Great introductory tutorials on lots of topics: regular expressions, debugger, objects<br>
+<a href="http://perldoc.perl.org/index-tutorials.html">http://perldoc.perl.org/index-tutorials.html</a></p>
+
+<h2 id="toc_3">Debugger</h2>
+
+<p>Run with a script, pass command line parameters in as normal  </p>
+
+<div><pre><code class="language-none">% perl -d sum.pl 4 5 
+
+Loading DB routines from perl5db.pl version 1.39_10
+Editor support available.
+
+Enter h or &#39;h h&#39; for help, or &#39;man perldebug&#39; for more help.
+
+main::(sum.pl:4):   my $a = shift @_;
+  DB&lt;1&gt; 
+</code></pre></div>
+
+<p>You don&#39;t need a script to enter an interactive perl debugger session</p>
+
+<div><pre><code class="language-none">% perl -de 4
+Loading DB routines from perl5db.pl version 1.39_10
+Editor support available.
+
+Enter h or &#39;h h&#39; for help, or &#39;man perldebug&#39; for more help.
+
+main::(-e:1):   4
+  DB&lt;1&gt; $a = 5
+
+  DB&lt;2&gt; p $a
+5
+  DB&lt;3&gt; $b = &quot;hello world\n&quot;
+
+  DB&lt;4&gt; p $b
+hello world
+
+  DB&lt;5&gt; @a = qw(red green yellow blue)
+
+  DB&lt;6&gt; x @a
+0  &#39;red&#39;
+1  &#39;green&#39;
+2  &#39;yellow&#39;
+3  &#39;blue&#39;
+  DB&lt;7&gt; $ref = {red =&gt; [5,0,0],green=&gt; [0,3,0],blue=&gt;[0,0,6]}
+
+  DB&lt;8&gt; x $ref
+0  HASH(0x7f8a85063898)
+   &#39;blue&#39; =&gt; ARRAY(0x7f8a85044f20)
+      0  0
+      1  0
+      2  6
+   &#39;green&#39; =&gt; ARRAY(0x7f8a85007fc0)
+      0  0
+      1  3
+      2  0
+   &#39;red&#39; =&gt; ARRAY(0x7f8a843a9a30)
+      0  5
+      1  0
+      2  0
+  DB&lt;9&gt; </code></pre></div>
+
+<p>Type &#39;h&#39; to get help in the debugger</p>
+
+<div><pre><code class="language-none">  DB&lt;10&gt; h
+List/search source lines:               Control script execution:
+  l [ln|sub]  List source code            T           Stack trace
+  - or .      List previous/current line  s [expr]    Single step [in expr]
+  v [line]    View around line            n [expr]    Next, steps over subs
+  f filename  View source in file         &lt;CR/Enter&gt;  Repeat last n or s
+  /pattern/ ?patt?   Search forw/backw    r           Return from subroutine
+  M           Show module versions        c [ln|sub]  Continue until position
+Debugger controls:                        L           List break/watch/actions
+  o [...]     Set debugger options        t [n] [expr] Toggle trace [max depth] ][trace expr]
+  &lt;[&lt;]|{[{]|&gt;[&gt;] [cmd] Do pre/post-prompt b [ln|event|sub] [cnd] Set breakpoint
+  ! [N|pat]   Redo a previous command     B ln|*      Delete a/all breakpoints
+  H [-num]    Display last num commands   a [ln] cmd  Do cmd before line
+  = [a val]   Define/list an alias        A ln|*      Delete a/all actions
+  h [db_cmd]  Get help on command         w expr      Add a watch expression
+  h h         Complete help page          W expr|*    Delete a/all watch exprs
+  |[|]db_cmd  Send output to pager        ![!] syscmd Run cmd in a subprocess
+  q or ^D     Quit                        R           Attempt a restart
+Data Examination:     expr     Execute perl code, also see: s,n,t expr
+  x|m expr       Evals expr in list context, dumps the result or lists methods.
+  p expr         Print expression (uses script&#39;s current package).
+  S [[!]pat]     List subroutine names [not] matching pattern
+  V [Pk [Vars]]  List Variables in Package.  Vars can be ~pattern or !pattern.
+  X [Vars]       Same as &quot;V current_package [Vars]&quot;.  i class inheritance tree.
+  y [n [Vars]]   List lexicals in higher scope &lt;n&gt;.  Vars same as V.
+  e     Display thread id     E Display all thread ids.
+For more help, type h cmd_letter, or run man perldebug for all docs.</code></pre></div>
+
+<p>One-line perl</p>
+
+<div><pre><code class="language-none">% perl -e &#39;print 5+4,&quot;\n&quot;&#39;  
+9</code></pre></div>
+
+<p>Is a module installed? Yes if there is no error.</p>
+
+<div><pre><code class="language-none">% perl -e &#39;use File::Basename&#39;
+%</code></pre></div>
+
+<p>Install with this if you have permission </p>
+
+<div><pre><code class="language-none">% sudo cpan</code></pre></div>
+
+<p>or this if you don&#39;t</p>
+
+<div><pre><code class="language-none">% cpan
+cpan&gt; install Bio::AlignIO::clustalw</code></pre></div>
+
+<h2 id="toc_4">Reformat files on the fly with perl one-liners</h2>
+
+<p>This uses some tricks we have deliberately avoided in the class, including the dreaded implicit <code>$_</code>. It&#39;s so useful for more advanced bioinformatics work that I include it here, but until it&#39;s really material that you should work up to on your own.</p>
+
+<p>Here&#39;s a fasta file, volvox_seq.fa. How can we extract the IDs and print them in a single column?</p>
+
+<div><pre><code class="language-none">&gt;vca4886446_93762
+MSPPPTHSTTESRMAPPSQSSTPSGDVDGS
+&gt;vca4887371_120236
+MAGLHSVPKLSARRPDWELPELHGDLQLAP
+&gt;vca4887497_89954
+MAYKLFGTAAVLNYDLPAERRAELDAMSME
+&gt;vca4888938_93984
+MLHTDLQPPRCRTSGPRPDPLRMETRARER</code></pre></div>
+
+<p>We can use two perl command line switches <code>-ne</code> to make a mini perl script that we write on the command line, or a &#39;perl one-liner&#39;. All the switches are described in Chapter 17 of Programming Perl. Here&#39;s the syntax<br>
+<code>
+perl -ne &#39;&lt;script&gt;&#39;  [files...]
+</code></p>
+
+<p>which writes the loop below around  <code>&lt;script&gt;</code> like so.</p>
+
+<div><pre><code class="language-perl">#!/usr/bin/perl
+#no use warnings or strict in this example
+foreach $file (@_) {
+    open(IN,&#39;&lt;&#39;, $file);
+    while (&lt;IN&gt;) {
+        # your script goes here
+    }   
+}</code></pre></div>
+
+<p>So you can write this script in short hand</p>
+
+<div><pre><code class="language-perl">#!/usr/bin/perl
+#no use warnings or strict in this example
+foreach $file (@_) {
+    open(IN,&#39;&lt;&#39;, $file);
+    while (&lt;IN&gt;) {
+        # your script goes here
+        if ($_ =~ /^&gt;(\S+)/) {
+            print &quot;$1\n&quot;;
+        }
+    }   
+}
+</code></pre></div>
+
+<div><pre><code class="language-none">% perl -ne &#39;if (/^&gt;(\S+)/) {print &quot;$1\n&quot;}&#39; volvox_AP2EREBP.fa
+vca4886446_93762
+vca4887371_120236
+vca4887497_89954</code></pre></div>
+
+<p>Very often used with pipes, eg to print duplicate IDs across multiple fasta files  </p>
+
+<div><pre><code class="language-none">% perl -ne &#39;if (/^&gt;(\S+)/) {print &quot;$1\n&quot;}&#39; *.fa | sort | uniq -d</code></pre></div>
+
+<h2 id="toc_5">Constructing a simple pipeline</h2>
+
+<p>Let’s assume we have a multiple fasta file and we want to use perl to run the program clustalw to make a multiple sequence alignment and read in the results.
+Here is the pipeline:</p>
+
+<ol>
+<li>get fasta seq filename </li>
+<li>construct output filename </li>
+<li>generate command line that will align sequences with clustalw,</li>
+<li>read in/parse output file,</li>
+<li>(do something with the data)</li>
+</ol>
+
+<p>We haven&#39;t covered part 3 in the course yet. We need to figure out how to run clustalw on the command line. Then we can use <code>system()</code> in perl to run a command as if we typed it in. It returns the exit value of the command.
+0 (false) means success.<br>
+Any other number (true) is the error code for what went wrong.</p>
+
+<div><pre><code class="language-perl">my $result = system(“ls -ltr”);
+print “exit value is $result\n”;</code></pre></div>
+
+<p>output is</p>
+
+<blockquote>
+<div><pre><code class="language-none">drwx------+  3 admin  staff     102 Sep 26 17:02 Pictures
+drwx------+  3 admin  staff     102 Sep 26 17:02 Music
+drwx------+  3 admin  staff     102 Sep 26 17:02 Movies
+drwxr-xr-x+  5 admin  staff     170 Sep 26 17:02 Public
+drwx------+  4 admin  staff     136 Sep 26 17:05 Documents
+drwx------@ 48 admin  staff    1632 Oct 17 08:47 Library
+drwx------+  9 admin  staff     306 Oct 17 08:49 Desktop
+drwx------+  5 admin  staff     170 Oct 17 14:46 Downloads
+exit value is 0</code></pre></div>
+</blockquote>
+
+<p>Here&#39;s an example where the file we try to list doesn&#39;t exist  </p>
+
+<div><pre><code class="language-perl">my $result = system(&quot;ls this_file_is_missing.txt”);
+print “exit value is $result\n”;</code></pre></div>
+
+<p>output is </p>
+
+<blockquote>
+<div><pre><code class="language-none">ls: this_file_is_missing.txt: No such file or directory
+exit value is 256</code></pre></div>
+</blockquote>
+
+<h3 id="toc_6">Start looking for help running clustalw</h3>
+
+<p>A google search for &#39;clustalw command line&#39; returns this</p>
+
+<blockquote>
+<div><pre><code class="language-none">USE OF OPTIONS
+     All parameters of Clustalw can be used as options
+with a &quot;-&quot; That permits to use Clustalw in a script or
+in batch.
+    $ clustalw -options
+     CLUSTAL W (1.7) Multiple Sequence Alignments
+    clustalw option list:-
+             -help
+                -options
+                -infile=filename
+                -outfile=filename
+                -type=protein OR dna
+                -output=gcg OR gde OR pir OR phylip</code></pre></div>
+</blockquote>
+
+<p>So our command might look like this</p>
+
+<blockquote>
+<div><pre><code class="language-none">% clustalw -infile=ExDNA.fasta -outfile=ExDNA.aln -type=dna</code></pre></div>
+</blockquote>
+
+<p>Default output format is clustalw format (*.aln)
+Run it to test. Did it do <em>exactly</em> what you want/expect?</p>
+
+<p>Command line
+Running a command and handling failure
+clustalw -infile=ExDNA.fasta -outfile=ExDNA.aln -type=dna
+Script</p>
+
+<div><pre><code class="language-perl">#!/usr/bin/perl
+use strict; 
+use warnings;
+my $file = ‘ExDNA.fasta’;
+my $clustFile = ‘ExDNA.aln’;
+# build command line
+my $cmd = “clustalw -infile=$file -outfile=$clustFile -type=dna”; 
+print “Call to clustalw $cmd\n”; # show command
+my $oops = system $cmd; # system call and save return
+                        # value in $oops
+die “FAILED $!” if $oops; # $oops true if failed</code></pre></div>
+
+<p>Let&#39;s put the system... die code in a sub() inside a module as we&#39;ll be using it a lot.  </p>
+
+<div><pre><code class="language-perl"># file is Util.pm
+package Util;
+use strict;
+our @EXPORT = qw(do_or_die);
+use Exporter;
+use base &#39;Exporter&#39;;
+  # allow do_or_die() to be exported
+# without specifying
+# Util::do_or_die()
+# --------------------------------------------------------------
+sub do_or_die {
+  my $cmd = shift;
+  print &quot;CMD: $cmd\n&quot;;
+  my $oops = system $cmd;
+  die &quot;Failed&quot; if $oops;
+}
+# --------------------------------------------------------------
+1;</code></pre></div>
+
+<p>Here&#39;s our script updated to use the do<em>or</em>die() subroutine from the Util package</p>
+
+<div><pre><code class="language-perl">#!/usr/bin/perl
+use strict; 
+use warnings;
+use lib ‘/pfbhome/sprochnik/lib’; # you might need to tell perl where to find Util.pm
+               # or with something like this
+use Util;
+
+my $file = ‘ExDNA.fasta’;
+my $clustFile = ‘ExDNA.aln’;
+
+# build command line
+my $cmd = “clustalw -infile=$file -outfile=$clustFile -type=dna”;
+
+do_or_die($cmd); # I use this all the time</code></pre></div>
+
+<p>Next we need to figure out how to parse the alignment file. This means reading the contents into memory. 
+Bioperl can read almost every bioinformatics file format.
+Look in bioperl documentation for help.
+See HOWTOs
+<a href="http://www.bioperl.org/wiki/HOWTOs">http://www.bioperl.org/wiki/HOWTOs</a></p>
+
+<blockquote>
+<p><img src="/Users/admin/pipeline_images/bioperl_howto.tiff" alt="Alt Image Text"></p>
+</blockquote>
+
+<p>Then go to the AlignIO tutorial which looks something like this, with a great example snippet of code you can copy and paste and edit.</p>
+
+<blockquote>
+<h3 id="toc_7">Abstract</h3>
+
+<p>This is a HOWTO that talks about using Bio::AlignIO and Bio::SimpleAlign) to create and analyze alignments. It also discusses how to run various applications that create alignment files. See the list of alignment formats for details on each format.</p>
+
+<h3 id="toc_8">AlignIO</h3>
+
+<p>Data files storing multiple sequence alignments appear in varied formats and is the Bioperl object for conversion of alignment files. AlignIO is patterned on the object and its commands have many of the same names as the commands in . Just as in the object can be created with -file and -format options:</p>
+
+<div><pre><code class="language-perl">use Bio::AlignIO; my $io = Bio::AlignIO-&gt;new(
+                        -file =&gt; &quot;receptors.aln&quot;, 
+                        -format =&gt; &quot;clustalw&quot; );</code></pre></div>
+
+<p>If the -format argument isn’t used then Bioperl will try and determine the format based on the file’s suffix, in a case-insensitive manner.</p>
+
+<p>...</p>
+
+<p>The basic syntax for AlignIO is similar to that of SeqIO:</p>
+
+<div><pre><code class="language-perl">use Bio::AlignIO;
+
+$in = Bio::AlignIO-&gt;new(-file =&gt; &quot;inputfilename&quot; ,
+                       -format =&gt; &#39;fasta&#39;);
+
+$out = Bio::AlignIO-&gt;new(-file =&gt; &quot;&gt;outputfilename&quot;,
+                        -format =&gt; &#39;pfam&#39;);
+
+while ( my $aln = $in-&gt;next_aln ) {
+   $out-&gt;write_aln($aln);
+}</code></pre></div>
+
+<p>The returned object, $aln, is a Bio::SimpleAlign object rather than a Bio::Seq object.</p>
+
+<p>Bio::AlignIO also supports the tied filehandle syntax described for Bio::SeqIO.<br>
+...</p>
+</blockquote>
+
+<p>Let&#39;s add the new piece to our script.</p>
+
+<div><pre><code class="language-perl">#!/usr/bin/perl
+use strict; 
+use warnings;
+
+use Util;
+use Bio::AlignIO;
+
+my $file = ‘ExDNA.fasta’;
+my $clustFile = ‘ExDNA.aln’;
+# build command line 
+my $cmd = “clustalw -infile=$file -outfile=$clustFile -type=dna”; 
+#run command 
+do_or_die($cmd);
+# parse in alignment file
+my $in = Bio::AlignIO-&gt;new(-file =&gt; $clustFile,
+                         -format =&gt; &#39;clustalw&#39;);
+while ( my $aln = $in-&gt;next_aln() ) {
+... 
+}</code></pre></div>
+
+<p>See bioperl-run for bioperl modules that can run programs like clustalw</p>
+
+<h2 id="toc_9">Key perl coding style points</h2>
+
+<ul>
+<li>use strict;</li>
+<li>use warnings;</li>
+<li>Put all the hard stuff in subroutines so you can write clean subroutine calls.</li>
+<li>If you want to re-use a subroutine several times, put it in a module and re-use the module e.g. Util.pm</li>
+<li>#comments (ESC-; makes a comment in EMACS) • comment what a subroutine expects and returns</li>
+<li>comment anything new to you or unusual</li>
+<li>Use the correct amount of indentation for loops, logic and subroutines</li>
+<li>coding time = thinking/design (10%) + code writing (30%) + testing and debugging (60%)</li>
+<li>Re-use and modify existing code as much as possible</li>
+<li>Write your code in small pieces and test each piece as you go. Debugger? • Test with a small (fake?) data file. Debugger?</li>
+<li>Use more complicated tools/code only if you need to</li>
+<li>Think about the big picture:</li>
+<li>total time = coding time + run time + analysis time + writing up results</li>
+<li>will speeding up your code take longer than waiting for it to complete? Your time is valuable</li>
+<li>Check your input data and your output data • Check it again.</li>
+<li>are there unexpected characters, line returns (\r or \n ? ), whitespace at the end of lines, spaces instead of tabs.You can use</li>
+</ul>
+
+<div><pre><code class="language-none">% od -c mydatafile | more</code></pre></div>
+
+<ul>
+<li>are there missing fields/characters, duplicated IDs?</li>
+<li>what about header lines, comments, corrupt data?</li>
+<li>Is the output exactly what you expect?</li>
+</ul>
+
+
+
+<script type="text/javascript">
+var _self="undefined"!=typeof window?window:"undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?self:{},Prism=function(){var e=/\blang(?:uage)?-(\w+)\b/i,t=0,n=_self.Prism={util:{encode:function(e){return e instanceof a?new a(e.type,n.util.encode(e.content),e.alias):"Array"===n.util.type(e)?e.map(n.util.encode):e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\u00a0/g," ")},type:function(e){return Object.prototype.toString.call(e).match(/\[object (\w+)\]/)[1]},objId:function(e){return e.__id||Object.defineProperty(e,"__id",{value:++t}),e.__id},clone:function(e){var t=n.util.type(e);switch(t){case"Object":var a={};for(var r in e)e.hasOwnProperty(r)&&(a[r]=n.util.clone(e[r]));return a;case"Array":return e.map&&e.map(function(e){return n.util.clone(e)})}return e}},languages:{extend:function(e,t){var a=n.util.clone(n.languages[e]);for(var r in t)a[r]=t[r];return a},insertBefore:function(e,t,a,r){r=r||n.languages;var l=r[e];if(2==arguments.length){a=arguments[1];for(var i in a)a.hasOwnProperty(i)&&(l[i]=a[i]);return l}var o={};for(var s in l)if(l.hasOwnProperty(s)){if(s==t)for(var i in a)a.hasOwnProperty(i)&&(o[i]=a[i]);o[s]=l[s]}return n.languages.DFS(n.languages,function(t,n){n===r[e]&&t!=e&&(this[t]=o)}),r[e]=o},DFS:function(e,t,a,r){r=r||{};for(var l in e)e.hasOwnProperty(l)&&(t.call(e,l,e[l],a||l),"Object"!==n.util.type(e[l])||r[n.util.objId(e[l])]?"Array"!==n.util.type(e[l])||r[n.util.objId(e[l])]||(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,l,r)):(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,null,r)))}},plugins:{},highlightAll:function(e,t){var a={callback:t,selector:'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'};n.hooks.run("before-highlightall",a);for(var r,l=a.elements||document.querySelectorAll(a.selector),i=0;r=l[i++];)n.highlightElement(r,e===!0,a.callback)},highlightElement:function(t,a,r){for(var l,i,o=t;o&&!e.test(o.className);)o=o.parentNode;o&&(l=(o.className.match(e)||[,""])[1],i=n.languages[l]),t.className=t.className.replace(e,"").replace(/\s+/g," ")+" language-"+l,o=t.parentNode,/pre/i.test(o.nodeName)&&(o.className=o.className.replace(e,"").replace(/\s+/g," ")+" language-"+l);var s=t.textContent,u={element:t,language:l,grammar:i,code:s};if(!s||!i)return n.hooks.run("complete",u),void 0;if(n.hooks.run("before-highlight",u),a&&_self.Worker){var c=new Worker(n.filename);c.onmessage=function(e){u.highlightedCode=e.data,n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(u.element),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},c.postMessage(JSON.stringify({language:u.language,code:u.code,immediateClose:!0}))}else u.highlightedCode=n.highlight(u.code,u.grammar,u.language),n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(t),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},highlight:function(e,t,r){var l=n.tokenize(e,t);return a.stringify(n.util.encode(l),r)},tokenize:function(e,t){var a=n.Token,r=[e],l=t.rest;if(l){for(var i in l)t[i]=l[i];delete t.rest}e:for(var i in t)if(t.hasOwnProperty(i)&&t[i]){var o=t[i];o="Array"===n.util.type(o)?o:[o];for(var s=0;s<o.length;++s){var u=o[s],c=u.inside,g=!!u.lookbehind,h=!!u.greedy,f=0,d=u.alias;u=u.pattern||u;for(var p=0;p<r.length;p++){var m=r[p];if(r.length>e.length)break e;if(!(m instanceof a)){u.lastIndex=0;var y=u.exec(m),v=1;if(!y&&h&&p!=r.length-1){var b=r[p+1].matchedStr||r[p+1],k=m+b;if(p<r.length-2&&(k+=r[p+2].matchedStr||r[p+2]),u.lastIndex=0,y=u.exec(k),!y)continue;var w=y.index+(g?y[1].length:0);if(w>=m.length)continue;var _=y.index+y[0].length,P=m.length+b.length;if(v=3,P>=_){if(r[p+1].greedy)continue;v=2,k=k.slice(0,P)}m=k}if(y){g&&(f=y[1].length);var w=y.index+f,y=y[0].slice(f),_=w+y.length,S=m.slice(0,w),O=m.slice(_),j=[p,v];S&&j.push(S);var A=new a(i,c?n.tokenize(y,c):y,d,y,h);j.push(A),O&&j.push(O),Array.prototype.splice.apply(r,j)}}}}}return r},hooks:{all:{},add:function(e,t){var a=n.hooks.all;a[e]=a[e]||[],a[e].push(t)},run:function(e,t){var a=n.hooks.all[e];if(a&&a.length)for(var r,l=0;r=a[l++];)r(t)}}},a=n.Token=function(e,t,n,a,r){this.type=e,this.content=t,this.alias=n,this.matchedStr=a||null,this.greedy=!!r};if(a.stringify=function(e,t,r){if("string"==typeof e)return e;if("Array"===n.util.type(e))return e.map(function(n){return a.stringify(n,t,e)}).join("");var l={type:e.type,content:a.stringify(e.content,t,r),tag:"span",classes:["token",e.type],attributes:{},language:t,parent:r};if("comment"==l.type&&(l.attributes.spellcheck="true"),e.alias){var i="Array"===n.util.type(e.alias)?e.alias:[e.alias];Array.prototype.push.apply(l.classes,i)}n.hooks.run("wrap",l);var o="";for(var s in l.attributes)o+=(o?" ":"")+s+'="'+(l.attributes[s]||"")+'"';return"<"+l.tag+' class="'+l.classes.join(" ")+'" '+o+">"+l.content+"</"+l.tag+">"},!_self.document)return _self.addEventListener?(_self.addEventListener("message",function(e){var t=JSON.parse(e.data),a=t.language,r=t.code,l=t.immediateClose;_self.postMessage(n.highlight(r,n.languages[a],a)),l&&_self.close()},!1),_self.Prism):_self.Prism;var r=document.currentScript||[].slice.call(document.getElementsByTagName("script")).pop();return r&&(n.filename=r.src,document.addEventListener&&!r.hasAttribute("data-manual")&&document.addEventListener("DOMContentLoaded",n.highlightAll)),_self.Prism}();"undefined"!=typeof module&&module.exports&&(module.exports=Prism),"undefined"!=typeof global&&(global.Prism=Prism);
+</script>
+
+<script type="text/javascript">
+Prism.languages.perl={comment:[{pattern:/(^\s*)=\w+[\s\S]*?=cut.*/m,lookbehind:!0},{pattern:/(^|[^\\$])#.*/,lookbehind:!0}],string:[/\b(?:q|qq|qx|qw)\s*([^a-zA-Z0-9\s\{\(\[<])(?:[^\\]|\\[\s\S])*?\1/,/\b(?:q|qq|qx|qw)\s+([a-zA-Z0-9])(?:[^\\]|\\[\s\S])*?\1/,/\b(?:q|qq|qx|qw)\s*\((?:[^()\\]|\\[\s\S])*\)/,/\b(?:q|qq|qx|qw)\s*\{(?:[^{}\\]|\\[\s\S])*\}/,/\b(?:q|qq|qx|qw)\s*\[(?:[^[\]\\]|\\[\s\S])*\]/,/\b(?:q|qq|qx|qw)\s*<(?:[^<>\\]|\\[\s\S])*>/,/("|`)(?:[^\\]|\\[\s\S])*?\1/,/'(?:[^'\\\r\n]|\\.)*'/],regex:[/\b(?:m|qr)\s*([^a-zA-Z0-9\s\{\(\[<])(?:[^\\]|\\[\s\S])*?\1[msixpodualngc]*/,/\b(?:m|qr)\s+([a-zA-Z0-9])(?:[^\\]|\\.)*?\1[msixpodualngc]*/,/\b(?:m|qr)\s*\((?:[^()\\]|\\[\s\S])*\)[msixpodualngc]*/,/\b(?:m|qr)\s*\{(?:[^{}\\]|\\[\s\S])*\}[msixpodualngc]*/,/\b(?:m|qr)\s*\[(?:[^[\]\\]|\\[\s\S])*\][msixpodualngc]*/,/\b(?:m|qr)\s*<(?:[^<>\\]|\\[\s\S])*>[msixpodualngc]*/,{pattern:/(^|[^-]\b)(?:s|tr|y)\s*([^a-zA-Z0-9\s\{\(\[<])(?:[^\\]|\\[\s\S])*?\2(?:[^\\]|\\[\s\S])*?\2[msixpodualngcer]*/,lookbehind:!0},{pattern:/(^|[^-]\b)(?:s|tr|y)\s+([a-zA-Z0-9])(?:[^\\]|\\[\s\S])*?\2(?:[^\\]|\\[\s\S])*?\2[msixpodualngcer]*/,lookbehind:!0},{pattern:/(^|[^-]\b)(?:s|tr|y)\s*\((?:[^()\\]|\\[\s\S])*\)\s*\((?:[^()\\]|\\[\s\S])*\)[msixpodualngcer]*/,lookbehind:!0},{pattern:/(^|[^-]\b)(?:s|tr|y)\s*\{(?:[^{}\\]|\\[\s\S])*\}\s*\{(?:[^{}\\]|\\[\s\S])*\}[msixpodualngcer]*/,lookbehind:!0},{pattern:/(^|[^-]\b)(?:s|tr|y)\s*\[(?:[^[\]\\]|\\[\s\S])*\]\s*\[(?:[^[\]\\]|\\[\s\S])*\][msixpodualngcer]*/,lookbehind:!0},{pattern:/(^|[^-]\b)(?:s|tr|y)\s*<(?:[^<>\\]|\\[\s\S])*>\s*<(?:[^<>\\]|\\[\s\S])*>[msixpodualngcer]*/,lookbehind:!0},/\/(?:[^\/\\\r\n]|\\.)*\/[msixpodualngc]*(?=\s*(?:$|[\r\n,.;})&|\-+*~<>!?^]|(lt|gt|le|ge|eq|ne|cmp|not|and|or|xor|x)\b))/],variable:[/[&*$@%]\{\^[A-Z]+\}/,/[&*$@%]\^[A-Z_]/,/[&*$@%]#?(?=\{)/,/[&*$@%]#?((::)*'?(?!\d)[\w$]+)+(::)*/i,/[&*$@%]\d+/,/(?!%=)[$@%][!"#$%&'()*+,\-.\/:;<=>?@[\\\]^_`{|}~]/],filehandle:{pattern:/<(?![<=])\S*>|\b_\b/,alias:"symbol"},vstring:{pattern:/v\d+(\.\d+)*|\d+(\.\d+){2,}/,alias:"string"},"function":{pattern:/sub [a-z0-9_]+/i,inside:{keyword:/sub/}},keyword:/\b(any|break|continue|default|delete|die|do|else|elsif|eval|for|foreach|given|goto|if|last|local|my|next|our|package|print|redo|require|say|state|sub|switch|undef|unless|until|use|when|while)\b/,number:/\b-?(0x[\dA-Fa-f](_?[\dA-Fa-f])*|0b[01](_?[01])*|(\d(_?\d)*)?\.?\d(_?\d)*([Ee][+-]?\d+)?)\b/,operator:/-[rwxoRWXOezsfdlpSbctugkTBMAC]\b|\+[+=]?|-[-=>]?|\*\*?=?|\/\/?=?|=[=~>]?|~[~=]?|\|\|?=?|&&?=?|<(?:=>?|<=?)?|>>?=?|![~=]?|[%^]=?|\.(?:=|\.\.?)?|[\\?]|\bx(?:=|\b)|\b(lt|gt|le|ge|eq|ne|cmp|not|and|or|xor)\b/,punctuation:/[{}[\];(),:]/};
+</script>
+
+
+</body>
+
+</html>

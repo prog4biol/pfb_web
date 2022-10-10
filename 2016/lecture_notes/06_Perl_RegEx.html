@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<title>06_Perl_RegEx</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+}
+</style>
+
+<style type="text/css">
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: black;
+	background: none;
+	text-shadow: 0 1px white;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #f5f2f0;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: slategray;
+}
+
+.token.punctuation {
+	color: #999;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: #a67f59;
+	background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #07a;
+}
+
+.token.function {
+	color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: #e90;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<h1 id="toc_0">Regular Expressions</h1>
+
+<p>Regular expressions is a language you can use within perl to identify patterns in text.</p>
+
+<p>A regular expression is a string template, or pattern, against which you can match a piece of text. They are something like shell wildcard expressions, but <strong>much</strong> more powerful.</p>
+
+<p><a href="#preview">Preview of Regular Expressions</a><br>
+<a href="#atoms">Atoms</a><br>
+<a href="#quantifiers">Quantifiers</a><br>
+<a href="#binding">Binding Operator</a><br>
+<a href="#variable">Variable Pattern</a><br>
+<a href="#alts">Alternatives and Grouping</a><br>
+<a href="#sub">Subpatterns</a><br>
+<a href="#submatchin">Using Subpatterns Inside the Regular Expression Match
+</a><br>
+<a href="#submatchout">Using Subpatterns Outside the Regular Expression Match
+</a><br>
+<a href="#extract">Extracting Subpatterns Using Arrays</a><br>
+<a href="#greedy">Subpatterns and Greediness</a><br>
+<a href="#s">String Substitution</a><br>
+<a href="#tr">Translating Character Ranges</a><br>
+<a href="#opt">Regular Expression Options</a><br>
+<a href="#g">Global Matches</a></p>
+
+<p><a name="preview"></a> </p>
+
+<h2 id="toc_1">Preview of Regular Expressions</h2>
+
+<h3 id="toc_2">A brief introduction of what a regular expression can do.</h3>
+
+<p>This bit of code loops through each line of a file. Finds all lines containing an EcoRI site, and bumps up a counter:</p>
+
+<p>Code:</p>
+
+<div><pre><code class="language-perl">#!/usr/bin/perl -w
+#file: EcoRI1.pl
+
+use strict;
+
+my $filename = &quot;example.fasta&quot;;
+open (FASTA , &#39;&lt;&#39; , $filename ) or print &quot;$filename does not exist\n&quot;;
+my $sites;
+
+while (my $line = &lt;FASTA&gt; ) {
+  chomp $line;
+
+  if ($line =~ /GAATTC/){
+    print &quot;Found an EcoRI site!\n&quot;;
+    $sites++;
+  }
+}
+
+if ($sites){
+  print &quot;$sites EcoRI sites total\n&quot;;
+}else{
+  print &quot;No EcoRI sites were found\n&quot;;
+}
+
+#note: if $sites is declared inside while loop you would not be able to
+#print it outside the loop</code></pre></div>
+
+<p>Output:</p>
+
+<div><pre><code class="language-none">~]$ ./EcoRI1.pl
+Found an EcoRI site!
+Found an EcoRI site!
+.
+.
+.
+Found an EcoRI site!
+Found an EcoRI site!
+34 EcoRI sites total</code></pre></div>
+
+<h4 id="toc_3">This does the same thing, but counts one type of methylation site (Pu-C-X-G) instead.</h4>
+
+<p>(Pu-C-X-G) Methyation Site:</p>
+
+<div><pre><code class="language-none">/[GA]C.?G/</code></pre></div>
+
+<blockquote>
+<p>G or an A</p>
+
+<div><pre><code class="language-none"> [GA]</code></pre></div>
+
+<p>followed by a C</p>
+
+<div><pre><code class="language-none"> C</code></pre></div>
+
+<p>followed by one of anything, but could be nothing</p>
+
+<div><pre><code class="language-none">.?</code></pre></div>
+
+<p>followed by a G</p>
+
+<div><pre><code class="language-none"> G</code></pre></div>
+</blockquote>
+
+<p>Code:</p>
+
+<div><pre><code class="language-perl">#file:methy.pl
+while (my $line = &lt;FASTA&gt;) {
+    chomp $line;
+
+    if ($line =~ /[GA]C.?G/){
+          $sites++;
+    }
+}
+if ($sites){
+    print &quot;$sites Methylation Sites total\n&quot;;
+}else{
+    print &quot;No Methylation Sites were found\n&quot;;
+}</code></pre></div>
+
+<p>Output:</p>
+
+<div><pre><code class="language-bash">~]$ ./methy.pl
+723 Methylation Sites total</code></pre></div>
+
+<p><a name="atoms"></a> </p>
+
+<h2 id="toc_4">Atoms</h2>
+
+<h3 id="toc_5">Atoms are the content, or the bits and peices of a regular expression</h3>
+
+<p>A regular expression is normally delimited by two slashes (&quot;/&quot;).
+Everything between the slashes is a pattern to match. Patterns can
+be made up of the following <strong>Atoms</strong>:</p>
+
+<ol>
+<li>Ordinary characters: a-z, A-Z, 0-9 and some punctuation.  These
+  match themselves.</li>
+<li>The &quot;.&quot; character, which matches everything <font color="RED">except the newline</font>.</li>
+<li>A bracket list of characters, such as [AaGgCcTtNn], [A-F0-9], or
+  [^A-Z] (the last means anything BUT A-Z).</li>
+<li>Certain predefined character sets:
+ <dl>
+<dt>\d</dt>
+<dd>The digits [0-9]</dd>
+<dt>\w</dt>
+<dd>A word character [A-Za-z_0-9]</dd>
+<dt>\s</dt>
+<dd>White space [ \t\n\r]</dd>
+<dt>\D</dt>
+<dd>A non-digit</dd>
+<dt>\W</dt>
+<dd>A non-word</dd>
+<dt>\S</dt>
+<dd>Non-whitespace</dd>
+  </dl></li>
+<li>Anchors:
+  <dl>
+<dt>^</dt>
+<dd>Matches the beginning of the string</dd>
+<dt>$</dt>
+<dd>Matches the end of the string</dd>
+<dt>\b</dt>
+<dd>Matches a word boundary (between a \w and a \W)</dd>
+  </dl></li>
+</ol>
+
+<p>Examples:</p>
+
+<ul>
+<li><code>/g..t/</code> matches &quot;gaat&quot;, &quot;goat&quot;, and &quot;gotta get a goat&quot; (twice)</li>
+<li><code>/g[gatc][gatc]t/</code> matches &quot;gaat&quot;, &quot;gttt&quot;, &quot;gatt&quot;, and
+  &quot;gotta get an agatt&quot; (once)</li></li>
+<li><p><code>/\d\d\d-\d\d\d\d/</code> matches 376-8380, and 5128-8181, but not
+  055-98-2818.</p></li>
+<li><p><code>/^\d\d\d-\d\d\d\d/</code> matches 376-8380 and 376-83801, but not
+  5128-8181.</p></li>
+<li><p><code>/^\d\d\d-\d\d\d\d$/</code> only matches telephone numbers</p></li>
+<li><p><code>/\bcat/</code> matches &quot;cat&quot;, &quot;catsup&quot; and &quot;more catsup please&quot; but not &quot;scat&quot;.</p></li>
+<li><p><code>/\bcat\b/</code> only text containing the word &quot;cat&quot;.
+</ul></p></li>
+</ul>
+
+<p><a name="quantifiers"></a> </p>
+
+<h2 id="toc_6">Quantifiers</h2>
+
+<h3 id="toc_7">Quantifiers quantify how many atoms are to be found.</h3>
+
+<p>By default, an atom matches once.  This can be modified by following
+the atom with a quantifier:</p>
+
+<dl>
+  <dt>?</dt>
+  <dd>atom matches zero or exactly once</dd>
+  <dt>*</dt>
+  <dd>atom matches zero or more times</dd>
+  <dt>+</dt>
+  <dd>atom matches one or more times</dd>
+  <dt>{3}</dt>
+  <dd>atom matches exactly three times</dd>
+  <dt>{2,4}</dt>
+  <dd>atom matches between two and four times, inclusive</dd>
+  <dt>{4,}</dt>
+  <dd>atom matches at least four times</dd>
+</dl>
+
+<p>Examples:</p>
+
+<ul>
+<li><code>/goa?t/</code>matches &quot;goat&quot; and &quot;got&quot;.  Also any text that contains these words.</li>
+<li><code>/g.+t/</code> matches &quot;goat&quot;, &quot;goot&quot;, and &quot;grant&quot;, among others.</li>
+<li><code>/g.*t/</code> matches &quot;gt&quot;, &quot;goat&quot;, &quot;goot&quot;, and &quot;grant&quot;, among others.</li>
+<li><code>/^\d{3}-\d{4}$/</code> matches US telephone numbers (no extra text allowed).</li>
+</ul>
+
+<h3 id="toc_8">Quick Exercises:</h3>
+
+<blockquote>
+<ol>
+<li>Design a pattern to recognize an email address.</li>
+<li>Design a pattern to recognize the id portion of a sequence in a FASTA file<br></li>
+</ol>
+
+<p>&gt;SEQ1<br>
+ATGCTGCGCGTGCATGATGCT<br>
+&gt;SEQ2<br>
+CGCGTGCATGATGCTGCGCGT</p>
+</blockquote>
+
+<p><a name="binding"></a></p>
+
+<h2 id="toc_9">Binding operator</h2>
+
+<h3 id="toc_10">Specifying the String to Match</h3>
+
+<p>The Binding operator (=~) is used to &quot;bind&quot; the string to be searched and the pattern.</p>
+
+<div><pre><code class="language-perl">$h = &quot;Who&#39;s afraid of Virginia Woolf?&quot;;
+$h =~ /Woo?lf/;</code></pre></div>
+
+<p>The one line version of the &#39;if statement&#39; can be combined with a regular expression:</p>
+
+<div><pre><code class="language-perl">$h = &quot;Who&#39;s afraid of Virginia Woolf?&quot;;
+print &quot;I&#39;m afraid!\n&quot; if $h =~ /Woo?lf/;</code></pre></div>
+
+<p>There&#39;s also an equivalent &quot;not match&quot; operator <strong>!~</strong>, which
+reverses the sense of the match:</p>
+
+<div><pre><code class="language-perl">$h = &quot;Who&#39;s afraid of Virginia Woolf?&quot;;
+print &quot;I&#39;m not afraid!\n&quot; if $h !~ /Woo?lf/;</code></pre></div>
+
+<h3 id="toc_11">Quick Exercises:</h3>
+
+<blockquote>
+<ol>
+<li>What happens if you do not use the <code>~</code> symbol in your pattern match?</li>
+<li>Create a script with a regular expression within an if-statement.</li>
+<li><p>Design the regular express to match an entire sentence, up to the<br>
+ending period in the provided string.</p>
+
+<p>my $str = &quot;This is a paragraph. A Paragraph is usually made up of more than one sentence.&quot;;</p></li>
+<li><p>Modify your regular expression to take &#39;.&#39; , &#39;?&#39;, and &#39;!; into account as ending punctuation.</p></li>
+</ol>
+</blockquote>
+
+<p><a name="variable"></a></p>
+
+<h2 id="toc_12">Variable Patterns</h2>
+
+<h3 id="toc_13">Matching with a pattern stored in a variable</h3>
+
+<p>You can use a scalar variable for all or part of a regular
+expression.  For example:</p>
+
+<div><pre><code class="language-perl">$pattern = &#39;/usr/local&#39;;
+print &quot;matches&quot; if $file =~ /^$pattern/;</code></pre></div>
+
+<h3 id="toc_14">Quick Exercises:</h3>
+
+<blockquote>
+<ol>
+<li>Save your pattern from the last exercise in a variable. Replace the pattern portion of the regular expression with the varible. </li>
+<li>Does your match still work?</li>
+</ol>
+</blockquote>
+
+<p><a name="alts"></a></p>
+
+<h2 id="toc_15">Alternatives and Grouping</h2>
+
+<h3 id="toc_16">Sometimes you want to match &quot;this&quot; or &quot;that&quot; with your pattern</h3>
+
+<p>A set of alternative patterns can be specified with the pipe <code>|</code>  symbol:</p>
+
+<p>This pattern matches &quot;wolf&quot; or &quot;sheep&quot;</p>
+
+<div><pre><code class="language-perl">/wolf|sheep/; </code></pre></div>
+
+<h4 id="toc_17">Use parenthesis to group the alternative patterns:</h4>
+
+<p>This pattern matches &quot;big bad wolf&quot; or &quot;big bad sheep&quot;</p>
+
+<div><pre><code class="language-perl">/big bad (wolf|sheep)/;</code></pre></div>
+
+<h3 id="toc_18">Quick Exercises</h3>
+
+<blockquote>
+<ol>
+<li>Create a regular expression that will match a string with this pattern:
+
+<ul>
+<li>ATG followed by a C or a T.<br></li>
+</ul></li>
+<li>Test your regular expression with these two strings:
+
+<ul>
+<li>GCTGATGCGTTA</li>
+<li>GCTATGGCT</li>
+</ul></li>
+</ol>
+</blockquote>
+
+<p><a name="sub"></a></p>
+
+<h2 id="toc_19">Subpatterns</h2>
+
+<h3 id="toc_20">Sometimes a subset of the pattern is important and you would like to save it for later use.</h3>
+
+<p>You can extract and manipulate subpatterns in regular expressions.</p>
+
+<p>To designate a subpattern, surround its part of the pattern with parenthesis (same as with the grouping operator).  </p>
+
+<p>This example has just one subpattern, <code>(.+)</code> :</p>
+
+<div><pre><code class="language-none"> /Who&#39;s afraid of the big bad w(.+)f/</code></pre></div>
+
+<p>You can combine parenthesis and quantifiers to quantify entire subpatterns:</p>
+
+<div><pre><code class="language-none">/Who&#39;s afraid of the big (bad )?wolf\?/;</code></pre></div>
+
+<p>This matches &quot;Who&#39;s afraid of the big bad wolf?&quot;
+as well as &quot;Who&#39;s afraid of the big wolf?&quot;</p>
+
+<p>This also shows how to literally match the special characters, <strong>put a backslash <code>\</code> in front of them</strong>.</p>
+
+<h3 id="toc_21">Quick Exercises</h3>
+
+<blockquote>
+<ol>
+<li>A FASTA has the following format:<br>
+&gt;ID Optional Descrption<br>
+SEQUENCE<br>
+SEQUENCE<br>
+SEQUENCE<br></li>
+<li>Create a regular expression that captures the sequence ID as a subpattern.</li>
+</ol>
+</blockquote>
+
+<p><a name="submatchin"></a></p>
+
+<h2 id="toc_22">Using Subpatterns Inside the Regular Expression Match</h2>
+
+<h3 id="toc_23">This is helpful when you want to find a subpattern and then match the contents again</h3>
+
+<p>Once a subpattern matches, you can refer to it within the same regular expression.  The first subpattern becomes \1, the second \2, the third \3, and so on.</p>
+
+<div><pre><code class="language-perl">  while ($line = &lt;FILE&gt;) {
+    chomp $line;
+    print &quot;I&#39;m scared!\n&quot; if /Who&#39;s afraid of the big bad w(.)\1f/;
+  }</code></pre></div>
+
+<p>This loop will print &quot;I&#39;m scared!&quot; for the following matching lines:</p>
+
+<ul>
+<li>Who&#39;s afraid of the big bad woof</li>
+<li>Who&#39;s afraid of the big bad weef</li>
+<li>Who&#39;s afraid of the big bad waaf</li>
+</ul>
+
+<p>but not</p>
+
+<ul>
+<li>Who&#39;s afraid of the big bad wolf</li>
+<li>Who&#39;s afraid of the big bad wife</li>
+</ul>
+
+<p>In a similar vein, <code>/\b(\w+)s love \1 food\b/</code> will match &quot;dogs love dog food&quot;, but not &quot;dogs love monkey food&quot;.</p>
+
+<p><a name="submatchout"></a></p>
+
+<h2 id="toc_24">Using Subpatterns Outside the Regular Expression Match</h2>
+
+<h3 id="toc_25">Using the captured subpattern in code that follows the regular expression.</h3>
+
+<p>Outside the regular expression match statement, the matched subpatterns (if any) can be found in the variables <strong>$1, $2, $3,</strong> and so forth.</p>
+
+<p>Example. Extract 50 base pairs upstream and 25 base pairs downstream of the TATTAT consensus transcription start site:</p>
+
+<div><pre><code class="language-perl">  while (my $line = &lt;FILE&gt;) {
+    chomp $line;
+    next unless $line =~ /(.{50})TATTAT(.{25})/;
+    my $upstream = $1;
+    my $downstream = $2;
+  }</code></pre></div>
+
+<h3 id="toc_26">Quick Exercises</h3>
+
+<blockquote>
+<ol>
+<li>A FASTA header has the following format:<br>
+&gt;ID Optional Descrption<br>
+SEQUENCE<br>
+SEQUENCE<br>
+SEQUENCE<br></li>
+<li>Create a regular expression that captures the sequence ID as a subpattern.</li>
+<li>If an ID is found, print it.</li>
+</ol>
+</blockquote>
+
+<p><a name="extract"></a></p>
+
+<h2 id="toc_27">Extracting Subpatterns Using Arrays</h2>
+
+<h3 id="toc_28">Storing all the captured subpatterns in an array</h3>
+
+<p>If you assign a regular expression match to an <strong>array</strong>, it will return a list of all the subpatterns that matched.  </p>
+
+<p>Alternative implementation of previous example:</p>
+
+<div><pre><code class="language-perl">  while ($line = &lt;FILE&gt;) {
+    chomp $line;
+    my ($upstream,$downstream) = $line =~ /(.{50})TATTAT(.{25})/;
+  }</code></pre></div>
+
+<p>Notice the <code>=</code> to the left of the string being searched. The subpatterns are returned and are assigned to the list of variables. This is another way to write it </p>
+
+<div><pre><code class="language-perl">my @nts = $line =~ /(.{50})TATTAT(.{25})/;</code></pre></div>
+
+<p>@nts will contain two values:  </p>
+
+<div><pre><code class="language-none">$nts[0] will have the upstream sequence  
+$nts[1] will have the downstream sequence  </code></pre></div>
+
+<p>If the regular expression doesn&#39;t match at all, then it returns an
+empty list.  Since an empty list is FALSE, you can use it in a logical
+test:</p>
+
+<div><pre><code class="language-perl">  while (my $line = &lt;FILE&gt;) {
+    chomp $line;
+    next unless my($upstream,$downstream) = $line =~ /(.{50})TATTAT(.{25})/;
+    print &quot;upstream = $upstream\n&quot;;
+    print &quot;downstream = $downstream\n&quot;;
+  }</code></pre></div>
+
+<p><a name="greedy"></a></p>
+
+<h2 id="toc_29">Subpatterns and Greediness</h2>
+
+<p>By default, regular expressions are &quot;greedy&quot;.  They try to match as much as they can.  For example:</p>
+
+<div><pre><code class="language-perl">$h = &#39;The fox ate my box of doughnuts&#39;;
+$h =~ /(f.+x)/;
+$subpattern = $1;</code></pre></div>
+
+<p>Because of the greediness of the match, <strong>$subpattern</strong> will contain &quot;fox ate my box&quot; rather than just &quot;fox&quot;.</p>
+
+<p>To match the minimum number of times, put a ? after the qualifier,
+like this:</p>
+
+<div><pre><code class="language-perl">$h = &#39;The fox ate my box of doughnuts&#39;;
+$h =~ /(f.+?x)/;
+$subpattern = $1;</code></pre></div>
+
+<p>Now <strong>$subpattern</strong> will contain &quot;fox&quot;.  This is called <em>lazy</em>
+matching.</p>
+
+<p>Lazy matching works with any quantifier, such as +?, *? and {2,50}?.</p>
+
+<p><a name="s"></a></p>
+
+<h2 id="toc_30">String Substitution</h2>
+
+<p>String substitution allows you to replace a pattern or character range with another one using the <b>s///</b> and <b>tr///</b> functions.</p>
+
+<h3 id="toc_31">The s/// Function</h3>
+
+<p><strong>s///</strong> has two parts: the regular expression and the string
+to replace it with: s/<em>expression</em>/<em>replacement</em>/.</p>
+
+<div><pre><code class="language-perl">$h = &quot;Who&#39;s afraid of the big bad wolf?&quot;;
+$i = &quot;He had a wife.&quot;;
+
+$h =~ s/w.+f/goat/;  # yields &quot;Who&#39;s afraid of the big bad goat?&quot;
+$i =~ s/w.+f/goat/;  # yields &quot;He had a goate.&quot;</code></pre></div>
+
+<p>If you extract pattern matches, you can use them in the replacement part of the substitution:</p>
+
+<p>Remember, if using the saved subpattern <em>outside</em> the pattern, or expression, use <strong>$1, $2</strong>, etc.</p>
+
+<div><pre><code class="language-perl">$h = &quot;Who&#39;s afraid of the big bad wolf?&quot;;
+
+$h =~ s/(\w+) (\w+) wolf/$2 $1 wolf/;
+# yields &quot;Who&#39;s afraid of the bad big wolf?&quot;</code></pre></div>
+
+<h3 id="toc_32">Quick Exercises</h3>
+
+<blockquote>
+<ol>
+<li>Create a regular expression with the s/// function to find all ATG and replace with &#39;-M-&#39;.</li>
+</ol>
+
+<p>GCAGAGGTGATGGACTCCG<br>
+TAATGGCCAAATGACACGT</p>
+</blockquote>
+
+<h3 id="toc_33">Using a Variable in the Substitution Part</h3>
+
+<p>Yes you can:</p>
+
+<div><pre><code class="language-perl">$h = &quot;Who&#39;s afraid of the big bad wolf?&quot;;
+$animal = &#39;hyena&#39;;
+$h =~ s/(\w+) (\w+) wolf/$2 $1 $animal/;
+# yields &quot;Who&#39;s afraid of the bad big hyena?&quot;</code></pre></div>
+
+<p><a name="tr"></a></p>
+
+<h2 id="toc_34">Translating Character Ranges</h2>
+
+<p>The <strong>tr///</strong> function allows you to translate one set of
+characters into another.  Specify the source set in the first part of
+the function, and the destination set in the second part:</p>
+
+<div><pre><code class="language-perl">$h = &quot;Who&#39;s afraid of the big bad wolf?&quot;;
+$h =~ tr/ao/AO/; # yields &quot;WhO&#39;s AfrAid Of the big bAd wOlf?&quot;;</code></pre></div>
+
+<p><strong>tr///</strong> returns the number of characters transformed, which is
+sometimes handy for counting the number of a particular character
+without actually changing the string.</p>
+
+<p>This example counts N&#39;s in a series of DNA sequences:</p>
+
+<p>Code:</p>
+
+<div><pre><code class="language-perl">  while (my $line = &lt;FILE&gt;) {
+    chomp $line;   # assume one sequence per line
+    my $count = $line =~ tr/Nn/Nn/;
+    print &quot;Sequence $line contains $count Ns\n&quot;;
+  }</code></pre></div>
+
+<p>Output:</p>
+
+<div><pre><code class="language-perl">(~) 50% count_Ns.pl sequence_list.txt
+Sequence 1 contains 0 Ns
+Sequence 2 contains 3 Ns
+Sequence 3 contains 1 Ns
+Sequence 4 contains 0 Ns
+...</code></pre></div>
+
+<p><a name="opt"></a></p>
+
+<h2 id="toc_35">Regular Expression Options</h2>
+
+<p>Regular expression matches and substitutions have a whole set of
+options which you can toggle on by appending one or more of the <strong>i, m, s, g, e</strong> or <strong>x</strong> modifiers to the end of the operation.</p>
+
+<p>See Programming Perl
+Page 153 for more information. Some example:</p>
+
+<div><pre><code class="language-perl">$string = &#39;Big Bad WOLF!&#39;;
+print &quot;There&#39;s a wolf in the closet!&quot; if $string =~ /wolf/i;
+# i is used for a case insensitive match</code></pre></div>
+
+<dl>
+  <dt><b>i</b></dt>
+  <dd>Case insensitive match.</dd>
+      <p>
+  <dt><b>g</b></dt>
+  <dd>Global match (see below).</dd>
+      <p>
+    <dt><b>e</b></dt>
+  <dd>Evalute right side of s/// as an expression.</dd>
+
+      <p>
+  <dt><b>m</b></dt>
+  <dd>Treat string as multiple lines.  ^ and $ will match at start
+      and end of internal lines, as well as at beginning and end of
+      whole string.  Use \A and \Z to match beginning and end of whole
+      string when this is turned on.</dd>
+      <p>
+  <dt><b>s</b></dt>
+  <dd>Treat string as a single line.  "." will match any character at
+      all, including newline.</dd>
+      <p>
+  <dt><b>o</b></dt>
+  <dd>Defining that a variable used as a pattern will never change, so perl will not attempt to interpolate the variable.</dd>
+      <p>
+
+</dl>
+
+<p><a name="g"></a></p>
+
+<h2 id="toc_36">Global Matches</h2>
+
+<p>Adding the <strong>g</strong> modifier to the pattern causes the match to be
+global.  Called in a scalar context (such as an <strong>if</strong> or <strong>while</strong> statement), it will match as many times as it can.</p>
+
+<p>This will match all codons in a DNA sequence, printing them out on
+separate lines:</p>
+
+<p>Code:</p>
+
+<div><pre><code class="language-perl">$sequence = &#39;GTTGCCTGAAATGGCGGAACCTTGAA&#39;;
+while ( $sequence =~ /(.{3})/g ) {
+  print $1,&quot;\n&quot;;
+}</code></pre></div>
+
+<p>Output:</p>
+
+<div><pre><code class="language-none">GTT
+GCC
+TGA
+AAT
+GGC
+GGA
+ACC
+TTG</code></pre></div>
+
+<p>If you perform a global match in a <strong>list</strong> context (e.g. assign
+its result to an array), then you get a list of all the subpatterns
+that matched from left to right.  This code fragment gets arrays of
+codons in three reading frames:</p>
+
+<div><pre><code class="language-perl">@frame1 = $sequence =~ /(.{3})/g;
+@frame2 = substr($sequence,1) =~ /(.{3})/g;
+@frame3 = substr($sequence,2) =~ /(.{3})/g;</code></pre></div>
+
+<p>The position of the most recent match can be determined by using the
+<strong><a name="http://perldoc.perl.org/functions/pos.html">pos</a></strong> function. The pos function returns the position where the next
+attempt begins. Remember that pos will return in 0-base notation, the first postion is 0 not 1.
+Code: </p>
+
+<div><pre><code class="language-perl">#file:pos.pl
+my $seq = &quot;XXGGATCCXX&quot;;
+
+if ( $seq =~ /(GGATCC)/gi ){
+  my $pos = pos($seq);
+  print &quot;Our Sequence: $seq\n&quot;;
+  print &#39;$pos = &#39;, &quot;1st postion after the match: $pos\n&quot;;
+  print &#39;$pos - length($1) = 1st postion of the match: &#39;,($pos-length($1)),&quot;\n&quot;;
+  print &#39;($pos - length($1))-1 = 1st postion before the the match:&#39;,
+    ($pos-length($1)-1),&quot;\n&quot;;
+}</code></pre></div>
+
+<p>Output:</p>
+
+<div><pre><code class="language-none">~]$ ./pos.pl
+Our Sequence: XXGGATCCXX
+$pos = 1st postion after the match: 8
+$pos - length(GGATCC) = 1st postion of the match: 2
+($pos - length(GGATCC))-1 = 1st postion before the the match: 1</code></pre></div>
+
+<h3 id="toc_37">Quick Exercises</h3>
+
+<blockquote>
+<ol>
+<li>Create a regular expression that matches ATG.</li>
+<li>Print &quot;Found ATG&quot; when an ATG is found.</li>
+<li>Did you use a while loop? 
+
+<ul>
+<li>If not, try it with a while loop. How many ATGs do you find?</li>
+<li>If so, try it without a while loop. How many ATGs do you find?</li>
+</ul></li>
+<li>Did you use the &#39;g&#39; modifier? What happens in your while loop with it and without it?</li>
+<li>Print the position of each of each of the ATGs.</li>
+</ol>
+
+<p>SEQUENCE:<br>
+TAATGGCCAAATGACACGTGCAGAGGTGATGGACTCCG</p>
+</blockquote>
+
+
+
+<script type="text/javascript">
+var _self="undefined"!=typeof window?window:"undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?self:{},Prism=function(){var e=/\blang(?:uage)?-(\w+)\b/i,t=0,n=_self.Prism={util:{encode:function(e){return e instanceof a?new a(e.type,n.util.encode(e.content),e.alias):"Array"===n.util.type(e)?e.map(n.util.encode):e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\u00a0/g," ")},type:function(e){return Object.prototype.toString.call(e).match(/\[object (\w+)\]/)[1]},objId:function(e){return e.__id||Object.defineProperty(e,"__id",{value:++t}),e.__id},clone:function(e){var t=n.util.type(e);switch(t){case"Object":var a={};for(var r in e)e.hasOwnProperty(r)&&(a[r]=n.util.clone(e[r]));return a;case"Array":return e.map&&e.map(function(e){return n.util.clone(e)})}return e}},languages:{extend:function(e,t){var a=n.util.clone(n.languages[e]);for(var r in t)a[r]=t[r];return a},insertBefore:function(e,t,a,r){r=r||n.languages;var l=r[e];if(2==arguments.length){a=arguments[1];for(var i in a)a.hasOwnProperty(i)&&(l[i]=a[i]);return l}var o={};for(var s in l)if(l.hasOwnProperty(s)){if(s==t)for(var i in a)a.hasOwnProperty(i)&&(o[i]=a[i]);o[s]=l[s]}return n.languages.DFS(n.languages,function(t,n){n===r[e]&&t!=e&&(this[t]=o)}),r[e]=o},DFS:function(e,t,a,r){r=r||{};for(var l in e)e.hasOwnProperty(l)&&(t.call(e,l,e[l],a||l),"Object"!==n.util.type(e[l])||r[n.util.objId(e[l])]?"Array"!==n.util.type(e[l])||r[n.util.objId(e[l])]||(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,l,r)):(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,null,r)))}},plugins:{},highlightAll:function(e,t){var a={callback:t,selector:'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'};n.hooks.run("before-highlightall",a);for(var r,l=a.elements||document.querySelectorAll(a.selector),i=0;r=l[i++];)n.highlightElement(r,e===!0,a.callback)},highlightElement:function(t,a,r){for(var l,i,o=t;o&&!e.test(o.className);)o=o.parentNode;o&&(l=(o.className.match(e)||[,""])[1],i=n.languages[l]),t.className=t.className.replace(e,"").replace(/\s+/g," ")+" language-"+l,o=t.parentNode,/pre/i.test(o.nodeName)&&(o.className=o.className.replace(e,"").replace(/\s+/g," ")+" language-"+l);var s=t.textContent,u={element:t,language:l,grammar:i,code:s};if(!s||!i)return n.hooks.run("complete",u),void 0;if(n.hooks.run("before-highlight",u),a&&_self.Worker){var c=new Worker(n.filename);c.onmessage=function(e){u.highlightedCode=e.data,n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(u.element),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},c.postMessage(JSON.stringify({language:u.language,code:u.code,immediateClose:!0}))}else u.highlightedCode=n.highlight(u.code,u.grammar,u.language),n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(t),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},highlight:function(e,t,r){var l=n.tokenize(e,t);return a.stringify(n.util.encode(l),r)},tokenize:function(e,t){var a=n.Token,r=[e],l=t.rest;if(l){for(var i in l)t[i]=l[i];delete t.rest}e:for(var i in t)if(t.hasOwnProperty(i)&&t[i]){var o=t[i];o="Array"===n.util.type(o)?o:[o];for(var s=0;s<o.length;++s){var u=o[s],c=u.inside,g=!!u.lookbehind,h=!!u.greedy,f=0,d=u.alias;u=u.pattern||u;for(var p=0;p<r.length;p++){var m=r[p];if(r.length>e.length)break e;if(!(m instanceof a)){u.lastIndex=0;var y=u.exec(m),v=1;if(!y&&h&&p!=r.length-1){var b=r[p+1].matchedStr||r[p+1],k=m+b;if(p<r.length-2&&(k+=r[p+2].matchedStr||r[p+2]),u.lastIndex=0,y=u.exec(k),!y)continue;var w=y.index+(g?y[1].length:0);if(w>=m.length)continue;var _=y.index+y[0].length,P=m.length+b.length;if(v=3,P>=_){if(r[p+1].greedy)continue;v=2,k=k.slice(0,P)}m=k}if(y){g&&(f=y[1].length);var w=y.index+f,y=y[0].slice(f),_=w+y.length,S=m.slice(0,w),O=m.slice(_),j=[p,v];S&&j.push(S);var A=new a(i,c?n.tokenize(y,c):y,d,y,h);j.push(A),O&&j.push(O),Array.prototype.splice.apply(r,j)}}}}}return r},hooks:{all:{},add:function(e,t){var a=n.hooks.all;a[e]=a[e]||[],a[e].push(t)},run:function(e,t){var a=n.hooks.all[e];if(a&&a.length)for(var r,l=0;r=a[l++];)r(t)}}},a=n.Token=function(e,t,n,a,r){this.type=e,this.content=t,this.alias=n,this.matchedStr=a||null,this.greedy=!!r};if(a.stringify=function(e,t,r){if("string"==typeof e)return e;if("Array"===n.util.type(e))return e.map(function(n){return a.stringify(n,t,e)}).join("");var l={type:e.type,content:a.stringify(e.content,t,r),tag:"span",classes:["token",e.type],attributes:{},language:t,parent:r};if("comment"==l.type&&(l.attributes.spellcheck="true"),e.alias){var i="Array"===n.util.type(e.alias)?e.alias:[e.alias];Array.prototype.push.apply(l.classes,i)}n.hooks.run("wrap",l);var o="";for(var s in l.attributes)o+=(o?" ":"")+s+'="'+(l.attributes[s]||"")+'"';return"<"+l.tag+' class="'+l.classes.join(" ")+'" '+o+">"+l.content+"</"+l.tag+">"},!_self.document)return _self.addEventListener?(_self.addEventListener("message",function(e){var t=JSON.parse(e.data),a=t.language,r=t.code,l=t.immediateClose;_self.postMessage(n.highlight(r,n.languages[a],a)),l&&_self.close()},!1),_self.Prism):_self.Prism;var r=document.currentScript||[].slice.call(document.getElementsByTagName("script")).pop();return r&&(n.filename=r.src,document.addEventListener&&!r.hasAttribute("data-manual")&&document.addEventListener("DOMContentLoaded",n.highlightAll)),_self.Prism}();"undefined"!=typeof module&&module.exports&&(module.exports=Prism),"undefined"!=typeof global&&(global.Prism=Prism);
+</script>
+
+<script type="text/javascript">
+Prism.languages.perl={comment:[{pattern:/(^\s*)=\w+[\s\S]*?=cut.*/m,lookbehind:!0},{pattern:/(^|[^\\$])#.*/,lookbehind:!0}],string:[/\b(?:q|qq|qx|qw)\s*([^a-zA-Z0-9\s\{\(\[<])(?:[^\\]|\\[\s\S])*?\1/,/\b(?:q|qq|qx|qw)\s+([a-zA-Z0-9])(?:[^\\]|\\[\s\S])*?\1/,/\b(?:q|qq|qx|qw)\s*\((?:[^()\\]|\\[\s\S])*\)/,/\b(?:q|qq|qx|qw)\s*\{(?:[^{}\\]|\\[\s\S])*\}/,/\b(?:q|qq|qx|qw)\s*\[(?:[^[\]\\]|\\[\s\S])*\]/,/\b(?:q|qq|qx|qw)\s*<(?:[^<>\\]|\\[\s\S])*>/,/("|`)(?:[^\\]|\\[\s\S])*?\1/,/'(?:[^'\\\r\n]|\\.)*'/],regex:[/\b(?:m|qr)\s*([^a-zA-Z0-9\s\{\(\[<])(?:[^\\]|\\[\s\S])*?\1[msixpodualngc]*/,/\b(?:m|qr)\s+([a-zA-Z0-9])(?:[^\\]|\\.)*?\1[msixpodualngc]*/,/\b(?:m|qr)\s*\((?:[^()\\]|\\[\s\S])*\)[msixpodualngc]*/,/\b(?:m|qr)\s*\{(?:[^{}\\]|\\[\s\S])*\}[msixpodualngc]*/,/\b(?:m|qr)\s*\[(?:[^[\]\\]|\\[\s\S])*\][msixpodualngc]*/,/\b(?:m|qr)\s*<(?:[^<>\\]|\\[\s\S])*>[msixpodualngc]*/,{pattern:/(^|[^-]\b)(?:s|tr|y)\s*([^a-zA-Z0-9\s\{\(\[<])(?:[^\\]|\\[\s\S])*?\2(?:[^\\]|\\[\s\S])*?\2[msixpodualngcer]*/,lookbehind:!0},{pattern:/(^|[^-]\b)(?:s|tr|y)\s+([a-zA-Z0-9])(?:[^\\]|\\[\s\S])*?\2(?:[^\\]|\\[\s\S])*?\2[msixpodualngcer]*/,lookbehind:!0},{pattern:/(^|[^-]\b)(?:s|tr|y)\s*\((?:[^()\\]|\\[\s\S])*\)\s*\((?:[^()\\]|\\[\s\S])*\)[msixpodualngcer]*/,lookbehind:!0},{pattern:/(^|[^-]\b)(?:s|tr|y)\s*\{(?:[^{}\\]|\\[\s\S])*\}\s*\{(?:[^{}\\]|\\[\s\S])*\}[msixpodualngcer]*/,lookbehind:!0},{pattern:/(^|[^-]\b)(?:s|tr|y)\s*\[(?:[^[\]\\]|\\[\s\S])*\]\s*\[(?:[^[\]\\]|\\[\s\S])*\][msixpodualngcer]*/,lookbehind:!0},{pattern:/(^|[^-]\b)(?:s|tr|y)\s*<(?:[^<>\\]|\\[\s\S])*>\s*<(?:[^<>\\]|\\[\s\S])*>[msixpodualngcer]*/,lookbehind:!0},/\/(?:[^\/\\\r\n]|\\.)*\/[msixpodualngc]*(?=\s*(?:$|[\r\n,.;})&|\-+*~<>!?^]|(lt|gt|le|ge|eq|ne|cmp|not|and|or|xor|x)\b))/],variable:[/[&*$@%]\{\^[A-Z]+\}/,/[&*$@%]\^[A-Z_]/,/[&*$@%]#?(?=\{)/,/[&*$@%]#?((::)*'?(?!\d)[\w$]+)+(::)*/i,/[&*$@%]\d+/,/(?!%=)[$@%][!"#$%&'()*+,\-.\/:;<=>?@[\\\]^_`{|}~]/],filehandle:{pattern:/<(?![<=])\S*>|\b_\b/,alias:"symbol"},vstring:{pattern:/v\d+(\.\d+)*|\d+(\.\d+){2,}/,alias:"string"},"function":{pattern:/sub [a-z0-9_]+/i,inside:{keyword:/sub/}},keyword:/\b(any|break|continue|default|delete|die|do|else|elsif|eval|for|foreach|given|goto|if|last|local|my|next|our|package|print|redo|require|say|state|sub|switch|undef|unless|until|use|when|while)\b/,number:/\b-?(0x[\dA-Fa-f](_?[\dA-Fa-f])*|0b[01](_?[01])*|(\d(_?\d)*)?\.?\d(_?\d)*([Ee][+-]?\d+)?)\b/,operator:/-[rwxoRWXOezsfdlpSbctugkTBMAC]\b|\+[+=]?|-[-=>]?|\*\*?=?|\/\/?=?|=[=~>]?|~[~=]?|\|\|?=?|&&?=?|<(?:=>?|<=?)?|>>?=?|![~=]?|[%^]=?|\.(?:=|\.\.?)?|[\\?]|\bx(?:=|\b)|\b(lt|gt|le|ge|eq|ne|cmp|not|and|or|xor)\b/,punctuation:/[{}[\];(),:]/};
+</script>
+
+<script type="text/javascript">
+!function(e){var t={variable:[{pattern:/\$?\(\([\w\W]+?\)\)/,inside:{variable:[{pattern:/(^\$\(\([\w\W]+)\)\)/,lookbehind:!0},/^\$\(\(/],number:/\b-?(?:0x[\dA-Fa-f]+|\d*\.?\d+(?:[Ee]-?\d+)?)\b/,operator:/--?|-=|\+\+?|\+=|!=?|~|\*\*?|\*=|\/=?|%=?|<<=?|>>=?|<=?|>=?|==?|&&?|&=|\^=?|\|\|?|\|=|\?|:/,punctuation:/\(\(?|\)\)?|,|;/}},{pattern:/\$\([^)]+\)|`[^`]+`/,inside:{variable:/^\$\(|^`|\)$|`$/}},/\$(?:[a-z0-9_#\?\*!@]+|\{[^}]+\})/i]};e.languages.bash={shebang:{pattern:/^#!\s*\/bin\/bash|^#!\s*\/bin\/sh/,alias:"important"},comment:{pattern:/(^|[^"{\\])#.*/,lookbehind:!0},string:[{pattern:/((?:^|[^<])<<\s*)(?:"|')?(\w+?)(?:"|')?\s*\r?\n(?:[\s\S])*?\r?\n\2/g,lookbehind:!0,inside:t},{pattern:/(["'])(?:\\\\|\\?[^\\])*?\1/g,inside:t}],variable:t.variable,"function":{pattern:/(^|\s|;|\||&)(?:alias|apropos|apt-get|aptitude|aspell|awk|basename|bash|bc|bg|builtin|bzip2|cal|cat|cd|cfdisk|chgrp|chmod|chown|chroot|chkconfig|cksum|clear|cmp|comm|command|cp|cron|crontab|csplit|cut|date|dc|dd|ddrescue|df|diff|diff3|dig|dir|dircolors|dirname|dirs|dmesg|du|egrep|eject|enable|env|ethtool|eval|exec|expand|expect|export|expr|fdformat|fdisk|fg|fgrep|file|find|fmt|fold|format|free|fsck|ftp|fuser|gawk|getopts|git|grep|groupadd|groupdel|groupmod|groups|gzip|hash|head|help|hg|history|hostname|htop|iconv|id|ifconfig|ifdown|ifup|import|install|jobs|join|kill|killall|less|link|ln|locate|logname|logout|look|lpc|lpr|lprint|lprintd|lprintq|lprm|ls|lsof|make|man|mkdir|mkfifo|mkisofs|mknod|more|most|mount|mtools|mtr|mv|mmv|nano|netstat|nice|nl|nohup|notify-send|nslookup|open|op|passwd|paste|pathchk|ping|pkill|popd|pr|printcap|printenv|printf|ps|pushd|pv|pwd|quota|quotacheck|quotactl|ram|rar|rcp|read|readarray|readonly|reboot|rename|renice|remsync|rev|rm|rmdir|rsync|screen|scp|sdiff|sed|seq|service|sftp|shift|shopt|shutdown|sleep|slocate|sort|source|split|ssh|stat|strace|su|sudo|sum|suspend|sync|tail|tar|tee|test|time|timeout|times|touch|top|traceroute|trap|tr|tsort|tty|type|ulimit|umask|umount|unalias|uname|unexpand|uniq|units|unrar|unshar|uptime|useradd|userdel|usermod|users|uuencode|uudecode|v|vdir|vi|vmstat|wait|watch|wc|wget|whereis|which|who|whoami|write|xargs|xdg-open|yes|zip)(?=$|\s|;|\||&)/,lookbehind:!0},keyword:{pattern:/(^|\s|;|\||&)(?:let|:|\.|if|then|else|elif|fi|for|break|continue|while|in|case|function|select|do|done|until|echo|exit|return|set|declare)(?=$|\s|;|\||&)/,lookbehind:!0},"boolean":{pattern:/(^|\s|;|\||&)(?:true|false)(?=$|\s|;|\||&)/,lookbehind:!0},operator:/&&?|\|\|?|==?|!=?|<<<?|>>|<=?|>=?|=~/,punctuation:/\$?\(\(?|\)\)?|\.\.|[{}[\];]/};var a=t.variable[1].inside;a["function"]=e.languages.bash["function"],a.keyword=e.languages.bash.keyword,a.boolean=e.languages.bash.boolean,a.operator=e.languages.bash.operator,a.punctuation=e.languages.bash.punctuation}(Prism);
+</script>
+
+
+</body>
+
+</html>

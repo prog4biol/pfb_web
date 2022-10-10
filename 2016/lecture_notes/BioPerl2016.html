@@ -1,0 +1,2631 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<title>BioPerl2016</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #4183C4;
+  padding: 0 15px;
+  color: #5f5c5c; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+}
+</style>
+
+<style type="text/css">
+/**
+ * prism.js Coy theme for JavaScript, CoffeeScript, CSS and HTML
+ * Based on https://github.com/tshedor/workshop-wp-theme (Example: http://workshop.kansan.com/category/sessions/basics or http://workshop.timshedor.com/category/sessions/basics);
+ * @author Tim  Shedor
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: black;
+	background: none;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	position: relative;
+	margin: .5em 0;
+	-webkit-box-shadow: -1px 0px 0px 0px #358ccb, 0px 0px 0px 1px #dfdfdf;
+	-moz-box-shadow: -1px 0px 0px 0px #358ccb, 0px 0px 0px 1px #dfdfdf;
+	box-shadow: -1px 0px 0px 0px #358ccb, 0px 0px 0px 1px #dfdfdf;
+	border-left: 10px solid #358ccb;
+	background-color: #fdfdfd;
+	background-image: -webkit-linear-gradient(transparent 50%, rgba(69, 142, 209, 0.04) 50%);
+	background-image: -moz-linear-gradient(transparent 50%, rgba(69, 142, 209, 0.04) 50%);
+	background-image: -ms-linear-gradient(transparent 50%, rgba(69, 142, 209, 0.04) 50%);
+	background-image: -o-linear-gradient(transparent 50%, rgba(69, 142, 209, 0.04) 50%);
+	background-image: linear-gradient(transparent 50%, rgba(69, 142, 209, 0.04) 50%);
+	background-size: 3em 3em;
+	background-origin: content-box;
+	overflow: visible;
+	padding: 0;
+}
+
+code[class*="language"] {
+	max-height: inherit;
+	height: 100%;
+	padding: 0 1em;
+	display: block;
+	overflow: auto;
+}
+
+/* Margin bottom to accomodate shadow */
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background-color: #fdfdfd;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	margin-bottom: 1em;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	position: relative;
+	padding: .2em;
+	-webkit-border-radius: 0.3em;
+	-moz-border-radius: 0.3em;
+	-ms-border-radius: 0.3em;
+	-o-border-radius: 0.3em;
+	border-radius: 0.3em;
+	color: #c92c2c;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	display: inline;
+	white-space: normal;
+}
+
+pre[class*="language-"]:before,
+pre[class*="language-"]:after {
+	content: '';
+	z-index: -2;
+	display: block;
+	position: absolute;
+	bottom: 0.75em;
+	left: 0.18em;
+	width: 40%;
+	height: 20%;
+	max-height: 13em;
+	-webkit-box-shadow: 0px 13px 8px #979797;
+	-moz-box-shadow: 0px 13px 8px #979797;
+	box-shadow: 0px 13px 8px #979797;
+	-webkit-transform: rotate(-2deg);
+	-moz-transform: rotate(-2deg);
+	-ms-transform: rotate(-2deg);
+	-o-transform: rotate(-2deg);
+	transform: rotate(-2deg);
+}
+
+:not(pre) > code[class*="language-"]:after,
+pre[class*="language-"]:after {
+	right: 0.75em;
+	left: auto;
+	-webkit-transform: rotate(2deg);
+	-moz-transform: rotate(2deg);
+	-ms-transform: rotate(2deg);
+	-o-transform: rotate(2deg);
+	transform: rotate(2deg);
+}
+
+.token.comment,
+.token.block-comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: #7D8B99;
+}
+
+.token.punctuation {
+	color: #5F6364;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.function-name,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #c92c2c;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.function,
+.token.builtin,
+.token.inserted {
+	color: #2f9c0a;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.token.variable {
+	color: #a67f59;
+	background: rgba(255, 255, 255, 0.5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword,
+.token.class-name {
+	color: #1990b8;
+}
+
+.token.regex,
+.token.important {
+	color: #e90;
+}
+
+.language-css .token.string,
+.style .token.string {
+	color: #a67f59;
+	background: rgba(255, 255, 255, 0.5);
+}
+
+.token.important {
+	font-weight: normal;
+}
+
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+@media screen and (max-width: 767px) {
+	pre[class*="language-"]:before,
+	pre[class*="language-"]:after {
+		bottom: 14px;
+		-webkit-box-shadow: none;
+		-moz-box-shadow: none;
+		box-shadow: none;
+	}
+
+}
+
+/* Plugin styles */
+.token.tab:not(:empty):before,
+.token.cr:before,
+.token.lf:before {
+	color: #e0d7d1;
+}
+
+/* Plugin styles: Line Numbers */
+pre[class*="language-"].line-numbers {
+	padding-left: 0;
+}
+
+pre[class*="language-"].line-numbers code {
+	padding-left: 3.8em;
+}
+
+pre[class*="language-"].line-numbers .line-numbers-rows {
+	left: 0;
+}
+
+/* Plugin styles: Line Highlight */
+pre[class*="language-"][data-line] {
+	padding-top: 0;
+	padding-bottom: 0;
+	padding-left: 0;
+}
+pre[data-line] code {
+	position: relative;
+	padding-left: 4em;
+}
+pre .line-highlight {
+	margin-top: 0;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<h1 id="toc_0"><a href="http://bioperl.org/">BioPerl</a></h1>
+
+<p>What is BioPerl?</p>
+
+<blockquote>
+<p>Bioperl is an open source bioinformatics toolkit used by researchers all over the world. If you’re looking for a script built to fit your exact needs you may or may not find it in Bioperl (check the scripts and examples directories). What you will find is an extensive set of Perl modules that will enable you to write your own script, and a community of people who are willing to help you.</p>
+</blockquote>
+
+<p>Why use BioPerl?</p>
+
+<ul>
+<li>Code is already written</li>
+<li>Manipulate sequence<strong>s</strong></li>
+<li>Run programs in your scripts (<em>e.g.</em>, BLAST, CLUSTALW, PHYLIP)</li>
+<li>Knows how to parse program output (<em>e.g.</em>, BLAST and alignments)</li>
+</ul>
+
+<h1 id="toc_1">Table of Contents</h1>
+
+<ol>
+<li><a href="#bp-website">Navigating BioPerl WebSite</a></li>
+<li><a href="#docs">BioPerl Module Documentation @ CPAN</a></li>
+<li><a href="#seqfile">Manipulating sequences in a file</a></li>
+<li><a href="#localfasta">Querying a local FASTA file</a></li>
+<li><a href="#seqrec">Creating a sequence record</a></li>
+<li><a href="#convert">File Format Conversions</a></li>
+<li><a href="#blast">Parsing BLAST output</a></li>
+<li><a href="#MSA">Manipulation of Multiple Sequence Alignments</a></li>
+<li><a href="#ann">Retrieving annotations from GenBank file</a></li>
+<li><a href="#other">Other Cool Things</a></li>
+</ol>
+
+<p><a name="bp-website"></a></p>
+
+<h2 id="toc_2">Navigating BioPerl WebSite</h2>
+
+<p><a href="http://bioperl.org">bioperl.org</a>  </p>
+
+<h3 id="toc_3">There is a ton of useful information on the BioPerl website and the BioPerl mailing list. Bookmark it! Go through the information.</h3>
+
+<ul>
+<li> Installation</li>
+<li> Support: Mailing List</li>
+<li> Documentation HOWTOs
+
+<ul>
+<li> <strong>Beginners HOWTO</strong> - Introduction to BioPerl for biologists.
+Features and Annotations HOWTO - Reading and writing detailed data associated with sequences.</li>
+<li><strong>BlastPlus HOWTO</strong> - Create, manage, and query BLAST databases with NCBI blast+.</li>
+<li><strong>EUtilities Cookbook HOWTO</strong> - Simple script examples using Bio::DB::EUtilities.</li>
+<li><strong>SearchIO HOWTO</strong> - Parsing reports from sequence comparison programs like BLAST.</li>
+<li><strong>SeqIO HOWTO</strong> - Sequence file input and output, with script examples.</li>
+<li><strong>Getting Genomic Sequences HOWTO</strong> - Some examples of how to retrieve genomic sequences.</li>
+<li><strong>AlignIO and SimpleAlign HOWTO</strong> - Create and analyze alignments using BioPerl.</li>
+</ul></li>
+</ul>
+
+<p><a name="docs"></a></p>
+
+<h2 id="toc_4">BioPerl Module Documentation @ CPAN</h2>
+
+<p><a href="http://cpan.org">cpan.org</a><br>
+<a href="https://metacpan.org/pod/Bio::SeqIO">CPAN SeqIO Example</a>  </p>
+
+<p>Excerpt from Bio::SeqIO Documentation:</p>
+
+<blockquote>
+<h3 id="toc_5">Synopsis</h3>
+
+<div><pre><code class="language-perl">use Bio::SeqIO;
+
+ $in  = Bio::SeqIO-&gt;new(-file =&gt; &quot;inputfilename&quot; ,
+                       -format =&gt; &#39;Fasta&#39;);
+ $out = Bio::SeqIO-&gt;new(-file =&gt; &quot;&gt;outputfilename&quot; ,
+                        -format =&gt; &#39;EMBL&#39;);
+
+ while ( my $seq = $in-&gt;next_seq() ) {
+     $out-&gt;write_seq($seq);
+ }
+
+# Now, to actually get at the sequence object, use the standard Bio::Seq
+# methods (look at Bio::Seq if you don&#39;t know what they are)
+
+ use Bio::SeqIO;
+
+ $in  = Bio::SeqIO-&gt;new(-file =&gt; &quot;inputfilename&quot; ,
+                        -format =&gt; &#39;genbank&#39;);
+
+ while ( my $seq = $in-&gt;next_seq() ) {
+    print &quot;Sequence &quot;,$seq-&gt;id, &quot; first 10 bases &quot;,
+          $seq-&gt;subseq(1,10), &quot;\n&quot;;
+ }
+
+
+# The SeqIO system does have a filehandle binding. Most people find this
+# a little confusing, but it does mean you can write the world&#39;s
+# smallest reformatter
+
+ use Bio::SeqIO;
+
+ $in  = Bio::SeqIO-&gt;newFh(-file =&gt; &quot;inputfilename&quot; ,
+                          -format =&gt; &#39;Fasta&#39;);
+ $out = Bio::SeqIO-&gt;newFh(-format =&gt; &#39;EMBL&#39;);
+</code></pre></div>
+
+<h3 id="toc_6">Description</h3>
+
+<p>Bio::SeqIO is a handler module for the formats in the SeqIO set (eg, Bio::SeqIO::fasta). It is the officially sanctioned way of getting at the format objects, which most people should use.</p>
+
+<p>The Bio::SeqIO system can be thought of like biological file handles. They are attached to filehandles with smart formatting rules (eg, genbank format, or EMBL format, or binary trace file format) and can either read or write sequence objects (Bio::Seq objects, or more correctly, Bio::SeqI implementing objects, of which Bio::Seq is one such object). If you want to know what to do with a Bio::Seq object, read Bio::Seq.</p>
+
+<p>The idea is that you request a stream object for a particular format. All the stream objects have a notion of an internal file that is read from or written to. A particular SeqIO object instance is configured for either input or output. A specific example of a stream object is the Bio::SeqIO::fasta object.</p>
+
+<p>Each stream object has functions ...</p>
+
+<h3 id="toc_7">APPENDIX</h3>
+
+<h4 id="toc_8">new</h4>
+
+<div><pre><code class="language-perl">Title   : new
+Usage   : $stream = Bio::SeqIO-&gt;new(-file =&gt; &#39;sequences.fasta&#39;,
+                                    -format =&gt; &#39;fasta&#39;);
+Function: Returns a new sequence stream
+Returns : A Bio::SeqIO stream initialised with the appropriate format
+Args    : Named parameters indicating where to read the sequences from or to
+          write them to:
+            -file   =&gt; filename, OR
+            -fh     =&gt; filehandle to attach to, OR
+            -string =&gt; string
+ 
+         Additional arguments, all with reasonable defaults:
+            -format     =&gt; format of the sequences, usually auto-detected
+            -alphabet   =&gt; &#39;dna&#39;, &#39;rna&#39;, or &#39;protein&#39;
+            -flush      =&gt; 0 or 1 (default: flush filehandles after each write)
+            -seqfactory =&gt; sequence factory
+            -locfactory =&gt; location factory
+            -objbuilder =&gt; object builder</code></pre></div>
+</blockquote>
+
+<p><a name="seqfile"></a></p>
+
+<h2 id="toc_9">Manipulating sequences in a file</h2>
+
+<h4 id="toc_10">Problem:</h4>
+
+<p>You have a sequence file and you want to do something to each sequence.</p>
+
+<h4 id="toc_11">Where to Start:</h4>
+
+<p><a href="http://bioperl.org/howtos/index.html">BioPerl HOWTOs</a><br>
+   - Beginners HOWTO<br>
+   - Retrieving a sequence from a file  </p>
+
+<hr>
+
+<p>Excerpt from SeqIO HOWTO:</p>
+
+<blockquote>
+<h3 id="toc_12">Retrieving a sequence from a file</h3>
+
+<p><strong>One beginner mistake is to not use Bio::SeqIO</strong> when working with sequence files. This is understandable in some respects. You may have read about Perl’s open() function, and Bioperl’s way of retrieving sequences may look overly complicated, at first. But don’t use open()! Using open() immediately forces you to do the parsing of the sequence file and this can get complicated very quickly. Trust the Bio::SeqIO object, it’s built to open and parse all the common sequence formats, it can read and write to files, and it’s built to operate with all the other Bioperl modules that you will want to use.</p>
+
+<p>Let’s read the file we created previously, sequence.fasta, using Bio::SeqIO. The syntax will look familiar:</p>
+
+<div><pre><code class="language-perl">#!/bin/perl -w
+
+use Bio::SeqIO;
+
+$seqio_obj = Bio::SeqIO-&gt;new(-file =&gt; &quot;sequence.fasta&quot;, 
+                            -format =&gt; &quot;fasta&quot; );</code></pre></div>
+
+<p>One difference is immediately apparent: there is no character. Just as with with the open() function this means we’ll be reading from the sequence.fasta file. Let’s add the key line, where we actually retrieve the Sequence object from the file using the next_seq method:</p>
+
+<div><pre><code class="language-perl">#!/bin/perl -w
+
+use Bio::SeqIO;
+
+$seqio_obj = Bio::SeqIO-&gt;new(-file =&gt; &quot;sequence.fasta&quot;, 
+                            -format =&gt; &quot;fasta&quot; );
+
+$seq_obj = $seqio_obj-&gt;next_seq;</code></pre></div>
+</blockquote>
+
+<p>Let&#39;s look at this code from the HOWTO. </p>
+
+<ul>
+<li><code>use Bio::SeqIO</code> This tells perl to look at the methods in the module Bio::SeqIO.</li>
+<li> <code>Bio::SeqIO-&gt;new</code> Creates a new Bio::SeqIO <em>object</em></li>
+<li> <code>$seqio_obj =</code> Stores the new <em>object</em> in a variable</li>
+<li> <code>$seq_obj = $seqio_obj-&gt;next_seq;</code> Create a seq object and then store it in a variable.</li>
+</ul>
+
+<h3 id="toc_13">Let&#39;s take a brief detour:</h3>
+
+<p><img src="bioperl_images/questions.png" alt="SeqIO Object"></p>
+
+<h3 id="toc_14">Sofia&#39;s Interpretation of &quot;What is an Object?&quot;</h3>
+
+<h4 id="toc_15">An object is like a box.</h4>
+
+<p><img src="bioperl_images/seqIO_object.png" alt="SeqIO Object"></p>
+
+<p>This box contains:</p>
+
+<ul>
+<li> Your Data</li>
+<li> All the methods for dealing with that data</li>
+</ul>
+
+<p>This includes a method, usually called <code>new</code>, that puts your data into the box. Or in other words, creates an object that knows all about your data and the methods to handle your data. </p>
+
+<p>Specific to SeqIO Object:  </p>
+
+<ul>
+<li>The <code>new</code> method knows how to handle a file of sequences that is in FASTA format. </li>
+</ul>
+
+<hr>
+
+<h4 id="toc_16">Some methods within your object can make new objects.</h4>
+
+<p><img src="bioperl_images/seqIO_object_2.png" alt="SeqIO Object"></p>
+
+<p>Specific to SeqIO Object:  </p>
+
+<ul>
+<li>The <code>next_seq</code> method will pull out a single sequence record from data in the SeqIO object.</li>
+<li><p>The new object, a Seq object, will be created.</p>
+
+<p>This Seq object is different from a SeqIO Object.</p>
+
+<ul>
+<li>It contains only a subset of the data </li>
+<li>It contains a different set of methods</li>
+</ul>
+
+<p>A Seq Object has methods for handling a single sequence record while a SeqIO object has methods for handling a file of sequences.</p>
+
+<ul>
+<li>Such as, translate and length.</li>
+</ul></li>
+</ul>
+
+<h3 id="toc_17">OK! Back to Manipulating sequences from a file</h3>
+
+<p>Let&#39;s set up the foundation for dealing with our sequences:</p>
+
+<div><pre><code class="language-perl">#!/usr/bin/perl -w
+use strict;
+use Bio::SeqIO;
+
+# get fasta filename from user input
+my $file = shift;
+
+# Here a SeqIO obj is created with $file as filename.
+# $seqIO_object contains a collection of sequences
+# that are from the file named $file
+my $seqIO_object = Bio::SeqIO-&gt;new(
+           -file =&gt; $file,
+           -format =&gt; &#39;fasta&#39;,
+);
+
+# This block is using a while loop and next_seq method to
+# “get to” and create a Seq obj for each individual sequence
+# in the SeqIO obj of many sequences
+while (my $seq_object = $seqIO_object-&gt;next_seq){
+  #do stuff to each sequence in the fasta
+}</code></pre></div>
+
+<p>Note: Read the documentation for the methods!!! You are not expected to know how to format the methods and the input and options. </p>
+
+<p><strong>Let&#39;s add a bit more to our script:</strong></p>
+
+<p>Code:</p>
+
+<div><pre><code class="language-perl">#!/usr/bin/perl -w
+use strict;
+use Bio::SeqIO;
+
+my $file = shift;
+
+## READING
+my $seqIO_object = Bio::SeqIO-&gt;new(
+                    -file =&gt; $file,
+                    -format =&gt; &#39;fasta&#39;,
+);
+
+#Create a second seqIO object for WRITING using the format &#39;fasta&#39;. 
+#Notice, no &#39;-file&#39; option. This will print the FASTA to STDOUT
+my $out_seqIO_Obj = Bio::SeqIO-&gt;new(-format =&gt; &#39;fasta&#39;);
+
+#Loop thru each seq object in $seqIO_object storing information from the object in variables.
+while (my $seq_object = $seqIO_object-&gt;next_seq){
+  my $id = $seq_object-&gt;id;
+  my $desc = $seq_object-&gt;desc;
+  my $seqString = $seq_object-&gt;seq;
+  my $revComp = $seq_object-&gt;revcom;
+  my $alphabet = $seq_object-&gt; alphabet;
+  my $translation_seq_obj = $seq_object-&gt; translate;
+  my $translation = $translation_seq_obj -&gt; seq;
+  my $seqLen = $seq_object-&gt;length;
+  print &quot;translation: $translation\n&quot;;
+  print &quot;alphapet: $alphabet\n&quot;;
+  print &quot;seqLen: $seqLen\n&quot;;
+
+  #prints sequnces in FASTA format to STDOUT
+  $out_seqIO_Obj-&gt;write_seq($seq_object);
+}</code></pre></div>
+
+<h6 id="toc_18">Note: Not all of these methods are required. They are just listed here to demonstrate a sampling of the things you can do with a Bio::Seq object.</h6>
+
+<p>Output:</p>
+
+<div><pre><code class="language-perl">srobb@www:~/scripts/bioperl$ perl inFasta_doStuff_outFasta.pl /pfbhome/data/HDAC1.nt
+translation: LPPGSDAERSRGREGGRTD*R*GREASKMAQTQGTRRKVCYYYDGDVGNYYYGQGHPMKPHRIRMTHNLLLNYGLYRKMEIYRPHKANAEEMTKYHSDDYIKFLRSIRPDNMSEYSKQMQRFNVGEDCPVFDGLFEFCQLSTGGSVASAVKLNKQQTDIAVNWAGGLHHAKKSEASGFCYVNDIVLAILELLKYHQRVLYIDIDIHHGDGVEEAFYTTDRVMTVSFHKYGEYFPGTGDLRDIGAGKGKYYAVNYPLRDGIDDESYEAIFKPVMSKVMEMFQPSAVVLQCGSDSLSGDRLGCFNLTIKGHAKCVEFVKSFNLPMLMLGGGGYTIRNVARCWTYETAVALDTEIPNELPYNDYFEYFGPDFKLHISPSNMTNQNTNEYLEKIKQRLFENLRMLPHAPGVQMQAIPEDAIPEESGDEDEDDPDKRISICSSDKRIACEEEFSDSEEEGEGGRKNSSNFKKAKRVKTEDEKEKDPEEKKEVTEEEKTKEEKPEAKGVKEEVKLA*MDLSSSGFLLSPSRFFPNPSDFIFSISLCIYIKIY*I*ISPGTETKAPSSGQLCWVSSSRSHLATHSSRS*L*TIKGARSG*KGYFYATIRQTPEMPSACLVALERCPY*TF*KGWLGLQGSPVFFRLLK*HQPFLDWFCFRTFPLASSEPRNTACPLSVFS*FCRWRLLV*FPF*DTIFIFVSLFVIKWYISISS*
+alphapet: dna
+seqLen: 2124
+&gt;HDAC1-001 cdna:KNOWN_protein_coding
+CTCCCCCCTGGGTCGGACGCTGAGCGGAGCCGCGGGCGGGAGGGCGGACGGACCGACTGA
+CGGTAGGGACGGGAGGCGAGCAAGATGGCGCAGACGCAGGGCACCCGGAGGAAAGTCTGT
+TACTACTACGACGGGGATGTTGGAAATTACTATTATGGACAAGGCCACCCAATGAAGCCT
+CACCGAATCCGCATGACTCATAATTTGCTGCTCAACTATGGTCTCTACCGAAAAATGGAA
+ATCTATCGCCCTCACAAAGCCAATGCTGAGGAGATGACCAAGTACCACAGCGATGACTAC
+ATTAAATTCTTGCGCTCCATCCGTCCAGATAACATGTCGGAGTACAGCAAGCAGATGCAG
+AGATTCAACGTTGGTGAGGACTGTCCAGTATTCGATGGCCTGTTTGAGTTCTGTCAGTTG
+TCTACTGGTGGTTCTGTGGCAAGTGCTGTGAAACTTAATAAGCAGCAGACGGACATCGCT
+GTGAATTGGGCTGGGGGCCTGCACCATGCAAAGAAGTCCGAGGCATCTGGCTTCTGTTAC
+GTCAATGATATCGTCTTGGCCATCCTGGAACTGCTAAAGTATCACCAGAGGGTGCTGTAC
+ATTGACATTGATATTCACCATGGTGACGGCGTGGAAGAGGCCTTCTACACCACGGACCGG
+GTCATGACTGTGTCCTTTCATAAGTATGGAGAGTACTTCCCAGGAACTGGGGACCTACGG
+GATATCGGGGCTGGCAAAGGCAAGTATTATGCTGTTAACTACCCGCTCCGAGACGGGATT
+GATGACGAGTCCTATGAGGCCATTTTCAAGCCGGTCATGTCCAAAGTAATGGAGATGTTC
+CAGCCTAGTGCGGTGGTCTTACAGTGTGGCTCAGACTCCCTATCTGGGGATCGGTTAGGT
+TGCTTCAATCTAACTATCAAAGGACACGCCAAGTGTGTGGAATTTGTCAAGAGCTTTAAC
+CTGCCTATGCTGATGCTGGGAGGCGGTGGTTACACCATTCGTAACGTTGCCCGGTGCTGG
+ACATATGAGACAGCTGTGGCCCTGGATACGGAGATCCCTAATGAGCTTCCATACAATGAC
+TACTTTGAATACTTTGGACCAGATTTCAAGCTCCACATCAGTCCTTCCAATATGACTAAC
+CAGAACACGAATGAGTACCTGGAGAAGATCAAACAGCGACTGTTTGAGAACCTTAGAATG
+CTGCCGCACGCACCTGGGGTCCAAATGCAGGCGATTCCTGAGGACGCCATCCCTGAGGAG
+AGTGGCGATGAGGACGAAGACGACCCTGACAAGCGCATCTCGATCTGCTCCTCTGACAAA
+CGAATTGCCTGTGAGGAAGAGTTCTCCGATTCTGAAGAGGAGGGAGAGGGGGGCCGCAAG
+AACTCTTCCAACTTCAAAAAAGCCAAGAGAGTCAAAACAGAGGATGAAAAAGAGAAAGAC
+CCAGAGGAGAAGAAAGAAGTCACCGAAGAGGAGAAAACCAAGGAGGAGAAGCCAGAAGCC
+AAAGGGGTCAAGGAGGAGGTCAAGTTGGCCTGAATGGACCTCTCCAGCTCTGGCTTCCTG
+CTGAGTCCCTCACGTTTCTTCCCCAACCCCTCAGATTTTATATTTTCTATTTCTCTGTGT
+ATTTATATAAAAATTTATTAAATATAAATATCCCCAGGGACAGAAACCAAGGCCCCGAGC
+TCAGGGCAGCTGTGCTGGGTGAGCTCTTCCAGGAGCCACCTTGCCACCCATTCTTCCCGT
+TCTTAACTTTGAACCATAAAGGGTGCCAGGTCTGGGTGAAAGGGATACTTTTATGCAACC
+ATAAGACAAACTCCTGAAATGCCAAGTGCCTGCTTAGTAGCTTTGGAAAGGTGCCCTTAT
+TGAACATTCTAGAAGGGGTGGCTGGGTCTTCAAGGATCTCCTGTTTTTTTCAGGCTCCTA
+AAGTAACATCAGCCATTTTTAGATTGGTTCTGTTTTCGTACCTTCCCACTGGCCTCAAGT
+GAGCCAAGAAACACTGCCTGCCCTCTGTCTGTCTTCTCCTAATTCTGCAGGTGGAGGTTG
+CTAGTCTAGTTTCCTTTTTGAGATACTATTTTCATTTTTGTGAGCCTCTTTGTAATAAAA
+TGGTACATTTCTATATCCTCCTGA</code></pre></div>
+
+<h3 id="toc_19">Table from <a href="http://bioperl.org/howtos/Beginners_HOWTO.html">BioPerl Beginners HOWTO</a></h3>
+
+<blockquote>
+<p>The table below shows the methods you’re likely to use with the Sequence object directly. Bear in mind that not all values, such as molecule or division, are found in all sequence formats, you have to know something about your input sequences in order to get some of these values.</p>
+</blockquote>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Returns</th>
+<th>Example</th>
+<th>Note</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>accession_number</td>
+<td>identifier</td>
+<td>$acc = $so-&gt;accession_number</td>
+<td>get or set an identifier</td>
+</tr>
+<tr>
+<td>alphabet</td>
+<td>alphabet</td>
+<td>$so-&gt;alphabet(‘dna’)</td>
+<td>get or set the alphabet (‘dna’,’rna’,’protein’)</td>
+</tr>
+<tr>
+<td>authority</td>
+<td>authority, if available</td>
+<td>$so-&gt;authority(“DB”)</td>
+<td>get or set the organization</td>
+</tr>
+<tr>
+<td>desc</td>
+<td>description</td>
+<td>$so-&gt;desc(“Example 1”)</td>
+<td>get or set a description</td>
+</tr>
+<tr>
+<td>display_id</td>
+<td>identifier</td>
+<td>$so-&gt;display_id(“M123456”)</td>
+<td>get or set an identifier</td>
+</tr>
+<tr>
+<td>division</td>
+<td>division, if available (e.g. PRI)</td>
+<td>$div = $so-&gt;division</td>
+<td>get division (e.g. “PRI”)</td>
+</tr>
+<tr>
+<td>get_dates</td>
+<td>array of dates, if available</td>
+<td>@dates = $so-&gt;get_dates</td>
+<td>get dates</td>
+</tr>
+<tr>
+<td>get_secondary_accessions</td>
+<td>array of secondary accessions, if available</td>
+<td>@accs = $so-&gt;get_secondary_accessions</td>
+<td>get other identifiers</td>
+</tr>
+<tr>
+<td>is_circular</td>
+<td>Boolean</td>
+<td>if $so-&gt;is_circular{}</td>
+<td>get or set</td>
+</tr>
+<tr>
+<td>keywords</td>
+<td>keywords, if available</td>
+<td>@array = $so-&gt;keywords</td>
+<td>get or set keywords</td>
+</tr>
+<tr>
+<td>length</td>
+<td>length, a number</td>
+<td>$len = $so-&gt;length</td>
+<td>get the length</td>
+</tr>
+<tr>
+<td>molecule</td>
+<td>molecule type, if available</td>
+<td>$type = $so-&gt;molecule</td>
+<td>get molecule (e.g. “RNA”, “DNA”)</td>
+</tr>
+<tr>
+<td>namespace</td>
+<td>namespace, if available</td>
+<td>$so-&gt;namespace(“Private”)</td>
+<td>get or set the name space</td>
+</tr>
+<tr>
+<td>new</td>
+<td>Sequence object</td>
+<td>$so = Bio::Seq-&gt;new(-seq =&gt; “MPQRAS”)</td>
+<td>create a new one, see for more</td>
+</tr>
+<tr>
+<td>pid</td>
+<td>pid, if available</td>
+<td>$pid = $so-&gt;pid</td>
+<td>get pid</td>
+</tr>
+<tr>
+<td>primary_id</td>
+<td>identifier</td>
+<td>$so-&gt;primary_id(12345)</td>
+<td>get or set an identifier</td>
+</tr>
+<tr>
+<td>revcom</td>
+<td>Sequence object</td>
+<td>$so2 = $so1-&gt;revcom</td>
+<td>Reverse complement</td>
+</tr>
+<tr>
+<td>seq</td>
+<td>sequence string</td>
+<td>$seq = $so-&gt;seq</td>
+<td>get or set the sequence</td>
+</tr>
+<tr>
+<td>seq_version</td>
+<td>version, if available</td>
+<td>$so-&gt;seq_version(“1”)</td>
+<td>get or set a version</td>
+</tr>
+<tr>
+<td>species</td>
+<td>Species object</td>
+<td>$species_obj = $so-&gt;species</td>
+<td>See for more</td>
+</tr>
+<tr>
+<td>subseq</td>
+<td>sequence string</td>
+<td>$string = $seq_obj-&gt;subseq(10,40)</td>
+<td>Arguments are start and end</td>
+</tr>
+<tr>
+<td>translate</td>
+<td>protein Sequence object</td>
+<td>$prot_obj = $dna_obj-&gt;translate</td>
+<td></td>
+</tr>
+<tr>
+<td>trunc</td>
+<td>Sequence object</td>
+<td>$so2 = $so1-&gt;trunc(10,40)</td>
+<td>Arguments are start and end</td>
+</tr>
+</tbody>
+</table>
+
+<p><a name="localfasta"></a></p>
+
+<h2 id="toc_20">Querying a local FASTA file</h2>
+
+<h4 id="toc_21">Problem:</h4>
+
+<ul>
+<li>You have a FASTA file that contains many records.<br></li>
+<li>You want to retrieve a specific record.<br></li>
+<li>You do not want to loop through all records until you find the correct record.</li>
+</ul>
+
+<h4 id="toc_22">Where to start:</h4>
+
+<p>Looking through BioPerl HOWTOs we find that we can use
+<em>Bio::DB::Fasta.</em>     </p>
+
+<p><a href="http://bioperl.org/howtos/Local_Databases_HOWTO.html#item4">Local Databases HOWTO</a><br>
+<a href="https://metacpan.org/pod/Bio::DB::Fasta">Bio::DB::Fasta CPAN DOC</a></p>
+
+<hr>
+
+<p>From Local Databases HOWTO:</p>
+
+<blockquote>
+<h3 id="toc_23">Abstract</h3>
+
+<p>This is a HOWTO that talks about using Bioperl to create local sequence databases for fast retrieval.</p>
+</blockquote>
+
+<h3 id="toc_24">Bio::DB::FASTA Example</h3>
+
+<p>Code from HOWTO:  </p>
+
+<div><pre><code class="language-perl">use strict;
+use Bio::DB::Fasta;
+
+my $id = &#39;CHROMOSOME_I&#39;;
+my $file = &quot;arabidopsis.fa&quot;
+
+my $db = Bio::DB::Fasta-&gt;new($file);
+
+my $seqobj = $db-&gt;get_Seq_by_id($id); </code></pre></div>
+
+<p>Let&#39;s write our own to retrieve sequences from a local copy of SwissProt/Uniprot:</p>
+
+<div><pre><code class="language-perl">#!/usr/bin/perl
+use warnings;
+use strict;
+use Bio::DB::Fasta;
+
+# downloaded from http://www.uniprot.org/downloads
+my $dbfile = &#39;/pfbhome/data/uniprot_sprot.fasta&#39;;
+my $db_obj = Bio::DB::Fasta-&gt;new($dbfile);
+
+# retrieve a sequence
+my $id = &#39;sp|Q13547|HDAC1_HUMAN&#39;;
+my $seq_obj = $db_obj-&gt;get_Seq_by_id($id);
+
+if ( defined $seq_obj ) {
+  print &quot;seq:&quot; , $seq_obj-&gt;seq , &quot;\n&quot;;
+} else {
+  warn(&quot;Cannot find $id\n&quot;);
+}</code></pre></div>
+
+<p>Output:</p>
+
+<div><pre><code class="language-none">srobb@www:~/scripts/bioperl$ perl ./local_seq_query.pl
+seq:MAQTQGTRRKVCYYYDGDVGNYYYGQGHPMKPHRIRMTHNLLLNYGLYRKMEIYRPHKANAEEMTKYHSDDYIKFLRSIRPDNMSEYSKQMQRFNVGEDCPVFDGLFEFCQLSTGGSVASAVKLNKQQTDIAVNWAGGLHHAKKSEASGFCYVNDIVLAILELLKYHQRVLYIDIDIHHGDGVEEAFYTTDRVMTVSFHKYGEYFPGTGDLRDIGAGKGKYYAVNYPLRDGIDDESYEAIFKPVMSKVMEMFQPSAVVLQCGSDSLSGDRLGCFNLTIKGHAKCVEFVKSFNLPMLMLGGGGYTIRNVARCWTYETAVALDTEIPNELPYNDYFEYFGPDFKLHISPSNMTNQNTNEYLEKIKQRLFENLRMLPHAPGVQMQAIPEDAIPEESGDEDEDDPDKRISICSSDKRIACEEEFSDSEEEGEGGRKNSSNFKKAKRVKTEDEKEKDPEEKKEVTEEEKTKEEKPEAKGVKEEVKLA</code></pre></div>
+
+<p><a name="seqrec"></a></p>
+
+<h2 id="toc_25">Creating a sequence record</h2>
+
+<h4 id="toc_26">Problem:</h4>
+
+<p>You have a sequence and want to create a Seq object on the fly.</p>
+
+<h4 id="toc_27">Use:</h4>
+
+<p>Bio::Seq</p>
+
+<p><a href="http://bioperl.org/howtos/Beginners_HOWTO.html#item8">Beginners HOWTO: Creating a sequence, and an Object</a><br>
+<a href="https://metacpan.org/pod/Bio::Seq">Bio::Seq CPAN DOC</a></p>
+
+<hr>
+
+<p>From Beginners HOWTO with a Data::Dumper print method added to visualize the object in a different way.</p>
+
+<p>Code:</p>
+
+<div><pre><code class="language-perl">
+#!/usr/bin/perl
+use strict;
+use warnings;
+use Bio::Seq;
+use Data::Dumper;
+
+
+my $seq_obj = Bio::Seq-&gt;new(-seq =&gt; &#39;aaaatgggggggggggccccgtt&#39;,
+                         -alphabet =&gt; &#39;dna&#39; );
+
+
+print Dumper $seq_obj;</code></pre></div>
+
+<p>The Object is just a hash of hashes, with some Blessing involved.<br>
+Output:</p>
+
+<div><pre><code class="language-none">srobb@www:~/scripts/bioperl$ perl seqObj.pl
+$VAR1 = bless( {
+                 &#39;_root_verbose&#39; =&gt; 0,
+                 &#39;primary_seq&#39; =&gt; bless( {
+                                           &#39;length&#39; =&gt; 23,
+                                           &#39;_root_verbose&#39; =&gt; 0,
+                                           &#39;alphabet&#39; =&gt; &#39;dna&#39;,
+                                           &#39;seq&#39; =&gt; &#39;aaaatgggggggggggccccgtt&#39;,
+                                           &#39;_nowarnonempty&#39; =&gt; undef
+                                         }, &#39;Bio::PrimarySeq&#39; )
+               }, &#39;Bio::Seq&#39; );
+</code></pre></div>
+
+<p>Let&#39;s add a bit more so that we can see what we can do with our new seq obj:</p>
+
+<p>Code:</p>
+
+<div><pre><code class="language-perl">#!/usr/bin/perl -w
+use strict;
+use Bio::Seq;
+use Bio::SeqIO;
+
+my $seqObj = Bio::Seq-&gt;new(-seq =&gt; &#39;aaaatgggggggggggccccgtt&#39;,
+                           -alphabet =&gt; &#39;dna&#39;,
+                           -display_id =&gt; &#39;seq_example&#39;,
+                           -description=&gt; &#39;this seq is awesome&#39;);
+                           
+## Create a seqIO Object to write out a sequence in FASTA format to a file                          
+my $out_seqIO_Obj = Bio::SeqIO-&gt;new(
+                            -format =&gt; &#39;fasta&#39;,
+                            -file =&gt; &#39;&gt;out.fasta&#39;,
+                            
+                      );
+
+## Write the seq object
+$out_seqIO_Obj-&gt;write_seq($seqObj);
+
+## Retrieve and print out some extra information about our seq object
+print &quot;Id: &quot; , $seqObj-&gt;display_id , &quot;\n&quot;;
+print &quot;Length: &quot; , $seqObj-&gt;length , &quot;\n&quot;;
+print &quot;Seq: &quot; , $seqObj-&gt;seq , &quot;\n&quot;;
+print &quot;Subseq (3..6): &quot; , $seqObj-&gt;subseq(3,6) , &quot;\n&quot;;
+print &quot;Translation: &quot; , $seqObj-&gt;translate-&gt;seq , &quot;\n&quot;;</code></pre></div>
+
+<p>Note: the nesting of methods. translate() returns a seq object that is passed to the seq() method that will return a string that can be printed.</p>
+
+<p>Output:</p>
+
+<div><pre><code class="language-none">srobb@www:~/scripts/bioperl$ perl create_seqObj.pl
+Id: seq_example
+Length: 23
+Seq: aaaatgggggggggggccccgtt
+Subseq (3..6): aatg
+Translation: KMGGGAP
+
+srobb@www:~/scripts/bioperl$ cat out.fasta
+&gt;seq_example this seq is awesome
+aaaatgggggggggggccccgtt</code></pre></div>
+
+<p><a name="convert"></a></p>
+
+<h2 id="toc_28">File Format Conversions</h2>
+
+<h4 id="toc_29">Problem:</h4>
+
+<p>You have GenBank files and want to extract only the sequence in FASTA format.</p>
+
+<h4 id="toc_30">Use:</h4>
+
+<p>Bio::SeqIO</p>
+
+<p><a href="http://bioperl.org/howtos/SeqIO_HOWTO.html#item5">SeqIO HOWTO</a><br>
+<a href="https://metacpan.org/pod/Bio::SeqIO">Bio::SeqIO CPAN DOC</a></p>
+
+<hr>
+
+<p>Let&#39;s look at our genbank formated file:  </p>
+
+<div><pre><code class="language-none">srobb@www:~/scripts/bioperl$ cat /pfbhome/data/MUSIGHBA1.gb
+LOCUS       MUSIGHBA1                408 bp    mRNA    linear   ROD 27-APR-1993
+DEFINITION  Mouse Ig active H-chain V-region from MOPC21, subgroup VH-II, mRNA.
+ACCESSION   J00522
+VERSION     J00522.1  GI:195052
+KEYWORDS    constant region; immunoglobulin heavy chain; processed gene;
+            variable region; variable region subgroup VH-II.
+SOURCE      Mus musculus (house mouse)
+  ORGANISM  Mus musculus
+            Eukaryota; Metazoa; Chordata; Craniata; Vertebrata; Euteleostomi;
+            Mammalia; Eutheria; Euarchontoglires; Glires; Rodentia;
+            Sciurognathi; Muroidea; Muridae; Murinae; Mus; Mus.
+REFERENCE   1  (bases 1 to 408)
+  AUTHORS   Bothwell,A.L., Paskind,M., Reth,M., Imanishi-Kari,T., Rajewsky,K.
+            and Baltimore,D.
+  TITLE     Heavy chain variable region contribution to the NPb family of
+            antibodies: somatic mutation evident in a gamma 2a variable region
+  JOURNAL   Cell 24 (3), 625-637 (1981)
+   PUBMED   6788376
+COMMENT     Original source text: Mouse C57Bl/6 myeloma MOPC21, cDNA to mRNA,
+            clone pAB-gamma-1-4.
+            [1] studies the response in C57Bl/6 mice to NP proteins. It is
+            called the b-NP response because this mouse strain carries the
+            b-IgH haplotype. See other entries for b-NP response for more
+            comments.
+FEATURES             Location/Qualifiers
+     source          1..408
+                     /organism=&quot;Mus musculus&quot;
+                     /mol_type=&quot;mRNA&quot;
+                     /db_xref=&quot;taxon:10090&quot;
+     CDS             &lt;1..&gt;408
+                     /note=&quot;Ig H-chain V-region from MOPC21&quot;
+                     /codon_start=1
+                     /protein_id=&quot;AAD15290.1&quot;
+                     /db_xref=&quot;GI:195055&quot;
+                     /translation=&quot;RLNLVFLVLILKGVQCDVQLVESGGGLVQPGGSRKLSCAASGFT
+                     FSSFGMHWVRQAPEKGLEWVAYISSGSSTLHYADTVKGRFTISRDNPKNTLFLQMTSL
+                     RSEDTAMYYCARWGNYPYYAMDYWGQGTSVTVSS&quot;
+     sig_peptide     &lt;1..48
+     mat_peptide     49..&gt;408
+                     /product=&quot;Ig H-chain V-region from MOPC21 mature peptide&quot;
+     misc_recomb     343..344
+                     /note=&quot;V-region end/D-region start (+/- 1bp)&quot;
+     misc_recomb     356..357
+                     /note=&quot;D-region end/J-region start&quot;
+ORIGIN      57 bp upstream of PvuII site, chromosome 12.
+        1 aggctcaatt tagttttcct tgtccttatt ttaaaaggtg tccagtgtga tgtgcagctg
+       61 gtggagtctg ggggaggctt agtgcagcct ggagggtccc ggaaactctc ctgtgcagcc
+      121 tctggattca ctttcagtag ctttggaatg cactgggttc gtcaggctcc agagaagggg
+      181 ctggagtggg tcgcatacat tagtagtggc agtagtaccc tccactatgc agacacagtg
+      241 aagggccgat tcaccatctc aagagacaat cccaagaaca ccctgttcct gcaaatgacc
+      301 agtctaaggt ctgaggacac ggccatgtat tactgtgcaa gatggggtaa ctacccttac
+      361 tatgctatgg actactgggg tcaaggaacc tcagtcaccg tctcctca
+//</code></pre></div>
+
+<h3 id="toc_31"><a href="http://bioperl.org/howtos/SeqIO_HOWTO.html#item5">Table</a> of Formats that SeqIO knows about (From SeqIO HOWTO):</h3>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>File extension</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>abi</td>
+<td>ABI tracefile</td>
+<td>ab[i1]</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ace</td>
+<td>Ace database</td>
+<td>ace</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>agave</td>
+<td>AGAVE XML</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>alf</td>
+<td>ALF tracefile</td>
+<td>alf</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>asciitree</td>
+<td>write-only, to visualize features</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>bsml</td>
+<td>BSML using</td>
+<td>bsm,bsml</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>bsml_sax</td>
+<td>BSML, using</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>chadoxml</td>
+<td>CHADO sequence format</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>chaos</td>
+<td>CHAOS sequence format</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>chaosxml</td>
+<td>Chaos XML</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ctf</td>
+<td>CTF tracefile</td>
+<td>ctf</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>embl</td>
+<td>EMBL database</td>
+<td>embl,ebl,emb,dat</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>entrezgene</td>
+<td>Entrez Gene ASN1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>excel</td>
+<td>Excel</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>exp</td>
+<td>Staden EXP format</td>
+<td>exp</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>fasta</td>
+<td>FASTA</td>
+<td>fasta,fast,seq,fa,fsa,nt,aa</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>fastq</td>
+<td>quality score data in FASTA-like format</td>
+<td>fastq</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>flybase_chadoxml</td>
+<td>variant of Chado XML</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>game</td>
+<td>GAME XML</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>gcg</td>
+<td>GCG</td>
+<td>gcg</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>genbank</td>
+<td>GenBank</td>
+<td>gb</td>
+<td>gbank</td>
+<td>genbank</td>
+</tr>
+<tr>
+<td>interpro</td>
+<td>InterProScan XML</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>kegg</td>
+<td>KEGG</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>largefasta</td>
+<td>Large files, fasta format</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>lasergene</td>
+<td>Lasergene format</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>locuslink</td>
+<td>LocusLink</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>metafasta</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>phd</td>
+<td>Phred</td>
+<td>phd,phred</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>pir</td>
+<td>PIR database</td>
+<td>pir</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>pln</td>
+<td>PLN tracefile</td>
+<td>pln</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>qual</td>
+<td>Phred</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>raw</td>
+<td>plain text</td>
+<td>txt</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>scf</td>
+<td>Standard Chromatogram Format</td>
+<td>scf</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>seqxml</td>
+<td>SeqXML sequence format</td>
+<td>xml</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>strider</td>
+<td>DNA Strider format</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>swiss</td>
+<td>SwissProt</td>
+<td>swiss,sp</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>tab</td>
+<td>tab-delimited</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>table</td>
+<td>Table</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>tigr</td>
+<td>TIGR XML</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>tigrxml</td>
+<td>TIGR Coordset XML</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>tinyseq</td>
+<td>NCBI TinySeq XML</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>ztr</td>
+<td>ZTR tracefile</td>
+<td>ztr</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="toc_32">Let&#39;s revisit code from <a href="#seqfile">Manipulating sequences in a file</a></h3>
+
+<p>Here we read in a FASTA file and we printed it out again in FASTA format.</p>
+
+<p>Code:</p>
+
+<div><pre><code class="language-perl">#!/usr/bin/perl -w
+use strict;
+use Bio::SeqIO;
+
+my $file = shift;
+
+my $seqIO_object = Bio::SeqIO-&gt;new(
+                    -file =&gt; $file,
+                    -format =&gt; &#39;fasta&#39;,
+);
+
+my $out_seqIO_Obj = Bio::SeqIO-&gt;new(-format =&gt; &#39;fasta&#39;);
+
+while (my $seq_object = $seqIO_object-&gt;next_seq){
+  $out_seqIO_Obj-&gt;write_seq($seq_object);
+}</code></pre></div>
+
+<p>Do you see where we create the $seqIO_Obj?<br>
+We have &#39;fasta&#39; as the format.<br>
+What happens if we change to &#39;genbank&#39;?</p>
+
+<div><pre><code class="language-perl">#!/usr/bin/perl -w
+use strict;
+use Bio::SeqIO;
+
+
+my $file = shift;
+
+my $seqIO_object = Bio::SeqIO-&gt;new(
+                    -file =&gt; $file,
+                    -format =&gt; &#39;genbank&#39;,
+);
+
+my $out_seqIO_Obj = Bio::SeqIO-&gt;new(-format =&gt; &#39;fasta&#39;);
+
+while (my $seq_object = $seqIO_object-&gt;next_seq){
+  $out_seqIO_Obj-&gt;write_seq($seq_object);
+}</code></pre></div>
+
+<p>Let&#39;s run our script:</p>
+
+<p>Output:</p>
+
+<div><pre><code class="language-none">srobb@www:~/scripts/bioperl$ perl convert_genbank_fasta.pl /pfbhome/data/MUSIGHBA1.gb
+&gt;MUSIGHBA1 Mouse Ig active H-chain V-region from MOPC21, subgroup VH-II, mRNA.
+AGGCTCAATTTAGTTTTCCTTGTCCTTATTTTAAAAGGTGTCCAGTGTGATGTGCAGCTG
+GTGGAGTCTGGGGGAGGCTTAGTGCAGCCTGGAGGGTCCCGGAAACTCTCCTGTGCAGCC
+TCTGGATTCACTTTCAGTAGCTTTGGAATGCACTGGGTTCGTCAGGCTCCAGAGAAGGGG
+CTGGAGTGGGTCGCATACATTAGTAGTGGCAGTAGTACCCTCCACTATGCAGACACAGTG
+AAGGGCCGATTCACCATCTCAAGAGACAATCCCAAGAACACCCTGTTCCTGCAAATGACC
+AGTCTAAGGTCTGAGGACACGGCCATGTATTACTGTGCAAGATGGGGTAACTACCCTTAC
+TATGCTATGGACTACTGGGGTCAAGGAACCTCAGTCACCGTCTCCTCA</code></pre></div>
+
+<h3 id="toc_33">What if we want to convert a FASTA file to Genbank?</h3>
+
+<p>What would we change?</p>
+
+<p>Code:</p>
+
+<div><pre><code class="language-perl">#!/usr/bin/perl
+use warnings;
+use strict;
+use Bio::SeqIO;
+
+
+my $file = shift;
+
+my $seqIO_object = Bio::SeqIO-&gt;new(
+                    -file =&gt; $file,
+                    -format =&gt; &#39;fasta&#39;,
+);
+
+my $out_seqIO_Obj = Bio::SeqIO-&gt;new(-format =&gt; &#39;genbank&#39;);
+
+while (my $seq_object = $seqIO_object-&gt;next_seq){
+  $out_seqIO_Obj-&gt;write_seq($seq_object);
+}</code></pre></div>
+
+<p>Here we changed: </p>
+
+<ul>
+<li>the <code>$seqIO_object</code> format to FASTA</li>
+<li>the <code>$out_seqIO_Obj</code> format to GenBank</li>
+</ul>
+
+<p>Let&#39;s look at our FASTA file: </p>
+
+<div><pre><code class="language-none">srobb@www:~/scripts/bioperl$ cat /pfbhome/data/H4.nt
+&gt;gi|603555|emb|X83548.1| H.sapiens gene for histone H4
+TCTAGAGATGGCGCCATTTGATTCCAGCAGCCACAAAGCACTAGAACAATCGATGCTAAGAGGTGACAGG
+AAAAACAGGCTGCAAAGACCCAGACAATGGAATGCAGCGGTGGTCAGCCTAAAACACTGTAGAAGGGCAA
+GATGAGCTGAGTAATTTTTAACTGGGCATCATTTTTAGAAACTGGAGTTTAAGTACCCCCTTTTCCATTT
+TTTCCTGAAGTCGTGGGCAGGGCGCAAGGTCTGTGAATCGGCCGACCGGATGCAGCTGGTGTGGAGAGTT
+CCCAATCAGGTCCGATTTATTACTATATAAAGTACTGCTGCGAGGCTTGCCGTGTTGCATTTTGTTTAGT
+ACAAGACATGTCTGGGCGCGGCAAAGGCGGGAAGGGTCTGGGCAAAGGAGGCGCTAAGCGCCACCGCAAA
+GTTCTGCGCGACAACATTCAGGGCATCACCAAGCCCGCCATCCGACGCCTGGCACGGCGTGGAGGCGTTA
+AGCGCATCTCAGGCCTTATATACGAGGAGACACGCGGAGTTCTTAAAGTGTTTTTGGAGAATGTAATCCG
+CGATGCAGTTACCTACACGGAGCACGCCAAACGCAAGACAGTCACAGCCATGGACGTGGTTTACGCGCTC
+AAGCGCCAGGGCCGCACCCTGTATGGCTTTGGCGGCTGAGTGTTTTACTTACTTACACGGTTCCTCAAAG
+GCCCTTCTCAGGGCCACCCATGAAGTCTGTGAAAGAGCTGTAGACTAAAGATAGTTAATTTCTTAAGAAC
+ACTTAAACGTATGGCAGTTTTGGCAAATTAGCGATTCCACATAAGCAGTCGCTGAAGTTTGAGGTTCGGT
+GCCCCTTTCAGCATTACTTAGTGGTTAAAA</code></pre></div>
+
+<p>Let&#39;s run our script:</p>
+
+<p>Output:</p>
+
+<div><pre><code class="language-none">srobb@www:~/scripts/bioperl$ perl convert_fasta_genbank.pl /pfbhome/data/H4.nt
+LOCUS       gi|603555|emb|X83548.1|          870 bp    dna     linear   UNK
+DEFINITION  H.sapiens gene for histone H4
+ACCESSION   unknown
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 tctagagatg gcgccatttg attccagcag ccacaaagca ctagaacaat cgatgctaag
+       61 aggtgacagg aaaaacaggc tgcaaagacc cagacaatgg aatgcagcgg tggtcagcct
+      121 aaaacactgt agaagggcaa gatgagctga gtaattttta actgggcatc atttttagaa
+      181 actggagttt aagtaccccc ttttccattt tttcctgaag tcgtgggcag ggcgcaaggt
+      241 ctgtgaatcg gccgaccgga tgcagctggt gtggagagtt cccaatcagg tccgatttat
+      301 tactatataa agtactgctg cgaggcttgc cgtgttgcat tttgtttagt acaagacatg
+      361 tctgggcgcg gcaaaggcgg gaagggtctg ggcaaaggag gcgctaagcg ccaccgcaaa
+      421 gttctgcgcg acaacattca gggcatcacc aagcccgcca tccgacgcct ggcacggcgt
+      481 ggaggcgtta agcgcatctc aggccttata tacgaggaga cacgcggagt tcttaaagtg
+      541 tttttggaga atgtaatccg cgatgcagtt acctacacgg agcacgccaa acgcaagaca
+      601 gtcacagcca tggacgtggt ttacgcgctc aagcgccagg gccgcaccct gtatggcttt
+      661 ggcggctgag tgttttactt acttacacgg ttcctcaaag gcccttctca gggccaccca
+      721 tgaagtctgt gaaagagctg tagactaaag atagttaatt tcttaagaac acttaaacgt
+      781 atggcagttt tggcaaatta gcgattccac ataagcagtc gctgaagttt gaggttcggt
+      841 gcccctttca gcattactta gtggttaaaa
+//</code></pre></div>
+
+<p><a name="blast"></a></p>
+
+<h2 id="toc_34">Parsing BLAST output</h2>
+
+<h3 id="toc_35">Problem:</h3>
+
+<p>You have 10s of thousands of BLAST reports, or maybe just 1, and you want to find all hits better than a specific E-value.</p>
+
+<h3 id="toc_36">Use:</h3>
+
+<p>Bio::SearchIO<br>
+<a href="http://bioperl.org/howtos/SearchIO_HOWTO.html">SearchIO HOWTO</a><br>
+<a href="https://metacpan.org/pod/Bio::SearchIO">Bio::Seq CPAN DOC</a></p>
+
+<hr>
+
+<p>Code From Cpan:</p>
+
+<div><pre><code class="language-perl">use Bio::SearchIO;
+# format can be &#39;fasta&#39;, &#39;blast&#39;, &#39;exonerate&#39;, ...
+my $searchio = Bio::SearchIO-&gt;new( -format =&gt; &#39;blastxml&#39;,
+                                  -file   =&gt; &#39;blastout.xml&#39; );
+while ( my $result = $searchio-&gt;next_result() ) {
+    while( my $hit = $result-&gt;next_hit ) {
+     # process the Bio::Search::Hit::HitI object
+        while( my $hsp = $hit-&gt;next_hsp ) { 
+         # process the Bio::Search::HSP::HSPI object
+        }
+    }
+}</code></pre></div>
+
+<h3 id="toc_37">Overview of a BLAST Report:</h3>
+
+<p><img src="bioperl_images/blastReport.png" alt="BLAST Reprot"></p>
+
+<p>Note: Command used to generate BLAST output</p>
+
+<div><pre><code class="language-none">blastx -db /pfbhome/data/uniprot_sprot.fasta -query /pfbhome/data/smed-HDAC.nt -evalue 1e-50 -num_descriptions 1 -num_alignments 1 &gt; smed-HDAC1-1_BLASTX_uniprot.blastout</code></pre></div>
+
+<p>Let&#39;s start parsing our BLAST output.</p>
+
+<p>Code:</p>
+
+<div><pre><code class="language-perl">#!/usr/bin/perl
+use warnings;
+use strict;
+use Bio::SearchIO;
+
+#file: blast_parser_intro.pl
+my $blast_report = shift;
+
+# Create the SearchIO Object
+my $searchIO_obj = Bio::SearchIO-&gt;new(
+                   -file =&gt; $blast_report,
+                   -format =&gt; &#39;blast&#39;
+);
+
+while (my $result_obj = $searchIO_obj -&gt;next_result ) {
+  my $program = $result_obj -&gt;algorithm;
+  my $queryName = $result_obj -&gt;query_name;
+  my $queryDesc = $result_obj -&gt;query_description;
+  my $queryLen = $result_obj -&gt;query_length;
+  print &quot;program=$program\n&quot;;
+  print &quot;queryName=$queryName\n&quot;;
+  print &quot;queryDesc=$queryDesc\n&quot;;
+  print &quot;queryLen=$queryLen\n&quot;;
+}</code></pre></div>
+
+<p>Output:</p>
+
+<div><pre><code class="language-none">srobb@www:~/scripts/bioperl$ perl parseBlast_result.pl smed-HDAC1-1_BLASTX_uniprot.blastout
+program=BLASTX
+queryName=smed-HDAC1-1
+queryDesc=Schmidtea mediterranea HDAC1
+queryLen=1487</code></pre></div>
+
+<p><code>new()</code> method creates a new Search IO object that contains you BLAST output and knows about all the methods to deal with your BLAST report, such as how to find the file, open the file, and how to read from it.</p>
+
+<p><code>next_result()</code> method within a <code>while</code> loop will iterate through your BLAST report one result at a time and create and return a result object for each result.</p>
+
+<p>The result object contains all the information about a BLAST result and the methods for accessing information about the query, such as, the BLAST algorithm used, database name, and methods to retrieve a HIT object.</p>
+
+<h3 id="toc_38"><a href="http://bioperl.org/howtos/SearchIO_HOWTO.html#item6">Table</a> of Methods for the SearchIO Result Object from the BioPerl SearchIO HOWTO:</h3>
+
+<h5 id="toc_39">See SearchIO HOWTO for the BLAST Report used to generate examples.</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Object</th>
+      <th>Method</th>
+      <th>Example</th>
+      <th>Description</th>
+      <th> </th>
+      <th> </th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Result</td>
+      <td>algorithm</td>
+      <td>BLASTX</td>
+      <td>algorithm string</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Result</td>
+      <td>algorithm_version</td>
+      <td>2.2.4 [Aug-26-2002]</td>
+      <td>algorithm version</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Result</td>
+      <td>query_name</td>
+      <td>gi</td>
+      <td>20521485</td>
+      <td>dbj</td>
+      <td>AP004641.2</td>
+      <td>query name</td>
+    </tr>
+    <tr>
+      <td>Result</td>
+      <td>query_accession</td>
+      <td>AP004641.2</td>
+      <td>query accession</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Result</td>
+      <td>query_length</td>
+      <td>3059</td>
+      <td>query length</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Result</td>
+      <td>query_description</td>
+      <td>Oryza sativa … 977CE9AF checksum.</td>
+      <td>query description</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Result</td>
+      <td>database_name</td>
+      <td>test.fa</td>
+      <td>database name</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Result</td>
+      <td>database_letters</td>
+      <td>1291</td>
+      <td>number of residues in database</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Result</td>
+      <td>database_entries</td>
+      <td>5</td>
+      <td>number of database entries</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Result</td>
+      <td>available_statistics</td>
+      <td>effectivespaceused … dbletters</td>
+      <td>statistics used</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Result</td>
+      <td>available_parameters</td>
+      <td>gapext matrix allowgaps gapopen</td>
+      <td>parameters used</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Result</td>
+      <td>num_hits</td>
+      <td>1</td>
+      <td>number of hits</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Result</td>
+      <td>hits</td>
+      <td> </td>
+      <td>List of all <a href="https://metacpan.org/pod/Bio::Search::Hit::GenericHit">Bio::Search::Hit::GenericHit</a> objects for this Result</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Result</td>
+      <td>rewind</td>
+      <td> </td>
+      <td>Reset the internal iterator that dictates where next_hit() is pointing, useful for re-iterating through the list of hits</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Table 2.1: The data returned by the Result object methods when the report shown above is used as input.</p>
+
+<p>Let&#39;s get information about the Hits in our BLAST output:</p>
+
+<p>Code:</p>
+
+<div><pre><code class="language-perl">#!/usr/bin/perl
+use warnings;
+use strict;
+use Bio::SearchIO;
+
+my $blast_report = shift;
+my $searchIO_obj = Bio::SearchIO-&gt;new(
+            -file =&gt; $blast_report,
+            -format =&gt; &#39;blast&#39;
+);
+while (my $result_obj = $searchIO_obj-&gt;next_result ) {
+  while (my $hit_obj = $result_obj-&gt;next_hit){
+    my $hitName = $hit_obj-&gt;name;
+    my $hitAcc = $hit_obj-&gt;accession;
+    my $hitLen = $hit_obj-&gt;length;
+    my $hitSig = $hit_obj-&gt;significance;
+    my $hitScore = $hit_obj-&gt;raw_score;
+    print &quot;hitName=$hitName\n&quot;;
+    print &quot;hitAcc=$hitAcc\n&quot;;
+    print &quot;hitLen=$hitLen\n&quot;;
+    print &quot;hitSig=$hitSig\n&quot;;
+    print &quot;hitScore=$hitScore\n&quot;;
+  }
+}</code></pre></div>
+
+<p>Output:</p>
+
+<div><pre><code class="language-none">srobb@www:~/scripts/bioperl$ perl parseBlast_hit.pl smed-HDAC1-1_BLASTX_uniprot.blastout
+hitName=sp|P56517|HDAC1_CHICK
+hitAcc=P56517
+hitLen=480
+hitSig=0.0
+hitScore=1680</code></pre></div>
+
+<h3 id="toc_40"><a href="http://bioperl.org/howtos/SearchIO_HOWTO.html#item6">Table</a> of Methods from the SearchIO Hit Object from the BioPerl SearchIO HOWTO:</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Object</th>
+      <th>Method</th>
+      <th>Example</th>
+      <th>Description</th>
+      <th> </th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Hit</td>
+      <td>name</td>
+      <td>gb</td>
+      <td>443893</td>
+      <td>124775</td>
+      <td>hit name</td>
+    </tr>
+    <tr>
+      <td>Hit</td>
+      <td>length</td>
+      <td>331</td>
+      <td>Length of the Hit sequence</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Hit</td>
+      <td>accession</td>
+      <td>443893</td>
+      <td>accession (usually when this is a Genbank formatted id this will be an accession number - the part after the <code class="highlighter-rouge">gb</code> or <code class="highlighter-rouge">emb</code> )</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Hit</td>
+      <td>description</td>
+      <td>LaForas sequence</td>
+      <td>hit description</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Hit</td>
+      <td>algorithm</td>
+      <td>BLASTX</td>
+      <td>algorithm</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Hit</td>
+      <td>raw_score</td>
+      <td>92</td>
+      <td>hit raw score</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Hit</td>
+      <td>significance</td>
+      <td>2e-022</td>
+      <td>hit significance</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Hit</td>
+      <td>bits</td>
+      <td>92.0</td>
+      <td>hit bits</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Hit</td>
+      <td>hsps</td>
+      <td> </td>
+      <td>List of all <a href="https://metacpan.org/pod/Bio::Search::HSP::GenericHSP">Bio::Search::HSP::GenericHSP</a> objects for this Hit</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Hit</td>
+      <td>num_hsps</td>
+      <td>1</td>
+      <td>number of HSPs in hit</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Hit</td>
+      <td>locus</td>
+      <td>124775</td>
+      <td>locus name</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Hit</td>
+      <td>accession_number</td>
+      <td>443893</td>
+      <td>accession number</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Hit</td>
+      <td>rewind</td>
+      <td> </td>
+      <td>Resets the internal counter for next_hsp() so that the iterator will begin at the beginning of the list</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Table 2.2. The data returned by Hit object methods when the report shown above is used as input.</p>
+
+<p>Let&#39;s get information about the HSPs of our HIT in our Result in our BLAST Report:</p>
+
+<p>Code:</p>
+
+<div><pre><code class="language-perl">#!/usr/bin/perl
+use strict;
+use warnings;
+use Bio::SearchIO;
+
+my $blast_report = shift;
+my $searchIO_obj = Bio::SearchIO-&gt;new(
+         -file =&gt; $blast_report,
+         -format =&gt; &#39;blast&#39;
+);
+while (my $result_obj = $searchIO_obj-&gt;next_result ) {
+  while (my $hit_obj = $result_obj-&gt;next_hit){
+    while (my $hsp_obj = $hit_obj -&gt;next_hsp){
+      my $evalue = $hsp_obj-&gt;evalue;
+      my $hitString = $hsp_obj-&gt;hit_string;
+      my $queryString = $hsp_obj-&gt;query_string;
+      my $homologyString = $hsp_obj-&gt;homology_string;
+      print &quot;hsp evalue: $evalue\n&quot;;
+      print &quot;HIT       : &quot;,substr($hitString,0,50),&quot;\n&quot;;
+      print &quot;HOMOLOGY  : &quot;,substr($homologyString,0,50),&quot;\n&quot;;
+      print &quot;QUERY     : &quot;,substr($queryString,0,50),&quot;\n&quot;;
+    }
+  }
+}</code></pre></div>
+
+<p>Output:</p>
+
+<div><pre><code class="language-none">srobb@www:~/scripts/bioperl$ perl parseBlast_hsp.pl smed-HDAC1-1_BLASTX_uniprot.blastout
+hsp evalue: 0.0
+HIT       : TKRKVCYYYDGDVGNYYYGQGHPMKPHRIRMTHNLLLNYGLYRKMEIYRP
+HOMOLOGY  :  ++KVCYYYDGD+GNYYYGQGHPMKPHRIRMTHNLLLNYGLYRKME+Y+P
+QUERY     : VRKKVCyyydgdignyyygqgHPMKPHRIRMTHNLLLNYGLYRKMEVYKP</code></pre></div>
+
+<h3 id="toc_41"><a href="http://bioperl.org/howtos/SearchIO_HOWTO.html#item6">Table</a> of Methods from the SearchIO HSP Object from the BioPerl SearchIO HOWTO:</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Object</th>
+      <th>Method</th>
+      <th>Example</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>HSP</td>
+      <td>algorithm</td>
+      <td>BLASTX</td>
+      <td>algorithm</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>evalue</td>
+      <td>2e-022</td>
+      <td>e-value</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>expect</td>
+      <td>2e-022</td>
+      <td>alias for evalue()</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>frac_identical</td>
+      <td>0.884615384615385</td>
+      <td>fraction identical</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>frac_conserved</td>
+      <td>0.923076923076923</td>
+      <td>fraction conserved (conservative and identical replacements aka “fraction similar”)</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>gaps</td>
+      <td>2</td>
+      <td>number of gaps</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>query_string</td>
+      <td>DMGRCSSG ..</td>
+      <td>query string from alignment</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>hit_string</td>
+      <td>DIVQNSS …</td>
+      <td>hit string from alignment</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>homology_string</td>
+      <td>D+ + SSGCN …</td>
+      <td>string from alignment</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>length(‘total’)</td>
+      <td>52</td>
+      <td>length of HSP (including gaps)</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>length(‘hit’)</td>
+      <td>50</td>
+      <td>length of hit participating in alignment minus gaps</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>length(‘query’)t</td>
+      <td>156</td>
+      <td>length of query participating in alignment minus gaps</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>hsp_length</td>
+      <td>52</td>
+      <td>Length of the HSP (including gaps) alias for length(‘total’)</td>
+    </tr>
+    <tr>
+      <td>HSPt</td>
+      <td>frame</td>
+      <td>0</td>
+      <td>$hsp-&gt;query-&gt;frame,$hsp-&gt;hit-&gt;frame</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>num_conserved</td>
+      <td>48</td>
+      <td>number of conserved (conservative replacements, aka “similar”) residues</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>num_identical</td>
+      <td>46</td>
+      <td>number of identical residues</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>rank</td>
+      <td>1</td>
+      <td>rank of HSP</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>seq_inds(‘query’,’identical’)</td>
+      <td>(966,971,972,973,974,975 …)</td>
+      <td>identical positions as array</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>seq_inds(‘query’,’conserved-not-identical’)</td>
+      <td>(967,969)</td>
+      <td>conserved, but not identical positions as array</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>seq_inds(‘query’,’conserved’)</td>
+      <td>(966,967,969,971,973,974,975, …)</td>
+      <td>conserved or identical positions as array</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>seq_inds(‘hit’,’identical’)</td>
+      <td>(197,202,203,204,205, …)</td>
+      <td>identical positions as array</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>seq_inds(‘hit’,’conserved-not-identical’)</td>
+      <td>(198,200)</td>
+      <td>conserved not identical positions as array</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>seq_inds(‘hit’,’conserved’,1)</td>
+      <td>(197,202-246)</td>
+      <td>conserved or identical positions as array, with runs of consecutive numbers compressed</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>score</td>
+      <td>227</td>
+      <td>score</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>bits</td>
+      <td>92.0</td>
+      <td>score in bits</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>range(‘query’)</td>
+      <td>(2896,3051)</td>
+      <td>start and end as array</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>range(‘hit’)</td>
+      <td>(197,246)</td>
+      <td>start and end as array</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>percent_identity</td>
+      <td>88.4615384615385</td>
+      <td>% identical</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>strand(‘hit’)</td>
+      <td>1</td>
+      <td>strand of the hit</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>strand(‘query’)</td>
+      <td>1</td>
+      <td>strand of the query</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>start(‘query’)</td>
+      <td>2896</td>
+      <td>start position from alignment</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>end(‘query’)</td>
+      <td>3051</td>
+      <td>end position from alignment</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>start(‘hit’)</td>
+      <td>197</td>
+      <td>start position from alignment</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>end(‘hit’)</td>
+      <td>246</td>
+      <td>end position from alignment</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>matches(‘hit’)</td>
+      <td>(46,48)</td>
+      <td>number of identical and conserved as array</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>matches(‘query’)</td>
+      <td>(46,48)</td>
+      <td>number of identical and conserved as array</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>get_aln</td>
+      <td>sequence alignment</td>
+      <td><a href="https://metacpan.org/pod/Bio::SimpleAlign">Bio::SimpleAlign</a> object</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>hsp_group</td>
+      <td><em>Not available in this report</em></td>
+      <td>Group field from WU-BLAST reports run with -topcomboN or -topcomboE specified</td>
+    </tr>
+    <tr>
+      <td>HSP</td>
+      <td>links</td>
+      <td><em>Not available in this report</em></td>
+      <td>Links field from WU-BLAST reports run with -links showing consistent HSP linking</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Table 2.3. The data returned by HSP object methods when the report shown above is used as input.</p>
+
+<p><a name="MSA"></a></p>
+
+<h2 id="toc_42">Manipulation of Multiple Sequence Alignments</h2>
+
+<p>You need to convert many alignment files from one format to another or  modify an alignment.</p>
+
+<h3 id="toc_43">Use Bio::AlignIO</h3>
+
+<p>For parsing and writing multiple alignment file formats including:</p>
+
+<ul>
+<li>fasta</li>
+<li>phylip</li>
+<li>nexus</li>
+<li>clustalw</li>
+<li>msf</li>
+<li>mega</li>
+<li>meme</li>
+<li>pfam</li>
+<li>psi</li>
+<li>selex</li>
+<li>stockholm</li>
+</ul>
+
+<h3 id="toc_44">Use Bio::SimpleAlign Object</h3>
+
+<ul>
+<li>To remove some sequences from an alignment and rewrite the result</li>
+<li> Extract or remove columns</li>
+<li> Calculate consensus string and percent identity</li>
+</ul>
+
+<p><a href="http://bioperl.org/howtos/AlignIO_and_SimpleAlign_HOWTO.html">BioPerl AlignIO and SimpleAlign HOWTO</a><br>
+<a href="https://metacpan.org/pod/Bio::AlignIO">CPAN AlignIO Doc</a><br>
+<a href="https://metacpan.org/pod/Bio::SimpleAlign">CPAN SimpleAlign Doc</a>  </p>
+
+<hr>
+
+<h3 id="toc_45">An Example using Bio::AlignIO</h3>
+
+<p>Convert between alignment formats <em>i.e.</em>, FASTA to NEXUS.</p>
+
+<p>Code:</p>
+
+<div><pre><code class="language-perl">#!/usr/bin/perl -w
+use strict;
+use Bio::AlignIO;
+my $align_fasta = shift;
+my $in_alignIO_obj = Bio::AlignIO-&gt;new(
+         -format =&gt; &#39;fasta&#39;,
+         -file =&gt; $align_fasta
+);
+my $out_alignIO_obj = Bio::AlignIO-&gt;new(
+         -format =&gt; &#39;nexus&#39;,
+         -file =&gt; &quot;&gt;$align_fasta.nex&quot;
+);
+while( my $align_obj = $in_alignIO_obj-&gt;next_aln ){
+  $out_alignIO_obj-&gt;write_aln($align_obj);
+}</code></pre></div>
+
+<p>Do you notice how similar this looks to the SeqIO script? We have two <code>new()</code> methods creating new objects, one for reading one for writing for which we can defined the format. How about the the <code>next_aln()</code> and <code>write_aln()</code> methods? They look and act like the SeqIO <code>next_seq()</code> and <code>write_seq()</code> methods. </p>
+
+<p><a name="ann"></a></p>
+
+<h2 id="toc_46">Retrieving annotations from GenBank file</h2>
+
+<h3 id="toc_47">Problem:</h3>
+
+<p>You have GenBank files and want to retrieve annotations.</p>
+
+<h3 id="toc_48">Use:</h3>
+
+<p>Bio::SeqIO</p>
+
+<h3 id="toc_49">Example of GenBank Feature Annoations</h3>
+
+<p><img src="bioperl_images/GenBank_features.png" alt="GenBank Features"></p>
+
+<p>The FEATURES section is made up of  Primary tags and tag=value pairs.</p>
+
+<p>Primary tag examples:</p>
+
+<ul>
+<li>source</li>
+<li>CDS</li>
+</ul>
+
+<p>tag=value example:  </p>
+
+<ul>
+<li>translation=&quot;RLNLVFLVLILKGVQCDVQLVESGGGLVQPGGSRKLSCAASGFT
+FSSFGMHWVRQAPEKGLEWVAYISSGSSTLHYADTVKGRFTISRDNPKNTLFLQMTSL
+RSEDTAMYYCARWGNYPYYAMDYWGQGTSVTVSS&quot;</li>
+</ul>
+
+<p>Code:</p>
+
+<div><pre><code class="language-perl">#!/usr/bin/perl
+use strict;
+use warnings;
+use Bio::SeqIO;
+
+my $infile = shift;
+my $seqIO = Bio::SeqIO-&gt;new(
+-file =&gt; $infile,
+-format =&gt; &#39;genbank&#39;,
+);
+while (my $seqObj = $seqIO -&gt; next_seq){
+
+  # get id
+  my $name = $seqObj -&gt; id;
+  
+  # get all features and loop through each
+  foreach my $feature_obj ($seqObj-&gt;get_SeqFeatures){
+  
+    # get primary tag
+    my $primary_tag = $feature_obj-&gt;primary_tag;
+    
+    # get start and end of each feature
+    my ($start, $end) = ($feature_obj-&gt;start , $feature_obj-&gt;end);
+    my $range = $start . &quot;..&quot; . $end;
+    
+    # get all tags and go through each
+    foreach my $tag ( sort $feature_obj-&gt;get_all_tags ) {
+      
+      # get the value for each tag
+      my @values = $feature_obj-&gt;get_tag_values($tag);
+      my $value_str = join &quot;,&quot;, @values;
+      
+      # print out the information about the sequence features
+      print &quot;$name($range)\t$primary_tag\t$tag:$value_str\n&quot;;
+    }
+  }
+}</code></pre></div>
+
+<p>Output:</p>
+
+<div><pre><code class="language-none">srobb@www:~/scripts/bioperl$ perl get_feature_tagValues.pl /pfbhome/data/MUSIGHBA1.gb
+MUSIGHBA1(1..408)   source  db_xref:taxon:10090
+MUSIGHBA1(1..408)   source  mol_type:mRNA
+MUSIGHBA1(1..408)   source  organism:Mus musculus
+MUSIGHBA1(1..408)   CDS codon_start:1
+MUSIGHBA1(1..408)   CDS db_xref:GI:195055
+MUSIGHBA1(1..408)   CDS note:Ig H-chain V-region from MOPC21
+MUSIGHBA1(1..408)   CDS protein_id:AAD15290.1
+MUSIGHBA1(1..408)   CDS translation:RLNLVFLVLILKGVQCDVQLVESGGGLVQPGGSRKLSCAASGFTFSSFGMHWVRQAPEKGLEWVAYISSGSSTLHYADTVKGRFTISRDNPKNTLFLQMTSLRSEDTAMYYCARWGNYPYYAMDYWGQGTSVTVSS
+MUSIGHBA1(49..408)  mat_peptide product:Ig H-chain V-region from MOPC21 mature peptide
+MUSIGHBA1(343..344) misc_recomb note:V-region end/D-region start (+/- 1bp)
+MUSIGHBA1(356..357) misc_recomb note:D-region end/J-region start</code></pre></div>
+
+<p><a name="other"></a></p>
+
+<h2 id="toc_50">Other Cool Things</h2>
+
+<ul>
+<li>Whole set of wrappers for running Bioinformatics tools
+in bioperl-run
+
+<ul>
+<li>Run BLAST locally or submit remote jobs (through NCBI)</li>
+<li>Run PAML - handles setup and take down of temporary
+files and directories</li>
+<li>Run alignment progams through similar interfaces: TCoffee, MUSCLE, Clustalw</li>
+</ul></li>
+<li>Modules for using Relational Databases for sequences and features</li>
+<li><a href="http://bioperl.org/howtos/Scrapbook_HOWTO.html">Scrapbook HOWTO</a> Donated scraps of BioPerl code for you to reuse.</li>
+<li><a href="https://github.com/bioperl/bioperl-live/tree/master/scripts">BioPerl Scripts</a> Comes with BioPerl</li>
+<li><a href="https://github.com/bioperl/bioperl-live/tree/master/examples">BioPerl Examples</a> Also comes with BioPerl </li>
+</ul>
+
+
+
+<script type="text/javascript">
+var _self="undefined"!=typeof window?window:"undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?self:{},Prism=function(){var e=/\blang(?:uage)?-(\w+)\b/i,t=0,n=_self.Prism={util:{encode:function(e){return e instanceof a?new a(e.type,n.util.encode(e.content),e.alias):"Array"===n.util.type(e)?e.map(n.util.encode):e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\u00a0/g," ")},type:function(e){return Object.prototype.toString.call(e).match(/\[object (\w+)\]/)[1]},objId:function(e){return e.__id||Object.defineProperty(e,"__id",{value:++t}),e.__id},clone:function(e){var t=n.util.type(e);switch(t){case"Object":var a={};for(var r in e)e.hasOwnProperty(r)&&(a[r]=n.util.clone(e[r]));return a;case"Array":return e.map&&e.map(function(e){return n.util.clone(e)})}return e}},languages:{extend:function(e,t){var a=n.util.clone(n.languages[e]);for(var r in t)a[r]=t[r];return a},insertBefore:function(e,t,a,r){r=r||n.languages;var l=r[e];if(2==arguments.length){a=arguments[1];for(var i in a)a.hasOwnProperty(i)&&(l[i]=a[i]);return l}var o={};for(var s in l)if(l.hasOwnProperty(s)){if(s==t)for(var i in a)a.hasOwnProperty(i)&&(o[i]=a[i]);o[s]=l[s]}return n.languages.DFS(n.languages,function(t,n){n===r[e]&&t!=e&&(this[t]=o)}),r[e]=o},DFS:function(e,t,a,r){r=r||{};for(var l in e)e.hasOwnProperty(l)&&(t.call(e,l,e[l],a||l),"Object"!==n.util.type(e[l])||r[n.util.objId(e[l])]?"Array"!==n.util.type(e[l])||r[n.util.objId(e[l])]||(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,l,r)):(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,null,r)))}},plugins:{},highlightAll:function(e,t){var a={callback:t,selector:'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'};n.hooks.run("before-highlightall",a);for(var r,l=a.elements||document.querySelectorAll(a.selector),i=0;r=l[i++];)n.highlightElement(r,e===!0,a.callback)},highlightElement:function(t,a,r){for(var l,i,o=t;o&&!e.test(o.className);)o=o.parentNode;o&&(l=(o.className.match(e)||[,""])[1],i=n.languages[l]),t.className=t.className.replace(e,"").replace(/\s+/g," ")+" language-"+l,o=t.parentNode,/pre/i.test(o.nodeName)&&(o.className=o.className.replace(e,"").replace(/\s+/g," ")+" language-"+l);var s=t.textContent,u={element:t,language:l,grammar:i,code:s};if(!s||!i)return n.hooks.run("complete",u),void 0;if(n.hooks.run("before-highlight",u),a&&_self.Worker){var c=new Worker(n.filename);c.onmessage=function(e){u.highlightedCode=e.data,n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(u.element),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},c.postMessage(JSON.stringify({language:u.language,code:u.code,immediateClose:!0}))}else u.highlightedCode=n.highlight(u.code,u.grammar,u.language),n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(t),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},highlight:function(e,t,r){var l=n.tokenize(e,t);return a.stringify(n.util.encode(l),r)},tokenize:function(e,t){var a=n.Token,r=[e],l=t.rest;if(l){for(var i in l)t[i]=l[i];delete t.rest}e:for(var i in t)if(t.hasOwnProperty(i)&&t[i]){var o=t[i];o="Array"===n.util.type(o)?o:[o];for(var s=0;s<o.length;++s){var u=o[s],c=u.inside,g=!!u.lookbehind,h=!!u.greedy,f=0,d=u.alias;u=u.pattern||u;for(var p=0;p<r.length;p++){var m=r[p];if(r.length>e.length)break e;if(!(m instanceof a)){u.lastIndex=0;var y=u.exec(m),v=1;if(!y&&h&&p!=r.length-1){var b=r[p+1].matchedStr||r[p+1],k=m+b;if(p<r.length-2&&(k+=r[p+2].matchedStr||r[p+2]),u.lastIndex=0,y=u.exec(k),!y)continue;var w=y.index+(g?y[1].length:0);if(w>=m.length)continue;var _=y.index+y[0].length,P=m.length+b.length;if(v=3,P>=_){if(r[p+1].greedy)continue;v=2,k=k.slice(0,P)}m=k}if(y){g&&(f=y[1].length);var w=y.index+f,y=y[0].slice(f),_=w+y.length,S=m.slice(0,w),O=m.slice(_),j=[p,v];S&&j.push(S);var A=new a(i,c?n.tokenize(y,c):y,d,y,h);j.push(A),O&&j.push(O),Array.prototype.splice.apply(r,j)}}}}}return r},hooks:{all:{},add:function(e,t){var a=n.hooks.all;a[e]=a[e]||[],a[e].push(t)},run:function(e,t){var a=n.hooks.all[e];if(a&&a.length)for(var r,l=0;r=a[l++];)r(t)}}},a=n.Token=function(e,t,n,a,r){this.type=e,this.content=t,this.alias=n,this.matchedStr=a||null,this.greedy=!!r};if(a.stringify=function(e,t,r){if("string"==typeof e)return e;if("Array"===n.util.type(e))return e.map(function(n){return a.stringify(n,t,e)}).join("");var l={type:e.type,content:a.stringify(e.content,t,r),tag:"span",classes:["token",e.type],attributes:{},language:t,parent:r};if("comment"==l.type&&(l.attributes.spellcheck="true"),e.alias){var i="Array"===n.util.type(e.alias)?e.alias:[e.alias];Array.prototype.push.apply(l.classes,i)}n.hooks.run("wrap",l);var o="";for(var s in l.attributes)o+=(o?" ":"")+s+'="'+(l.attributes[s]||"")+'"';return"<"+l.tag+' class="'+l.classes.join(" ")+'" '+o+">"+l.content+"</"+l.tag+">"},!_self.document)return _self.addEventListener?(_self.addEventListener("message",function(e){var t=JSON.parse(e.data),a=t.language,r=t.code,l=t.immediateClose;_self.postMessage(n.highlight(r,n.languages[a],a)),l&&_self.close()},!1),_self.Prism):_self.Prism;var r=document.currentScript||[].slice.call(document.getElementsByTagName("script")).pop();return r&&(n.filename=r.src,document.addEventListener&&!r.hasAttribute("data-manual")&&document.addEventListener("DOMContentLoaded",n.highlightAll)),_self.Prism}();"undefined"!=typeof module&&module.exports&&(module.exports=Prism),"undefined"!=typeof global&&(global.Prism=Prism);
+</script>
+
+<script type="text/javascript">
+Prism.languages.perl={comment:[{pattern:/(^\s*)=\w+[\s\S]*?=cut.*/m,lookbehind:!0},{pattern:/(^|[^\\$])#.*/,lookbehind:!0}],string:[/\b(?:q|qq|qx|qw)\s*([^a-zA-Z0-9\s\{\(\[<])(?:[^\\]|\\[\s\S])*?\1/,/\b(?:q|qq|qx|qw)\s+([a-zA-Z0-9])(?:[^\\]|\\[\s\S])*?\1/,/\b(?:q|qq|qx|qw)\s*\((?:[^()\\]|\\[\s\S])*\)/,/\b(?:q|qq|qx|qw)\s*\{(?:[^{}\\]|\\[\s\S])*\}/,/\b(?:q|qq|qx|qw)\s*\[(?:[^[\]\\]|\\[\s\S])*\]/,/\b(?:q|qq|qx|qw)\s*<(?:[^<>\\]|\\[\s\S])*>/,/("|`)(?:[^\\]|\\[\s\S])*?\1/,/'(?:[^'\\\r\n]|\\.)*'/],regex:[/\b(?:m|qr)\s*([^a-zA-Z0-9\s\{\(\[<])(?:[^\\]|\\[\s\S])*?\1[msixpodualngc]*/,/\b(?:m|qr)\s+([a-zA-Z0-9])(?:[^\\]|\\.)*?\1[msixpodualngc]*/,/\b(?:m|qr)\s*\((?:[^()\\]|\\[\s\S])*\)[msixpodualngc]*/,/\b(?:m|qr)\s*\{(?:[^{}\\]|\\[\s\S])*\}[msixpodualngc]*/,/\b(?:m|qr)\s*\[(?:[^[\]\\]|\\[\s\S])*\][msixpodualngc]*/,/\b(?:m|qr)\s*<(?:[^<>\\]|\\[\s\S])*>[msixpodualngc]*/,{pattern:/(^|[^-]\b)(?:s|tr|y)\s*([^a-zA-Z0-9\s\{\(\[<])(?:[^\\]|\\[\s\S])*?\2(?:[^\\]|\\[\s\S])*?\2[msixpodualngcer]*/,lookbehind:!0},{pattern:/(^|[^-]\b)(?:s|tr|y)\s+([a-zA-Z0-9])(?:[^\\]|\\[\s\S])*?\2(?:[^\\]|\\[\s\S])*?\2[msixpodualngcer]*/,lookbehind:!0},{pattern:/(^|[^-]\b)(?:s|tr|y)\s*\((?:[^()\\]|\\[\s\S])*\)\s*\((?:[^()\\]|\\[\s\S])*\)[msixpodualngcer]*/,lookbehind:!0},{pattern:/(^|[^-]\b)(?:s|tr|y)\s*\{(?:[^{}\\]|\\[\s\S])*\}\s*\{(?:[^{}\\]|\\[\s\S])*\}[msixpodualngcer]*/,lookbehind:!0},{pattern:/(^|[^-]\b)(?:s|tr|y)\s*\[(?:[^[\]\\]|\\[\s\S])*\]\s*\[(?:[^[\]\\]|\\[\s\S])*\][msixpodualngcer]*/,lookbehind:!0},{pattern:/(^|[^-]\b)(?:s|tr|y)\s*<(?:[^<>\\]|\\[\s\S])*>\s*<(?:[^<>\\]|\\[\s\S])*>[msixpodualngcer]*/,lookbehind:!0},/\/(?:[^\/\\\r\n]|\\.)*\/[msixpodualngc]*(?=\s*(?:$|[\r\n,.;})&|\-+*~<>!?^]|(lt|gt|le|ge|eq|ne|cmp|not|and|or|xor|x)\b))/],variable:[/[&*$@%]\{\^[A-Z]+\}/,/[&*$@%]\^[A-Z_]/,/[&*$@%]#?(?=\{)/,/[&*$@%]#?((::)*'?(?!\d)[\w$]+)+(::)*/i,/[&*$@%]\d+/,/(?!%=)[$@%][!"#$%&'()*+,\-.\/:;<=>?@[\\\]^_`{|}~]/],filehandle:{pattern:/<(?![<=])\S*>|\b_\b/,alias:"symbol"},vstring:{pattern:/v\d+(\.\d+)*|\d+(\.\d+){2,}/,alias:"string"},"function":{pattern:/sub [a-z0-9_]+/i,inside:{keyword:/sub/}},keyword:/\b(any|break|continue|default|delete|die|do|else|elsif|eval|for|foreach|given|goto|if|last|local|my|next|our|package|print|redo|require|say|state|sub|switch|undef|unless|until|use|when|while)\b/,number:/\b-?(0x[\dA-Fa-f](_?[\dA-Fa-f])*|0b[01](_?[01])*|(\d(_?\d)*)?\.?\d(_?\d)*([Ee][+-]?\d+)?)\b/,operator:/-[rwxoRWXOezsfdlpSbctugkTBMAC]\b|\+[+=]?|-[-=>]?|\*\*?=?|\/\/?=?|=[=~>]?|~[~=]?|\|\|?=?|&&?=?|<(?:=>?|<=?)?|>>?=?|![~=]?|[%^]=?|\.(?:=|\.\.?)?|[\\?]|\bx(?:=|\b)|\b(lt|gt|le|ge|eq|ne|cmp|not|and|or|xor)\b/,punctuation:/[{}[\];(),:]/};
+</script>
+
+
+</body>
+
+</html>
