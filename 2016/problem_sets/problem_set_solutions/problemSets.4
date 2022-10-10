@@ -1,0 +1,277 @@
+#!/usr/bin/perl
+# File: alignmentFile.pl
+# Author: Steven Ahrendt
+
+use strict;
+use warnings;
+
+
+## Use the fasta parser from Perl III, problem 3
+#   but modified so that the sequences are stored in an array
+
+my $alignment_file = shift @ARGV;
+
+open(ALN,"<",$alignment_file) or die "Can't open file $alignment_file: $!\n";
+my @aln_array;
+my $header;
+my $sequence = '';
+
+while (my $line = <ALN>)
+{
+  chomp($line);
+
+  ## There are many ways to check for a '>' character
+  #   - pattern matching, using the =~ operator
+  #   - substring, using the substr() function
+  #   - index, using the index() function
+  ## Here, I use substring:
+  my $char = substr($line,0,1);
+  if ($char eq ">")
+  {
+    ## This is a fasta header line, but it could be the first of the file
+    #    or it could be somewhere in the middle of the file. To check,
+    #    we can look at the length of $sequence
+    if (length($sequence) > 0)
+    {
+      ## This means we have accumulated a complete fasta entry
+      #   store it:
+      push(@aln_array,$sequence);
+
+      #  and clear the variable for the next sequence:
+      $sequence = '';
+    }
+    # This stores the contents of $line in the $header variable
+    $header = $line; # header is updated with current sequence name
+  }
+  else
+  {
+    ## If we're here, that means we've just hit some sequence line
+    #   so we can grow our $sequence by adding $lines to it using the
+    #   concatenate operator '.'
+    $sequence = $line.$sequence;
+  }
+}
+
+## After we've processed the file, we still have some sequence left, so we need to store that too
+if (length($sequence) > 0)
+{
+  push(@aln_array,$sequence);
+}
+
+close(ALN);
+
+## The rest of the program is nearly identical to problem 10
+my $size = length($aln_array[0]);
+
+my @seq1 = split(//,$aln_array[0]);
+my @seq2 = split(//,$aln_array[1]);
+
+print "$aln_array[0]\n";
+print "$aln_array[1]\n";
+for(my $i = 0; $i < $size; $i++)
+{
+  if ($seq1[$i] ne $seq2[$i])
+  {
+    print "Difference at $i\n";
+  }
+}
+#!/usr/bin/perl
+# File: alignment.pl
+# Author: Steven Ahrendt
+
+use strict;
+use warnings;
+
+my $al_seq1 = "-------------------------------------------------------------------------------------AGCACCCTCCCACCTCATCCCACCCTTCTGATCTCAATCCAACGTCGCATCTCCAC-CGTCTCGCGGA----TCGACCCAGCGAAGTCCCTC----CCGCCCCCAAAGTCCCCCAAATCTTGCAGTTCCCTCCTAAATCCTCCCCA------------TATAAACCAACCCCCCGCCCTCAGATCCC-TAATCCCATCGCAAGCA--TCAGACTCCCTCCAAAGCAGGCAGCAGCTCCTCTTCTTCCTAATCACACTATCTCGGAGAGGAGCGGCCATGTCTGGGCGCGACAAGGGCGGCAAGGGGCTGGGCAAGGGCGGCGCCAAGCGGCACCGGAAGGTCCTCCGCGACAACATCCAGGGCATCACCAAGCCGGCGATCCGGAGGCTGGCCAGGAGGGGCGGCGTGAAGCGCATCTCCGGCCTCATCTACGAGGAGACCCGCGGCGTCCTCAAGATCTTCCTCGAGAACGTCATCCGCGACGCCGTCACCTACACCGAGCACGCCCGCCGCAAAACCGTCACCGCCATGGACGTCGTCTACGCGCTCAAGCGCCAGGGCCGCACCCTCTACGGCTTCGGAGGCTAGATTTGTGTGGTGAAGCAACTTCCTCGTTTGCTCTGTGATCTGTGCT---GTCGTAGATGAGATTTACTGATTTGGCGTGCGCCGGTTGTATTCTGTCA-TGGGGTTCAGTGGGCTGTGTAATACCTTGCTCTGTACTTCTGTTCAATGCAATCACTTCT---ATTCTGAA-------------------------------------";
+
+my $al_seq2 = "TCTAGAGATGGCGCCATTTGATTCCAGCAGCCACAAAGCACTAGAACAATCGATGCTAAGAGGTGACAGGAAAAACAGGCTGCAAAGACCCAGACAATGGAATGCAGCGGTGGTCAGCCTAAAACACTGTAGAAGGGCAAGATGAGCTGAGTAATTTTTAACTGGGCATCATTTTTAGAAACTGGAGTTTAAGTACCCCC--TTTTCCATTTTTTCCTGAAGTCGTGGGCAGGGCGCAAGGTCTGTGAATCGGCCGACCGGATGCAGCTGGTGTGGAGAGTTCCCAATCAGGTCCGATTTATTACTATATAAAGTACTGCTGCGAGGCTTGCCG--TGTTGCATTTTGTTTAGTACAAGACATGTCTGGGCGCGGCAAAGGCGGGAAGGGTCTGGGCAAAGGAGGCGCTAAGCGCCACCGCAAAGTTCTGCGCGACAACATTCAGGGCATCACCAAGCCCGCCATCCGACGCCTGGCACGGCGTGGAGGCGTTAAGCGCATCTCAGGCCTTATATACGAGGAGACACGCGGAGTTCTTAAAGTGTTTTTGGAGAATGTAATCCGCGATGCAGTTACCTACACGGAGCACGCCAAACGCAAGACAGTCACAGCCATGGACGTGGTTTACGCGCTCAAGCGCCAGGGCCGCACCCTGTATGGCTTTGGCGGC------TGAGTGTTTTACTTACTTACACGGTTCCTCAAAGGCCCTTCTCAGGGCCACCCATGAAGTCTGTGAAAGAGCTGTAGACTAAAGATAGTTAATTTCTTAAGAACACTTAAACGTATGGCAGTTTTGGCAAATTAGCGATTCCACATAAGCAGTCGCTGAAGTTTGAGGTTCGGTGCCCCTTTCAGCATTACTTAGTGGTTAAAA";
+
+my $size = length($al_seq1);
+
+my @seq1 = split(//,$al_seq1);
+my @seq2 = split(//,$al_seq2);
+
+print "$al_seq1\n";
+print "$al_seq2\n";
+for(my $i = 0; $i < $size; $i++)
+{
+  if ($seq1[$i] ne $seq2[$i])
+  {
+    print "Difference at $i\n";
+  }
+}
+#!/usr/bin/perl
+use strict;
+for (my $i = 0; $i < 10; $i++) {
+ if ($i == 2) {
+     print "\$i = $i\n";
+ }   
+}
+
+#!/usr/bin/perl
+# File: GC_calcLoop.pl
+# Author: Steven Ahrendt
+
+use strict;
+use warnings;
+
+my @fragments = ('ATGCCCGGCCCGGC','GCGTGCTAGCAATACGATAAACCGG', 'ATATATATCGAT','ATGGGCCC');
+
+foreach my $sequence (@fragments)
+{
+  my @nt_array = split(//,$sequence);  # use // to split each character
+
+  my $total_length=0;
+  my $total_G=0;
+  my $total_C=0;
+  foreach my $nt (@nt_array)
+  {
+    if($nt eq "C")
+    {
+      $total_C++;
+    }
+    if($nt eq "G")
+    {
+      $total_G++;
+    }
+    $total_length++;
+  }
+
+  my $total_GC = $total_G + $total_C;
+
+  printf("GC percent: %.2f%%\n",($total_GC/$total_length)*100);
+}
+#!/usr/bin/perl
+
+use warnings;
+use strict;
+my @fragments = ('ATGCCCGGCCCGGC','GCGTGCTAGCAATACGATAAACCGG', 'ATATATATCGAT','ATGGGCCC');
+
+my $sequence = shift @fragments; # just get the first sequence
+
+my @nt_array = split(//,$sequence);  # use // to split each character
+
+my $total_length=0;
+my $total_G=0;
+my $total_C=0;
+foreach my $nt (@nt_array)
+{
+  if($nt eq "C")
+  {
+    $total_C++;
+  } 
+  if($nt eq "G")
+  {
+    $total_G++;
+  }
+  $total_length++;
+}
+
+my $total_GC = $total_G + $total_C;
+
+printf("GC percent: %.2f%%\n",($total_GC/$total_length)*100);
+
+#!/usr/bin/perl
+# File: iterate.pl
+# Author: Steven Ahrendt
+
+use warnings;
+use strict;
+
+my @numbers = (101, 2, 15, 22, 95, 33, 2, 27, 72, 15, 52);
+
+foreach my $number (@numbers)
+{
+  if($number % 2 ==0)
+  {
+    print "$number\n";
+  }
+}
+
+#!/usr/bin/perl
+use warnings;
+use strict;
+
+my $i = shift;
+my $j = shift;
+
+if (defined($i) and defined($j))
+{
+  if (($i+$j) == 0)
+  {
+    warn "some warning\n";
+  }
+  else
+  {
+    my $percent = 100*($i/($i+$j));
+    printf("%.2f%%\n",$percent);
+  }
+}
+else
+{
+  warn "Please provide two numbers\n";
+}
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+my $n1 = shift @ARGV;
+my $n2 = shift @ARGV;
+
+if($n1 lt $n2)
+{
+  print "$n1 $n2\n";
+}
+else
+{
+  print "$n2 $n1\n";
+}
+#!/usr/bin/perl
+# File: shuffle.pl
+# Author: Steven Ahrendt
+
+use warnings;
+use strict;
+
+my $sequence = 'ATGCCCGGCCCGGC';
+my @nt_array = split(//, $sequence);
+
+my $seq_length = length ($sequence);  # or = scalar(@nucleotides)
+for (my $i = 0; $i < $seq_length; $i++)
+{
+  ## The rand() function retruns a decimal value, but we want
+  #    an integer to use as an index. So we use another function
+  #    int() to convert the output of rand() to something we can use
+  my $index1 = int(rand ($seq_length));
+  my $index2 = int(rand ($seq_length));
+
+  ## The cautious way to reassign variables in an array is to use a temp variable:
+  my $tmp = $nt_array[$index1];
+  $nt_array[$index1] = $nt_array[$index2];
+  
+  ## Now we have to use the $tmp value since we've overwritten the $index1 value
+  $nt_array[$index2] = $tmp;
+}
+print "Original: $sequence\n";
+print "Shuffled: ",join("", @nt_array),"\n";
+#!/usr/bin/perl
+# File: sortSeq.pl
+# Author: Steven Ahrendt
+
+use strict;
+use warnings;
+  
+my @fragments = ('ATGCCCGGCCCGGC','GCGTGCTAGCAATACGATAAACCGG', 'ATATATATCGAT','ATGGGCCC');
+
+## Largest to smallest 
+print("Largest to smallest\n");
+my @sorted_fragments = sort {length($b) <=> length($a) } @fragments;
+print join("\n",@sorted_fragments),"\n";
+
+print "\n";
+
+## Smallest to largest: change the order of $a and $b
+print("Smallest to largest\n"); 
+my @sorted_fragments_rev = sort {length($a) <=> length($b) } @fragments;
+print join("\n",@sorted_fragments_rev),"\n";

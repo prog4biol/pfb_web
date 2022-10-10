@@ -1,0 +1,217 @@
+<h1>Sequence Alignment</h1>
+<h2>Part 0: Files</h2>
+<p>We are going to use proteomes of some classic genomes: C. elegans, D.
+melanogaster, and A. thaliana. If you want to use your own favorite
+genome, go ahead.</p>
+<h2>Part 1: Local Alignment</h2>
+<p>The first program we are going to use for alignment is called <code>water</code>,
+which is named after the <strong>Smith-Waterman</strong> algorithm. This comes from
+the <strong>EMBOSS</strong> suite of bioinformatics programs, which is installed on
+your system. One of the first things you should do when using a new
+program is to skim the documentation. Some bioinformatics programs will
+have <code>man</code> pages, but not all. <code>water</code> doesn't come with a <code>man</code> page,
+but there is good documentation online at the EMBOSS site. Most
+bioinformatics programs will have a <strong>usage statement</strong> that gives you
+some help with the program. To display the usage statement, try the
+<code>-h</code>, <code>-help</code>, <code>--help</code> options or try using the program without any
+arguments. The <code>water</code> program responds to the first three, but if you
+give it no arguments, it will start prompting you for arguments (which
+can be useful or annoying depending on your mindset).</p>
+<p>As you gain more experience with bioinformatics tools, you will find a
+large variety of command line syntaxes and usage statements. Why?
+Because most scientific programmers aren't professional software
+developers. They don't always follow the rules and best practices of the
+Unix community.</p>
+<pre><code>water -h
+</code></pre>
+<p>There are not may options. We need to provide two sequence files,
+penalties for gap opening and extension, and an output file. The scoring
+matrix appears to BLOSUM62 by default but others are available (see
+<code>/usr/share/EMBOSS/data</code> or <code>/usr/local/share/EMBOSS/data</code>). Let's try
+the interactive mode.</p>
+<pre><code>water
+</code></pre>
+<p>The program now asks for the name of the input sequence file. You can't
+tab-complete this. That's enough reason for me to NEVER USE THE
+INTERACTIVE MODE, but if you like it, go ahead.</p>
+<p>So where are we going to get our sequence files from? Let's grab the
+first protein from the A. thaliana, C. elegans, and D. melanogaster
+proteomes to begin. You can use <code>head</code> with a command line option for
+the number of lines and the <code>&gt;</code> redirection symbol for this task. Save
+these files as <code>at1.fa</code>, <code>ce1.fa</code>, and <code>dm1.fa</code>. You might want to write
+a bit in your <code>lab1_notebook.md</code> file about how you did this. You can
+even paste in parts of your <code>history</code>.</p>
+<p>Now let's try aligning the various files to each other.</p>
+<pre><code>water at1.fa ce1.fa -gapopen 10 -gapextend 5 -outfile at_ce.water
+</code></pre>
+<p>Read the output of this command with <code>less</code>. Note the score, percent
+identity, percent similarity, and score. Is a score of 37 (or whatever)
+good? Hmm, that's a difficult question. What exactly does "good" mean?
+Should a good score mean that two sequences are evolutionarily related?
+That they have similar function? As a scientist, one of the first
+questions you should ask yourself is how likely that alignment could
+have occurred at random.</p>
+<h2>Part 2: Random Expectation</h2>
+<p>In order to determine what the random background of sequence alignment
+looks like, we need to make some random sequences. There are several
+ways to go about doing this.</p>
+<ul>
+<li>Write a program that uses 5% probability for each amino acid</li>
+<li>Write a program that uses <em>realisitc</em> probabilities</li>
+<li>Write a program that randomizes real sequences</li>
+<li>Use EMBOSS <code>shuffleseq</code> or some other program</li>
+</ul>
+<p>Make some random sequences and then align them a bunch of times with
+<code>water</code>. This will give you an idea of what alignment score is expected
+at random. If you really want to explore what random looks like, you'll
+have to perform this experiment thousands of times. So script the whole
+thing from sequence generation to histogram.</p>
+<ul>
+<li>Generate random sequences</li>
+<li>Align sequences</li>
+<li>Get maximum score</li>
+<li>Create a table of maximum scores</li>
+</ul>
+<p>After performing some experiments, answer these questions.</p>
+<ul>
+<li>Is the shape of the curve normal? </li>
+<li>Do you expect it to be normal?</li>
+<li>Do you expect all protein comparisons to have the same distribution?</li>
+<li>What factors might change the distribution and how?</li>
+<li>How might real sequences be different from random?</li>
+</ul>
+<h2>Part 3: Karlin-Altschul Stats</h2>
+<p>Karlin-Altschul statistics tells us that the expected number of
+alignments that exceed some score depends on the score, lambda, the size
+of the sequences, and a few other parameters (see lecture notes). K-A
+also forbids gaps and has some other restrictions. But is that all
+really true? The way to find out is with some experimentation.</p>
+<ol>
+<li>Write a program to examine the effect of sequence lengths</li>
+<li>Write a program to examine compositional effects</li>
+<li>Write a program to examine gap penalties</li>
+</ol>
+<h2>Part 4: Alignment Significance</h2>
+<p>Your task is to determine the statistical significance of an alignment.
+The query sequence is B0213.10, which can be found in the C. elegans
+proteome. Search this against all A. thaliana and D. melanogaster
+proteins to find its homologs.</p>
+<p>Before you begin, it's a good idea to get an idea how long it will take
+to do the experiment. Will your experiment take seconds, minutes, hours,
+days, or longer? Before attempting to do the whole experiment, it pays
+to do a small fraction first. Don't begin until you can answer the
+following questions?</p>
+<ul>
+<li>How many amino acids can I align per second?</li>
+<li>How many amino acids do I need to align to do this experiment?</li>
+<li>How long would it take to compare two proteomes?</li>
+</ul>
+<p>Set up the experiment any way you like. You will need to use the unix
+<code>time</code> command. You need to be able to answer the following questions.
+Note that some questions are very open-ended and may be very difficult
+to answer.</p>
+<ul>
+<li>What is the best match in each genome?</li>
+<li>What protein is this?</li>
+<li>What are the alignment properties (% identity, etc)</li>
+<li>What is the expected score of your alignment at random?</li>
+<li>How different is your best score from random?</li>
+<li>How statistically significant is this score?</li>
+<li>How biologically significant is this score?</li>
+</ul>
+<h2>Part 5: BLASTP</h2>
+<p>BLASTP is supposed to be a lot like Smith-Waterman, but better. Peform
+the same experiment above, but with BLASTP. To get a usage statement for
+<code>blastp</code>, type its name on the command line.</p>
+<pre><code>blastp
+</code></pre>
+<p>There is a bewildering number of options! And you'll have to format a
+database with <code>xdformat</code> before you can use <code>blastp</code>. Here's how you
+format a protein database of the C. elegans proteome (assuming its name
+is <code>worm</code>).</p>
+<pre><code>xdformat -p worm
+</code></pre>
+<p>This creates several new files with various extensions. These extra
+files are the BLAST database. To search it with some other fasta file,
+the command line is very simple.</p>
+<pre><code>blastp worm other_file.fa
+</code></pre>
+<p>There are many ways to control <code>blastp</code>. But before we do that, let's
+redo the experiment in Part 4.</p>
+<ul>
+<li>How fast is <code>blastp</code> compared to <code>water</code>?</li>
+<li>Do you believe the statistics in the BLAST report?</li>
+</ul>
+<h2>Part 6: Orthologs</h2>
+<p>We previously aligned B0213.10 to the A. thalian and D. melanogaster
+genomes. The best match is often the <em>ortholog</em> but really, the best
+reciprocal match is a better definition of the ortholog. That is, after
+finding the best match to the fly genome, one must take the fly protein
+and search it against the worm proteome to determine if it finds
+B0213.10. If if it does, the proteins are orthologous.</p>
+<p>Let's do something ambitious. Let's find ALL the orthologous proteins
+between worm and fly (or any two genomes). First thing, we had better
+estimate how long that will take. You can do that by aligning a few
+sequences and timing it.</p>
+<p>There are a lot of parameters that contol the speed of BLAST. The most
+important of these are the seeding parameters. The default <code>blastp</code>
+search uses <code>W=3 T=11</code>. We can change the seeding parameters quite a
+bit. We will set <code>T=999</code> so that there is no <strong>neighborhood</strong> aound each
+word match. In other words, only exact matches will produce a seed.
+Let's vary the word match from 1 to 6.</p>
+<pre><code>time blastp worm whatever T=999 W=1 &gt; w1.blast
+time blastp worm whatever T=999 W=2 &gt; w2.blast
+etc.
+</code></pre>
+<ul>
+<li>How much faster does <code>blastp</code> run at higher word sizes?</li>
+<li>High speed reduces sensitivity. What is acceptable?</li>
+</ul>
+<hr />
+<p>Time to set up the searches. Create BLAST databases for each proteome
+and then search one against the other. Do these in separate terminals so
+they run at the same time (or you can background them).</p>
+<pre><code>blastp worm fly mformat=2 hspmax=1 E=1e-15 W=5 warnings &gt; wvf.blastp
+blastp fly worm mformat=2 hspmax=1 E=1e-15 W=5 warnings &gt; fvw.blastp
+</code></pre>
+<p>A few command line switches were added. <code>mformat=2</code> made the output
+tabular. <code>hspmax=1</code> made it so that only the best alignment was shown
+(there can be more than one unlike <code>water</code>). <code>warnings</code> turns off some
+warning messages.</p>
+<hr />
+<p>Once the jobs are complete use <code>less</code> to examine the outputs of each
+(actually, you can do this even before the jobs are complete). Columns
+1, 2, and 3 contain the names of the proteins and the E-value of the
+match. If it makes it easier, you can <code>cut</code> these, but you might want to
+look at other columns of the file.</p>
+<pre><code>cut -f 1-3 wvf
+</code></pre>
+<p>Use the <code>less</code> search feature (forward slash key) to find proteins in
+one file that match proteins in the other file. Find some putative
+orthologs. Answer the following questions.</p>
+<ul>
+<li>What difficulties are there in finding orthologs?</li>
+<li>Which BLAST parameters might you change if you did this again?</li>
+<li>What additional information would you like to have?</li>
+<li>What logic would you use to find orthologs automatically?</li>
+</ul>
+<h2>Part 7: Paralogs</h2>
+<p>In this part, we are going to look for the <strong>paralogs</strong> of a couple worm
+genes: T21B10.2a and B0213.10. That is, we are going to search the these
+proteins against the C. elegans proteome to look for sequences that
+arose by duplication within the same genome. A gene may have from 0 to
+many paralogs. A simple, but flawed way to determine which alignments
+represent paralogs is to use an E-value cutoff. But it's a good place to
+start.</p>
+<pre><code>blastp worm T21B10.2a &gt; T21B10.2a.blastp
+blastp worm B0213.10 &gt; B0213.10.blastp
+</code></pre>
+<p>Inspect the BLAST report with <code>less</code>. Do all the sequences look like
+they are highly related? You may want to change the E-value cutoff to
+something higher or lower than 1e-10.</p>
+<ul>
+<li>What parameters did you choose for the search?</li>
+<li>How did you choose the parameters? What trade-offs were considered?</li>
+<li>What other properties would be useful for finding paralogs?</li>
+<li>How would you identify paralogs using BLAST?</li>
+</ul>

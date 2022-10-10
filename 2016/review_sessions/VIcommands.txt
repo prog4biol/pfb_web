@@ -1,0 +1,62 @@
+you should use vi, because it's simpler
+and lighter
+and cooler
+
+MODES
+
+i			insert mode
+escape			command mode
+
+CUTTING AND PASTING
+
+dd			delete (cut) line
+number dd		delete (cut) number of lines
+dw			delete (cut) word
+cc			cut line
+yy			yank line (copy)
+number yy		yank number of lines
+yw			yank word
+D			delete rest of line 
+p			paste into next line
+P			paste at cursor
+u			undo
+ctrl r			redo
+x			delete character under cursor
+X			delete character behind cursor
+MOVING AROUND
+
+0			beginning of line
+$			end of line
+e			end of word
+b			beginning of word
+shift arrow key		beginning/end of word 
+:number			move cursor to the (number) line
+arrow key		move left, down, up, right
+h,j,k,l			move left, down, up, right
+{			up a paragraph
+}			down a paragraph
+H			move to top of screen (High)
+M			move to middle of screen (Middle)
+L			move to bottom of screen (Low)
+
+SAVING AND  EXITING
+
+:w			write file
+:q			quit vi 
+:q!			quit without saving
+:wq			write file and quit vi
+
+SEARCH
+
+/string			search for string below cursor
+?string			search for string above cursor
+n			next in same direction 
+N			next in opposite direction
+
+OTHER
+
+o			open new line below
+O			open new line above
+:set nu			add number lines
+:nohl			clear highlights
+:! perl program.pl	run program in shell without leaving vi

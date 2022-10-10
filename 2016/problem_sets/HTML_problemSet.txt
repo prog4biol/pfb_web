@@ -1,0 +1,26 @@
+##################
+HTML Problem Sets
+##################
+
+
+1. Log in to AWS and go to your public_html directory
+   Open index.html in your preferred text editor.
+   Navigate to http://www.programmingforbiology.org/~<your user name>
+   Change the page title
+   In your text editor, Remove the class attribute from the first <section> element
+   Refresh the page in the browser. Can you see the changes?
+
+
+2. Open ~/public_html/styles/style.css in your text editor
+   Change the color of the motif
+   Change the font used for the entire page
+
+
+3. Open more.html in your browser
+   Use the form to search bing
+   Modify the form to search a different site (PFAM? UCSC Genome browser? Other)
+
+
+3. Write a perl script that scrapes your web site.
+   Make a hash of ( gene_id => motif_sequence ) from the example table.
+

@@ -1,0 +1,17 @@
+CGI Exercises
+
+Problem #1
+
+Write a CGI script that prompts the user for his or her name and age. When the
+user presses the submit button, convert the age into "dog years" (divide by 7) and
+print the result.
+
+It is useful to include the following to print your errors and warnings to the browser:
+
+  use CGI::Carp qw(fatalsToBrowser warningsToBrowser);
+
+
+
+Problem #2
+Accept a DNA sequence and break it into codons.
+Extra credit: Translate the codons into protein. 

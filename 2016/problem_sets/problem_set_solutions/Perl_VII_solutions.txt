@@ -1,0 +1,188 @@
+Perl VII Problem Set
+=====================
+1. Create a subroutine that reverse complements a sequence.
+This subroutine should take a nucleotide sequence as a parameter and return the reverse complement.
+ 
+Here's the pseudo code:
+ 
+-- BEGIN PSEUDOCODE --
+ 
+subroutine reverse_complement {
+ 
+  get the parameter nucleotide string
+ 
+  reverse complement the nucleotide string
+ 
+  return the complemented nucleotide string
+ 
+}
+ 
+-- END PSEUDOCODE --
+ 
+Write a program that takes in a nucleotide string as an argument, calls the reverse_complement subroutine, and then prints the reverse complement sequence to STDOUT.
+ 
+-- BEGIN SAMPLE RUN --
+ 
+./reverse_complement.pl GAGAGAGAGAGTTTTTTTTT
+AAAAAAAAACTCTCTCTCTC
+ 
+-- END SAMPLE RUN --
+
+
++-------------------------------+
+#!/usr/bin/perl
+# File: reverse_complement.pl
+# Author: Steven Ahrendt
+# Problem: 1
+
+use warnings;
+use strict;
+
+## Grab the string from the cmd line
+my $gene = shift @ARGV;
+
+## reverse_complement returns a string, so we can 
+#   just use it as an argument to print
+print reverse_complement($gene),"\n";
+
+
+#####-----Subroutine-----#####
+sub reverse_complement {
+  #get the parameter nucleotide string
+  my $nuc_str = shift @_;
+
+  # Reverse complement the nucleotide string
+  $nuc_str = reverse($nuc_str);
+  $nuc_str =~ tr/ATGCatgc/TACGtacg/;
+
+  # Return the revcomp'd string
+  return $nuc_str;
+}
++------------------------------+
+ 
+2. Create a subroutine that reformats your FASTA file such that the sequence is reformatted so that it contains certain number of nucleotides per line. 
+ 
+For example:
+ 
+reformat_seq ($seq , 60 );
+ 
+## sequence before
+>seq 1
+GAATTCAAGTTCTTGTGCGCACACAAATCCAATAAAAACTATTGTGCACACAGACGCGACTTCGCGGTCTCGCTTGTTCTTGTTGTATTCGTATTTTCATTTCTCGTTCTGTTTCTACTT
+AACAATGTGGTGATAATATAAAAAATAAAGCAATTCAAAAGTGTATGACTTAATTAATGAGCGATTTTTTTTTTGAAATCAAATTTTTGGAACATTTTTTTTAAATTCAAATTTTGGCGA
+AAATTCAATATCGGTTCTACTATCCATAATATAATTCATCAGGAATACATCTTCAAAGGCAAACGGTGACAACAAAATTCAGGCAATTCAGGCAAATACCGAATGACCAGCTTGGTTATC
+ 
+## sequence after
+>seq 1
+GAATTCAAGTTCTTGTGCGCACACAAATCCAATAAAAACTATTGTGCACACAGACGCGAC
+TTCGCGGTCTCGCTTGTTCTTGTTGTATTCGTATTTTCATTTCTCGTTCTGTTTCTACTT
+AACAATGTGGTGATAATATAAAAAATAAAGCAATTCAAAAGTGTATGACTTAATTAATGA
+GCGATTTTTTTTTTGAAATCAAATTTTTGGAACATTTTTTTTAAATTCAAATTTTGGCGA
+AAATTCAATATCGGTTCTACTATCCATAATATAATTCATCAGGAATACATCTTCAAAGGC
+AAACGGTGACAACAAAATTCAGGCAATTCAGGCAAATACCGAATGACCAGCTTGGTTATC
+
+
+
++--------------------------------+
+#!/usr/bin/perl
+# File: reformat_fasta.pl
+# Author: Steven Ahrendt
+# Problem: 2
+
+use warnings;
+use strict;
+
+my $fasta_file = shift @ARGV;
+my $new_size = 10;  # Can also provide this on the command line
+
+my (%fasta,$header);
+
+open(my $FAS, "<", $fasta_file) or die "Can't open $fasta_file: $!\n";
+
+while (my $line = <$FAS>)
+{
+  chomp $line;
+  if($line =~ /^>/)
+  {
+    $header = $line;
+  }
+  else
+  {
+    $fasta{$header} .= $line;
+  }
+}
+
+close($FAS);
+
+foreach my $key (sort keys %fasta)
+{
+  print "$key\n";
+  reformat_seq($fasta{$key},$new_size);
+}
+
+#####-----Subroutines-----#####
+sub reformat_seq {
+  my $seq = shift @_; # formatted sequence on one line
+  my $size = shift @_; # size to be reformatted
+
+  $seq =~ s/(.{$size})/$1\n/g;
+  print $seq,"\n";
+}
++----------------------------------+
+
+3. Create a subroutine in which you pass in a FASTA file name and in which you return an array of the id followed by sequence. Your returned values will be formatted as follows: 
+
+(id1, seq1, id2, seq2, id3, seq3, id4, seq4)
+
+my @seq_records = fastaParser ($fasta_file_name);
+
+
+How will you handle new lines in your sequences (sequences that have multiple lines of sequence per record).
+
++-----------------------+
+#!/usr/bin/perl
+# File: fastaArray.pl
+# Author: Steven Ahrendt
+# Problem: 3
+
+use warnings;
+use strict;
+
+my $fasta_file_name = shift @ARGV;
+
+my @seq_records = fastaParser ($fasta_file_name);
+
+#####-----Subroutines-----#####
+sub fastaParser {
+  my $filename = shift @_;
+  my @result;
+  my $header="";
+  my $seq="";
+
+  my $i = 0;
+  open(my $fas, "<",$filename);
+  while(my $line = <$fas>)
+  {
+    chomp $line;
+    if($line =~ /^>/)
+    {
+      $header=$line;
+      if($i > 0)
+      {
+        $result[$i] = $seq;
+        $seq="";
+        $i++;
+      }
+      $result[$i] = $header;
+      $i++;
+    }
+    else
+    {
+      $seq .= $line;
+    }
+  }
+  close($fas);
+  return @result;
+}
+
++-----------------------+

@@ -1,0 +1,70 @@
+#!/usr/bin/perl #tell the computer wat kind of a script this is
+use strict; #keeps you from doing scetchy stuff
+use warnings; #lets you know when you have done somthing just a little schetchy
+use lib ('/pfbhome/mcampbell/lib'); #tell perl whare to find a modue you wrote. change this to match your computer.
+#use PostData; #a debuging module from Mike originaly written by Ian Korf
+
+#---------------------------MAIN-----------------------
+
+#start by making a usage statement to let yourself and others know what you are trying to accomplish with your script.
+my $usage= " 
+\n\n\tThis script takes a fasta as inptup and changes the line wrapping.
+
+    fasta_parser.pl <fasta_file> <Desired line length (integer)>\n\n";
+
+die $usage unless $ARGV[1]; #die if the script wasn't given two arguments
+my $fasta_file = shift; #get the file from the command line
+my $wrap_lenght = shift; #get the desired line length from the command line
+
+
+my $hash_ref = build_hash($fasta_file); #call the subroutine 'build_hash'and give it the file. the subroutine is going to return a hash reference
+wrap_seq($hash_ref); # calls the subroutine 'wrap_seq'. the hash reference we just generated is passed to the subroutine. 
+
+#PostData($hash_ref); #call the module postdata to interogate a variable.
+#--------------------------SUBS-------------------------
+
+sub build_hash{ #define the subroutein
+    my $file = shift @_; #shift the input file off of the magic carpet
+    my %fasta_hash; #declair an empty hash
+
+    open(IN, '<', $file) or die "I tried and can't open the file $fasta_file $!. I'm sorry\n";  #open the file for reading and die if it can't be opened
+
+    my $id; #declair the id variable outside of the while loop so it is vissable at the same time we are working on a sequence line. This avoids a scope error
+    while(my $line = <IN>){ # go through the file one line at a time
+	chomp $line; #remove the line returns from the lines
+	if ($line =~ /^\s+$/){ #a conditional that skips the line if it is all white space
+	    next;
+	}
+	elsif($line =~ /^>(\S+)/){ #check for the fasta header (line starts with greater than sign) and capture the id in the $1 variable
+	    #this is the header #helpfull comment to let you know what you are working with
+	    $id = $1; #set the id variable declaired outside of the while loop to $1. 
+	    
+	}
+	else{ #We know that in fasta format everything that is not a header is sequence
+	    #this is the sequence #another helpfull comment to let you know what you are working with
+	    my $seq_len = length $line; #get the length of the line of sequence
+
+	    #here we are adding keys and values to the hash. This needs to be a mulitdementional hash because we want the gene Id key to have more than one value. here we want to associate the sequence an its length with the sequence ID.
+	    $fasta_hash{$id}{'seq'} .= $line; #here we append the sequence as a value of 'seq'
+	    $fasta_hash{$id}{'len'} += $seq_len; #here we add the line lenght to the value of 'len'
+	}
+	
+    } 
+    return \%fasta_hash; #after we are done looping through eyvery line in the file we send a hash reference back to the $hash_ref variable we declaied when we called the subroutein.
+}
+#---------------------------------------------------------
+sub wrap_seq{
+    my $hash_ref2 = shift @_; #shift the hash reference off of the magic carpet
+
+    #here we are going to loop through the keys of the hash in alphabetical order. Note the we have to dereference the hash to use the keys operator
+    foreach my $key_id (sort {$b cmp $a} keys %{$hash_ref2})e{ 
+	my $seq = ${$hash_ref2}{$key_id}{'seq'}; #get the sequce for a given sequence id. This hash has two dimentions so we need two keys to get the the value. we got the first key from the keys function. The second key we already know because we hard coded it when we build the hash. If we didnt' know what the key was we would have need to use a second forach loop;
+	
+	#wrap and print the entries #says what we are going to do
+	print ">$key_id\n"; #print a > and the key (happens to be the sequence ID)
+	$seq =~ s/(.{1,$wrap_lenght})/$1\n/g; #this wraps the sequence. we are capturing all of the characters starting at the begining of the line upto the desired line lenght passed in on the command line. Then replaces what it matches with itself and a line return. This is done globaly
+	print $seq; #print out the sequence with line returns.
+    
+    }
+}
+#---------------------------------------------------------

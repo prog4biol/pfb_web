@@ -1,0 +1,103 @@
+============================================================
+Advanced Unix Tools: A Demo
+============================================================
+We can define variables in Bash so that we can store file names, paths,
+data, etc. As you start using Bash more, you'll notice a lot of commonalities
+between Bash and Perl syntaxes, and some differences.
+
+To define variables in Bash, you do NOT use the `$':
+variable="some string"
+
+But you would use the `$' any time else:
+echo $variable
+
+
+
+Like in Perl scripting, double quotes in Bash scripting allows variable
+interpolation:
+$ name="Jane Programmer"
+$ echo "Hello, my name is $name!"
+
+
+
+Bash also has `for' loops, which are useful when you need to do something many
+times:
+$ for i in {1..10}; do echo "Item $i"; done
+
+
+
+Bash has `while' loops too:
+$ i=0
+$ while [ $i -lt 8 ]; do echo "Item $i"; i=$(($i + 1)); done
+
+
+
+In Bash, `while` can also function in a manner similar to `foreach' in Perl:
+$ echo 'Deb
+Eric
+Jessen
+Joe
+Mike
+Wendy
+' >list.txt
+$ cat list.txt | while read TA; do echo "Hello $TA"; done
+
+
+
+Similar to Perl's `s///' function, we can use `sed' to modify strings with
+regular expressions (though you will find that there are some differencs in
+syntax).
+$ for i in {1..10}; do echo "file_$i.txt" | sed "s/txt$/out.txt/"; done
+
+
+
+We can also disect the parts of a file path with `basename' and `dirname';
+this is useful when we are generating command lines from a list of files
+in one directory and want to put the 
+`basename' returns the filename part of a path, while `dirname' returns
+the directory path part of a file path:
+$ mydata="/pfbhome/data/cuffdiff.txt"
+$ basename $mydata  # prints "cuffdiff.txt"
+$ dirname $mydata   # prints "/pfbhome/data"
+
+
+
+Back-ticks in Bash work like back-ticks in Perl, they capture the output of
+a sub-command so that you can store it in a variable:
+$ filename=`basename $mydata`
+$ filepath=`dirname $mydata`
+$ echo "$filepath/newdir/$filename"
+
+
+
+
+
+============================================================
+Advanced Unix Practice: Real-world Problems
+============================================================
+
+1. Use Unix tools to determine how many reference sequences (chromosomes) are
+represented in the /pfbhome/data/cuffdiff.txt file; output these reference
+names into a new file (one name per line).
+
+
+2. Use this file of reference names and a `while' loop to collect the transcripts
+in cuffdiff.txt into chromosome-specific files (All the transcripts from Chr1
+written to a file called Chr1.txt and so on).
+
+
+3. Repeat Problem 2, this time sort the transcripts by chromosomal coordinate
+(Hint: requires removing "Chr#:" from locus field):
+
+
+4. Use Unix to create a report summarizing the number of transcripts for each
+chromosome (Hint: use printf). The output should be a tab-delimited table with
+two columns:
+   1. Chromsome name
+   2. Number of transcripts
+
+
+5. Modify your command from Problem 4 to also print the number of transcripts
+from each chromosome for which expression could be measured. Add this to your
+report table as a third column.
+

@@ -1,0 +1,57 @@
+============================================================
+Additional Unix Tools: A Demo
+============================================================
+Earlier, we saw that Bash has some useful commands for checking and
+manipulating files quickly; for example, the idiom:
+$ column -t cuffdiff.txt | less -S
+
+
+
+Occasionally you'll recieve a data file from a Windows user (or maybe you
+exported some data from Excel yourself); Windows and MS Office products
+(even the ones for Mac) do not use newline characters to terminate a line,
+they use the more archaic carriage return ("\r") character. When you `less'
+the file, you may see a bunch of ^M codes in the file and all the data will
+appear on a single line. We can examine every character in the file (even
+the non-printing ones) directly with the following command:
+$ od -c windowsfile.txt
+
+
+
+We can convert these files to a more Unix-friendly format with the `tr' tool
+(the `tr' tool only reads input from stdin, so we have to pipe the file into
+it with `cat'):
+$ cat windowsfile.txt | tr '\r' '\n' >unixfile.txt
+
+
+
+============================================================
+Unix: Real World Problems
+============================================================
+
+1. Split /pfbhome/data/secret_seqs.fastq into five files with the `split' tool.
+
+
+2. Use Unix to wrap the fasta sequences in /pfbhome/data/Perl_III.fasta
+
+
+3. Some tools, such as samtools, throw errors when blank lines are observed in
+fasta and fastq files, use `tr' to remove these blank lines from the sequence
+file: /pfbhome/data/Perl_IV.fasta
+
+
+4. Use Unix tools to determine how many reference sequences (chromosomes) are
+represented in the /pfbhome/data/cuffdiff.txt file; output these reference
+names into a new file.
+
+
+5. Use Unix to calculate the total nucleotide composition of the sequences in 
+/pfbhome/data/Trinity.fasta
+
+
+6. Use `tar' to compress a directory of files (e.g., run
+`tar -czvf 16S.tar.gz /pfbhome/data/Metagenomic/16S'). Read the man page for
+`tar' and learn how to list the contents of the tar file. From this tar file,
+extract out a single file.
+
+

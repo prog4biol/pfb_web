@@ -1,0 +1,66 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use lib ('/pfbhome/mcampbell/lib');
+#use PostData;
+
+#---------------------------MAIN-----------------------
+
+my $usage= "
+\n\n\tThis script takes a fasta as inptup and changes the line wrapping.
+
+    fasta_parser.pl <fasta_file> <desired line lenght (integer)>\n\n";
+
+die $usage unless $ARGV[1];
+my $fasta_file = shift;
+my $wrap_lenght = shift;
+
+
+my $hash_ref = build_hash($fasta_file);
+wrap_seq($hash_ref);
+
+#PostData($hash_ref);
+#--------------------------SUBS-------------------------
+
+sub build_hash{
+    my $file = shift @_;
+    my %fasta_hash;
+
+    open(IN, '<', $file) or die "I tried and can't open the file $fasta_file $!. I'm sorry\n";  
+
+    my $id;
+    while(my $line = <IN>){
+	chomp $line;
+	if ($line =~ /^\s+$/){
+	    next;
+	}
+	elsif($line =~ /^>(\S+)/){
+	    #this is the header
+	    $id = $1;
+	    
+	    #$line =~ s/^>//;
+	}
+	else{
+	    #this is the sequence
+	    my $seq_len = length $line;
+	    $fasta_hash{$id}{'seq'} .= $line;
+	    $fasta_hash{$id}{'len'} += $seq_len;
+	}
+	
+    }
+    return \%fasta_hash;
+}
+#---------------------------------------------------------
+sub wrap_seq{
+    my $hash_ref2 = shift @_;
+    
+    foreach my $key_id (sort {$b cmp $a} keys %{$hash_ref2}){
+	my $seq = ${$hash_ref2}{$key_id}{'seq'};
+	
+	#wrap and print the entries
+	print ">$key_id\n";
+	$seq =~ s/(.{1,$wrap_lenght})/$1\n/g;
+	print $seq;
+    
+    }
+}
