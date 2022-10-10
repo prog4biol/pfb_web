@@ -1,0 +1,1102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Programming for Biology 2016</title>
+<link rel="stylesheet"  type="text/css"  href="index_files/standard.css" />
+<meta http-equiv="refresh" content="300; URL=index.html" />
+</head><body>
+
+<div id="header">
+        <a href="http://www.cshl.edu/"><img src="index_files/cshl-logo.gif" alt="CSHL"/></a>
+
+<h1>Programming for Biology 2017</h1>
+<p class="instructors">
+Simon Prochnik, Ph.D.<br />
+Sofia Robb, Ph.D.<br />
+</p>
+</div>
+
+
+<div id="announcements">
+
+<!-- Special Announcements -->
+<h2>Special Announcements</h2>
+<ul class="announcements">
+  <li>All course materials can be found here on <a href="https://github.com/srobb1/pfb2017">Github</a>.</li>
+  <li>Join the Programming for Biology <a href="https://www.facebook.com/groups/33255002959/">Facebook group</a>.</li>
+  <li>RUN/WALK MAP: Enjoy the great outdoors on <a href="run.pdf">this route</a>.</li> 
+  <li>Want more practice? There is a free, self-guided series of bioinformatics coding exercises at <a href = "http://rosalind.info/problems/tree-view">Rosalind</a></li>
+  <!--<li><a href="lecture_notes/big_pdf.pdf">All the notes in one big pdf</a></li>-->
+  <!--<li><a href="review_sessions/AdvancedUnix.txt">Advanced Unix tools and problems</a></li>-->
+  <!--<li><a href="review_sessions/RealWorldUnix.txt">MTV unix</a></li>-->
+    </ul>
+</div>
+
+<div id="schedule">
+<!-- Main schedule table -->
+<h2>Schedule</h2>
+<table>
+  <tbody>
+    <tr>
+      <th class="day" colspan="2">
+        Sunday, October 15
+      </th>
+    </tr>
+    
+    <tr class="party">
+      <td >7:00-8:00</td>
+      <td>Meet &amp; Greet in the bar
+        <br />
+        <br />
+        Everyone</td>
+    </tr>
+    
+    <tr>
+      <td colspan="2">
+        &nbsp;
+      </td>
+    </tr>
+    
+    <tr>
+      <th class="day" colspan="2">
+        Monday, October 16
+      </th>
+    </tr>
+    
+    <tr class="special">
+      <td ></td>
+      <td>Welcome &amp; Orientation<br />
+        <br />
+        Simon Prochnik, Sofia Robb, and TAs
+      </td>
+    </tr>
+    
+    <tr class="lecture">
+      <td >9:00-10:30</td>
+      <!--    <td><b>Unix 1: </b><a href="https://github.com/srobb1/pfb2017/blob/master/README.md">Intro to UNIX</a> and <a href="lecture_notes/Perl_I.pdf">Perl1:Program structure and good practices</a><br />-->
+      <td><b>Unix 1: </b><a href="https://github.com/srobb1/pfb2017/blob/master/README.md">Unix Overview, The Basics, Advanced Unix</a><br />
+	<a href="https://files.fosswire.com/2007/08/fwunixref.pdf">Unix cheet sheet</a><br />
+	<br /><a href="#Simon">Simon</a>
+      </td>
+    </tr>
+    
+    <tr class="workshop">
+      <td >10:30-12:30</td>
+      <!--    <td><a href="problem_sets/Unix_01_problemset.pdf">Unix I problem set</a> (<a href="problem_sets/files/cuffdiff.txt">cuffdiff.txt</a> file for Unix I, problem 13)<br />-->
+      <td><a href="https://github.com/srobb1/pfb2017/blob/master/problemsets/Unix_01_problemset.md">Unix I problem set</a><br />
+	<a href="problem_sets/files/sequences.nt.fa">sequences.nt.fa</a> file for Unix I, problem 6<br />
+	<a href="problem_sets/files/cuffdiff.txt">cuffdiff.txt</a> file for Unix I, problem 10<br />
+	<br />
+	<a href="#TAs">TAs</a>
+      </td>
+    </tr>
+
+    <tr class="meal">
+      <td ></td>
+      <td>lunch</td>
+    </tr>
+    
+    <tr class="lecture">
+      <td >2:00-3:30</td>
+      <td><b>Unix 2: </b><a href="https://github.com/srobb1/pfb2017/blob/master/README.md">Text Editors,Git for Beginners</a><br /> 
+	<!--    <td>    <b>Perl II: </b><a href="lecture_notes/02_Perl_Logic.pdf">Operators, functions, control structures, and processing the command line </a><br />-->
+	<a href="#Sofia">Sofia</a>
+      </td>
+    </tr>    
+    
+    <tr class="workshop">
+      <td >3:30-5:00</td>
+      <td> 
+	<a href="https://github.com/srobb1/pfb2017/blob/master/problemsets/Unix_02_problemset.md">Unix II problem set</a><br />
+	<!--<a href="problem_sets/problem_set_solutions/Perl_II_solutions.txt">Perl II solutions</a><br /> -->
+        <br />
+        <a href="#TAs">TAs</a>
+      </td>
+    </tr>
+    
+    
+    <tr class="meal">
+      <td ></td>
+      <td>dinner</td>
+    </tr>
+    
+    <tr class="workshop">
+      <td >7:00-9:30</td>
+      <td><b>Review Session: </b>program structure<br />
+	
+	
+	<br /><a href="#TAs">TAs</a>
+      </td>
+    </tr>
+    
+    <tr>
+      <td colspan="2">
+        &nbsp;
+      </td>
+    </tr>
+    
+    <tr>
+      <th class="day" colspan="2"  >
+        Tuesday, October 17
+      </th>
+    </tr>
+    
+    <tr class="lecture">
+      <td >9:00-10:30</td>
+      <td><b>Python I: </b><a href="https://github.com/srobb1/pfb2017/blob/master/README.md">python1 overview, running python, PyCharm, syntax, data types and variables</a><br />
+	<br /><a href="#Simon">Simon</a>
+      </td>
+    </tr>
+    
+    <tr class="workshop">
+      <td >10:30-12:00</td>
+      <td><a href="https://github.com/srobb1/pfb2017/blob/master/problemsets/Python_01_problemset.md">Python I problem set</a><br />
+        <!--<a href="problem_sets/problem_set_solutions/Perl_III_solutions.txt">Perl III solutions</a><br /> -->
+	<br />
+	<a href="#TAs">TAs</a>
+      </td>
+    </tr>
+    
+    <tr class="meal">
+      <td ></td>
+      <td>lunch</td>
+    </tr>
+    
+    <tr class="lecture">
+      <td >2:00-3:30</td>
+      <td><b>Python II: </b> <a href="https://github.com/srobb1/pfb2017/blob/master/README.md">operators, truth, logic, numbers</a><br />
+	<br /><a href="#Sofia">Sofia</a>
+      </td>
+    </tr>
+    
+    <tr class="workshop">
+      <td >3:30-5:00</td>
+      <td><a href="https://github.com/srobb1/pfb2017/blob/master/problemsets/Python_02_problemset.md">Python II problem set </a><br />
+	<!--        <a href="problem_sets/problem_set_solutions/Perl_IV_solutions.txt">Perl IV solutions </a><br />-->
+	<br /><a href="#TAs">TAs</a>
+      </td>
+    </tr>
+    
+    <tr class="meal">
+      <td ></td>
+      <td>dinner</td>
+    </tr>
+    
+    <tr class="workshop">
+      <td >7:00-9:30</td>
+      <td><b>Review Session: </b><br />
+        <br /><a href="#TAs">TAs</a>
+	<!--<br /><a href="#Simon">Simon</a>, <a href="#Sofia">Sofia</a>-->
+      </td>
+    </tr>
+    
+    <tr>
+      <td colspan="2">
+        &nbsp;
+      </td>
+    </tr>
+    
+    <tr>
+      <th class="day" colspan="2"  >
+        Wednesday, October 18
+      </th>
+    </tr>
+    
+    <tr class="lecture">
+      <td >9:00-10:30</td>
+      <td><b>Python III:</b> <a href="https://github.com/srobb1/pfb2017/blob/master/README.md">sequences, strings, lists, tuples</a><br />
+	<br /><a href="#Simon">Simon</a>
+      </td>
+    </tr>
+    
+    <tr class="workshop">
+      <td >10:30-12:00</td>
+      <td><a href="https://github.com/srobb1/pfb2017/blob/master/problemsets/Python_03_problemset.md">Python III Problem set</a><br />
+	<!--        <a href="problem_sets/problem_set_solutions/Perl_V_solutions.txt">Perl V solutions</a><br> -->
+        <br />
+        <a href="#TAs">TAs</a>
+      </td>
+    </tr>
+    
+    <tr class="meal">
+      <td ></td>
+      <td>lunch</td>
+    </tr>
+    
+    
+    <tr class="lecture and workshop">
+      <td >2:00-3:30</td>
+      <td><b>Python IV:</b> <a href="https://github.com/srobb1/pfb2017/blob/master/README.md">loops, dictionaries, sets</a><br />
+	<br /><a href="#Sofia">Sofia</a>
+      </td>
+    </tr>
+    
+    <tr class="workshop">
+      <td >3:30-5:00</td>
+      
+      <td><a href="https://github.com/srobb1/pfb2017/blob/master/problemsets/Python_04_problemset.md">Python IV Problem set</a><br />
+	<!--        <a href="problem_sets/problem_set_solutions/Perl_VI_solutions.txt">Perl VI solutions</a><br />-->
+	
+	<br />
+	<a href="#TAs">TAs</a>
+      </td>
+    </tr>
+    
+    
+    <tr class="party">
+      <td >5:00-6:00</td>
+      <td>Wine and Cheese on Hershey upstairs veranda<br />
+        <br />
+        <a>Everyone</a>
+      </td>
+    </tr>
+    
+    <tr class="meal">
+      <td ></td>
+      <td>dinner</td>
+    </tr>
+    
+    <tr class="workshop">
+      <td >7:00-9:30</td>
+      <td><b>Review Session</b><br />
+	<!--<a href="review_sessions/VIpresentation.pdf">Vim tutorial</a>
+	    <a href="review_sessions/VIcommandsSimple.txt">Vim Simple Cheatsheet</a>
+	    <a href="review_sessions/VIcommands.txt">Vim Cheatsheet</a><br/>
+	    <a href="review_sessions/emacs_tutorial_2016.pdf">emacs tutorial</a>
+	    <a href="review_sessions/cheat_sheet_emacs.html">emacs Simple Cheatsheet</a>
+	    <a href="https://www.gnu.org/software/emacs/refcards/pdf/refcard.pdf">emacs cheatsheet</a>
+	    <br /><a href="#Deb">Deb</a>, <a href="#Joseph">Joseph</a>-->
+	<br />
+      	<a href="#TAs">TAs</a>
+      </td>
+    </tr>
+    
+    <tr>
+      <td colspan="2">
+        &nbsp;
+      </td>
+    </tr>
+    
+    <tr>
+      <th class="day" colspan="2">
+        Thursday, October 19
+      </th>
+    </tr>
+    
+    <tr class="lecture">
+      <td >9:00-10:30</td>
+      <td><b>Python V: </b><a href="https://github.com/srobb1/pfb2017/blob/master/README.md">iterables, I/O and files</a> <br/>
+	<!--<a href="https://github.com/srobb1/pfb2017/blob/master/README.md">Modules and Subroutines(2015)</a> <br/>-->
+	<!--<b>Perl VIII: </b><a href="https://github.com/srobb1/pfb2017/blob/master/README.md.key.pdf.pdf">Scope</a><br />-->
+	<br /><a href="#Simon">Simon</a>
+      </td>
+    </tr>
+    
+    <tr class="workshop">
+      <td >10:30-12:00</td>
+      <td><a href="https://github.com/srobb1/pfb2017/blob/master/problemsets/Python_05_problemset.md">Python V problem set </a><br />
+        <!--<a href="problem_sets/problem_set_solutions/Perl_VII_subroutines_solutions.txt">Solutions - Subroutines</a><br /><br />-->
+        <br />
+        <a href="#TAs">TAs</a>
+      </td>
+    </tr>
+    
+    <tr class="meal">
+      <td ></td>
+      <td>lunch</td>
+    </tr>
+    
+    <tr class="lecture">
+      <td >2:00-3:30</td>
+      <td><b>Python VI: </b><a href="https://github.com/srobb1/pfb2017/blob/master/README.md">regular expressions</a><br />
+	<br /><a href="#Sofia">Sofia</a>
+      </td>
+    </tr>
+    
+    <tr class="workshop">
+      <td >3:30-5:00</td>
+      <td><a href="https://github.com/srobb1/pfb2017/blob/master/problemsets/Python_06_problemset.md">Python VI problem set </a><br />
+        <!--<a href="problem_sets/problem_set_solutions/Perl_IX_References_solutions.txt">Solutions - References</a><br /><br />-->
+        <br />
+        <a href="#TAs">TAs</a>
+      </td>
+    </tr>
+    
+    <tr class="meal">
+      <td ></td>
+      <td>dinner</td>
+    </tr>
+
+    <tr class="workshop">
+      <td >7:00-9:30</td>
+      <td><b>Review Session</b><br />
+	<br />
+	<a href="#TAs">TAs</a>
+	<!--<br /><a href="#Simon">Simon</a>, <a href="#Sofia">Sofia</a>-->
+      </td>
+    </tr>
+    
+    <tr>
+      <td colspan="2">
+        &nbsp;
+      </td>
+    </tr>
+    
+    <tr>
+      <th class="day" colspan="2"  >
+        Friday, October 20
+      </th>
+    </tr>
+    
+    <tr class="lecture">
+      <td >9:00-10:30</td>
+      <td><b>Python VII: </b><a href="https://github.com/srobb1/pfb2017/blob/master/README.md">Functions, scope, modules</a><br />
+	<br /><a href="#Simon">Simon</a>
+      </td>
+    </tr>
+    
+    <tr class="workshop">
+      <td >10:30-12:00</td>
+      <td><a href="problem_sets/Python_07_problemset.pdf">Python VII problem set</a><br />
+        <!--<a href="problem_sets/problem_set_solutions/Perl_X_objects_solutions.txt">Solutions - Objects</a><br />-->
+        <br />
+        <a href="#TAs">TAs</a>
+      </td>
+    </tr>
+    
+    <tr class="meal">
+      <td ></td>
+      <td>lunch</td>
+    </tr>
+    
+    <tr class="lecture">
+      <td >2:00-3:30</td>
+      <td><b>Python VIII: </b><a href="https://github.com/srobb1/pfb2017/blob/master/README.md ">exceptions, data structures</a><br />
+	<br /><a href="#Simon">Simon</a>
+      </td>
+    </tr>
+    
+    <tr class="workshop">
+      <td >3:30-5:00</td>
+      <td><a href="https://github.com/srobb1/pfb2017/blob/master/problemsets/Python_08_problemset.md">Python VIII problem set</a><br />
+        <!--<a href="problem_sets/problem_set_solutions/Perl_XI_BioPerl_solutions.txt">Solutions - BioPerl</a><br /> -->
+        <br />
+        <a href="#TAs">TAs</a>
+      </td>
+    </tr>
+    <tr class="meal">
+      <td ></td>
+      <td>dinner</td>
+    </tr>
+    <tr class="workshop">
+      <td >7:00-9:30</td>
+      <td><b>Review Session</b><br />
+	<br />
+	<a href="#TAs">TAs</a>
+      </td>
+    </tr>
+    
+    <tr>
+      <td colspan="2">
+        &nbsp;
+      </td>
+    </tr>
+    
+    <tr>
+      <th class="day" colspan="2"  >
+	Saturday, October 21
+      </th>
+    </tr>
+    
+    <tr class="party">
+      <td >All day</td>
+      <td>Free Time<br />
+        Relax, have some fun!!<br />
+        <br />
+        Everyone
+      </td>
+    </tr>
+    
+    <tr>
+      <td colspan="2">
+        &nbsp;
+      </td>
+    </tr>
+    
+    
+    <tr>
+      <th class="day" colspan="2"  >
+        Sunday, October 22
+      </th>
+    </tr>
+    
+    <tr class="lecture">
+      <td >9:00-10:30</td>
+      <td><b>Bioinf tools overview I: </b><a href="https://github.com/srobb1/pfb2017/blob/master/README.md">what's coming; define bioinf concepts: gene prediction, alignment, searching, assembly</a><br />
+	<!--<a href="http://www.w3schools.com/html/default.asp">Additional HTML help</a><br /><br /> -->
+	<br /><a href="#Simon">Simon</a>
+      </td>
+    </tr>
+    
+    
+    <tr class="workshop">
+      <td >10:30-12:00</td>
+      <td><a> Catch up on problem sets</a><br />
+        <br />
+        <a href="#TAs">TAs</a>
+      </td>
+    </tr>
+    
+    <tr class="meal">
+      <td ></td>
+      <td>lunch</td>
+    </tr>
+    
+    <tr class="lecture">
+      <td >2:00-3:30</td>
+      <td><b>Next Gen Sequencing: </b><a href="https://github.com/srobb1/pfb2017/blob/master/pdfs/Campbell_NGS.pdf">File formats: fasta, fastq, bam, vcf</a><br />
+        <!--<a href="problem_sets/problem_set_solutions/13_CGI_solutions.txt">Solutions - CGI</a><br />-->
+        <br /><a href="#Mike">Mike</a>
+      </td>
+    </tr>
+
+    <tr class="workshop">
+      <td >3:30-5:00</td>
+      <td><a href="https://github.com/srobb1/pfb2017/blob/master/problemsets/NGS_01_problemset.md">NGS problem set</a><br />
+        <br />
+        <a href="#TAs">TAs</a>
+      </td>
+    </tr>
+    
+    <tr class="meal">
+      <td ></td>
+      <td>dinner</td>
+    </tr>
+    
+    <tr class="workshop">
+      <td >7:00-9:30</td>
+      <td><b>Review Session</b><br />
+	<br />
+	<a href="#TAs">TAs</a>
+      </td>
+    </tr>
+    
+    <tr>
+      <th class="day" colspan="2"  >
+        Monday, October 23
+      </th>
+    </tr>
+    
+    
+    <tr class="lecture">
+      <td >9:00-10:30</td>
+      <td><b>Python IX: </b> <a href="/https://github.com/srobb1/pfb2017/blob/master/README.md">Biopython</a><br />
+	<br /><a href="#Simon">Simon</a>
+      </td>
+      
+    </tr>
+    <tr class="workshop">
+      <td >10:30-12:00</td>
+      <td><a href="https://github.com/srobb1/pfb2017/blob/master/problemsets/biopython_problem_set.md">Biopython problem set</a><br />
+	<br />
+	<a href="#TAs">TAs</a>
+      </td>  
+    </tr>
+    
+    
+    <tr class="meal">
+      <td ></td>
+      <td>lunch</td>
+    </tr>
+    
+    <tr class="guest_lecture">
+      <td >2:00-3:30</td>
+      <td><b>bioinf tools overview II: </b><a href="lecture_notes/JBrowse_programming_for_biology_2016.pdf">GMOD and JBrowse</a><br />
+	<br />
+	<a href="#ScottCain">Scott Cain</a>, Ontario Institute for Cancer Research<br />
+      </td>
+    </tr>
+    
+    <tr class="workshop">
+      <td >3:30-5:00</td>
+      <td><a href="https://github.com/srobb1/pfb2017/blob/master/pdfs/PfB%20GMOD%20lecture.pdf">Managing Genomic Data</a><br />
+	<a href="https://www.rosaceae.org">Sample Tripal install (GDR--Apple, strawberry, etc)</a><br />
+	<a href="http://staging.wormbase.org/tools/genome/jbrowse/">Sample JBrowse install (WormBase dev site)</a><br />
+	<a href="http://apollo.berkeleybop.io/Apollo2/annotator/index">Demo Apollo site</a> (user:demo@demo.com, password demo)<br />	
+	<a href="http://www.flymine.org/flymine/begin.do">Sample InterMine site (FlyMine)</a><br />
+	<br />
+	<a href="#ScottCain">Scott Cain</a>, Ontario Institute for Cancer Research
+      </td>
+    </tr>
+    
+    <tr class="party">
+      <td >7:00-7:45</td>
+      <td>Cocktails at the bar (associated with the splicing meeting)<br />
+	<br />
+      </td>
+    </tr>
+    
+    <tr class="meal">
+      <td >7:45-9:00</td>
+      <td>banquet (No normal 5:30 - 7:30 dinner)<br />
+	<br />
+    </td></tr>
+    
+    <tr class="special">
+      <td >9:00-11:00?</td>
+      <td><b>Field trip:</b> Carrington's Genomics Research Station, Huntington<br />
+	<br />
+	<a>Everyone</a>
+      </td>
+    </tr>
+    
+    <tr>
+      <td colspan="2">
+	&nbsp;
+      </td>
+    </tr>
+    
+    
+    <tr>
+      <th class="day" colspan="2"  >
+	Tuesday, October 24
+      </th>
+    </tr>
+    
+    <tr class="guest_lecture">
+      <td >9:00-10:30</td>
+      <td><b>Sequence Similarity Search I: </b><a href="https://github.com/srobb1/pfb2017/blob/master/pdfs/Pearson_SimilaritySearching-1_102317.pdf">Sequence similarity search I</a><br />
+	<br />
+	<a href="#BillPearson">Bill Pearson</a>
+      </td>
+    </tr>
+    
+    <tr class="workshop">
+      <td >10:30-12:00</td>
+      <td>Sequence Similarity Search workshop I<br />
+	<a href="http://fasta.bioch.virginia.edu/fasta_www2/fasta_list2.shtml">FASTA search web service</a><br />
+	<a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-015-0656-7">Most partial domains in proteins are alignment and annotation artifacts</a><br />	
+	<br />
+	<a href="#BillPearson">Bill Pearson</a>
+      </td>
+    </tr>
+    
+    <tr class="meal">
+      <td ></td>
+      <td>lunch</td>
+    </tr>
+    
+    <tr class="guest_lecture">
+      <td >2:00-3:30</td>
+      <td><b>Sequence Similarity Search II: </b><a href="https://github.com/srobb1/pfb2017/blob/master/pdfs/Pearson_SimilaritySearching-2_102317.pdf">Sequence similarity search I</a><br />
+	<a href="http://fasta.bioch.virginia.edu/mol_evol/data/">alignment data</a><br />
+	<a href="http://fasta.bioch.virginia.edu/mol_evol/pfb_python_matrices.html">problems</a><br />	
+        <br />
+        <a href="#BillPearson">Bill Pearson</a>
+      </td>
+    </tr>
+<!--    
+    <tr class="workshop">
+      <td >10:30-12:00</td>
+      <td>Sequence Similarity Search workshop II<br />
+	<br />
+	<a href="#BillPearson">Bill Pearson</a>
+      </td>
+    </tr>
+-->
+    <tr class="party">
+      <td >5:30-5:45</td>
+      <td>Projects overview<br />
+	<br />
+    </td></tr>
+    
+
+    <tr class="meal">
+      <td ></td>
+      <td>dinner</td>
+    </tr>
+    
+    <tr class="guest_lecture">
+      <td >7:00-9:30</td>
+      <td><b>Review Session</b> Open questions<br />
+	<br /><a href="#TAs">TAs</a>
+      </td>
+    </tr>
+    
+    <tr>
+      <td colspan="2">
+        &nbsp;
+      </td>
+    </tr>
+    <tr>
+      <th class="day" colspan="2"  >
+        Wednesday, October 25
+      </th>
+    </tr>
+    
+    <tr class="guest_lecture">
+      <td >9:00-10:30</td>
+      <td><b>Ontologies: </b> <a href="https://github.com/srobb1/pfb2017/blob/master/pdfs/Ontologies4biology.pdf">Controlled vocabulary</a><br />
+	<a href="http://www.geneontology.org/page/download-annotations">GO:Dowwnload annotations page</a><br />
+	<a href="http://www.geneontology.org/page/go-annotation-file-formats">GO:Understanding the columns</a><br />
+	<a href="http://wiki.geneontology.org/index.php/Main_Page">GO:Gene Ontology Wiki</a><br />
+	<a href="http://go.princeton.edu/cgi-bin/LAGO">GO: LAGO - GO term finder </a><br />
+	<a href="http://https://david.ncifcrf.gov/">GO: DAVID - Over representation tool </a><br />
+	<a href="http://www.geneontology.org/page/go-slim-and-subset-guide">GO: Making high level GO summaries </a><br />
+	<a href="https://www.nature.com/articles/nrg2363">GO: Use and misuse of the gene ontology annotations S Rhee et al.</a><br />
+	<a href="http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003343">GO: Ten Quick Tips for Using the Gene Ontology</a><br />	
+
+	<a href="http://www.sequenceontology.org/">SO: Sequence Ontology</a><br />		
+	
+	<a href="http://human-phenotype-ontology.github.io/">HPO: Human Phenotype Ontology</a><br />
+	<a href="http://compbio.charite.de/hpoweb/showterm?id=HP:0000118">HPO: Browser</a><br />
+	<a href="http://compbio.charite.de/phenomizer/">HPO: Phenomizer</a><br />
+
+	<a href="http://www.obofoundry.org/">OBO: Places to find biomedical ontologies</a><br />
+	<a href="https://www.bioontology.org/">NCBO: Places to find biomedical ontologies</a><br />
+	
+	<br />
+        <a href="#KarenEilbeck">Karen Eilbeck</a>, Univeristy of Utah
+      </td>
+    </tr>
+    
+    <tr class="workshop">
+      <td >10:30-12:00</td>
+      <td><a href="https://github.com/srobb1/pfb2017/blob/master/problemsets/ontology_problemset.md">Ontology workshop</a><br />
+	<a href="problem_sets/files/go.owl">go file</a><br />
+	<br />
+        <a href="#KarenEilbeck">Karen Eilbeck</a>, Univeristy of Utah
+      </td>
+    </tr>
+    
+    <tr class="meal">
+      <td ></td>
+      <td>lunch</td>
+    </tr>
+    
+    <tr class="guest_lecture">
+      <td >2:00-3:30</td>
+      <td><b>Guest Lecture V: </b><a href="path/to/notes">Ethics and Reproducibility in research</a><br />
+	<br /><a href="#Jan Witkowski">Jan Witkowski</a>, Executive Director Banbury Centre, Cold Spring Harbor Laboratory
+      </td>
+    </tr>    
+    
+    <tr class="guest_lecture">
+      <td >3:30-5:30</td>
+      <td><b>Genome Assembly: </b><a href="https://github.com/srobb1/pfb2017/blob/master/pdfs/Triant_GenomeAssembly_CSHL-short_2017.pdf">Genome Assembly</a><br />
+	<br />
+        <a href="#Deb">Deb</a>
+      </td>
+    </tr>
+    
+    <tr class="meal">
+      <td ></td>
+      <td>dinner</td>
+    </tr>
+    
+    <tr class="party">
+      <td >7:00</td>
+      <td>Project proposals due</td>
+    </tr>
+    
+    <tr class="workshop">
+      <td >7:00-9:00</td>
+      <td> <a href="lecture_notes/WGS_Workshop.pdf">Genome Assembly workshop</a><br />
+	<br />
+        <a href="#Deb">Deb</a>
+      </td>
+    </tr>
+    
+    <tr>
+      <th class="day" colspan="2"  >
+        Thursday, October 26
+      </th>
+    </tr>
+    <tr class="party">
+      <td >All day</td>
+      <td>Free Time<br />
+        Relax, have some fun!!<br />
+        <br />
+        Everyone
+      </td>
+    </tr>
+    
+    <tr>
+      <td colspan="2">
+	&nbsp;
+      </td>
+    </tr>
+    
+    <tr>
+      <th class="day" colspan="2"  >
+        Friday, October 27
+      </th>
+    </tr>
+    
+    <tr class="guest_lecture">
+      <td >9:00-10:30</td>
+      <td><b>RNAseq: </b><a href="https://github.com/trinityrnaseq/CSHLProgForBiol2017/blob/master/rnaseq_slides_PFB2017.pdf">RNAseq</a><br />
+        <br /><a href="#BrianHaas">Brian Haas</a>, The Broad Institute
+      </td>
+    </tr>
+
+    <tr class="workshop">
+      <td >10:30-12:00</td>
+      <td><a href="https://github.com/trinityrnaseq/CSHLProgForBiol2017">RNAseq workshop I</a><br />
+      <a href="https://github.com/trinityrnaseq/CSHLProgForBiol2017/tree/master/Exercise_1-counting_kmers">Exercise 1: Counting kmers</a><br />	
+      <a href="https://github.com/trinityrnaseq/CSHLProgForBiol2017/tree/master/Exercise_1-counting_kmers">Exercise 2: Estimating gene expression levels</a><br />
+      <a href="https://github.com/trinityrnaseq/CSHLProgForBiol2017/tree/master/Exercise_3-filtering_DE_results">Exercise 3: Filtering DE results</a><br />
+        <br /><a href="#BrianHaas">Brian Haas</a>, The Broad Institute
+      </td>
+    </tr>
+    
+    <tr class="meal">
+      <td ></td>
+      <td>lunch</td>
+    </tr>
+    
+    <tr class="workshop">
+      <td >2:00-4:00</td>
+      <td><a href="https://github.com/trinityrnaseq/CSHLProgForBiol2017">RNAseq workshop II</a><br />
+        <br /><a href="#BrianHaas">Brian Haas</a>, The Broad Institute
+      </td>
+    </tr>    
+
+    <tr class="guest_lecture">
+      <td >4:00-5:00</td>
+      <td><b>Guest Lecture: </b><a href="/lecture_notes/CSH2016_CNVs.pdf">Structural Variation</a><br />
+	<br />
+	<a href="#Lukas">Lukas Kuderna</a>, Universitat Pompeu Fabra
+      </td>
+    </tr>
+
+    <tr class="meal">
+      <td >5:5:30</td>
+      <td>Pizza dinner at Hershey (little vincents?)</td>
+    </tr>
+    
+     <tr class="workshop">
+      <td >5:30-6:00</td>
+      <td><a href="https://github.com/srobb1/pfb2017/blob/master/jupyterNotebook.md/">project prep: Jupyter Notebooks</a><br />
+        <br /><a href="#Simon">Simon</a>
+      </td>
+     </tr>
+
+     <tr class="workshop">
+      <td >6:00-9:00</td>
+      <td><a href="">Student informal project discussion and costume prep</a><br />
+        <br /><a href="">Students</a>
+      </td>
+     </tr>
+     
+    <tr class="special">
+      <!--      <tr class="party">-->
+      <td >9:00-?:00</td>
+      <td>Halloween Party!(Clarkston Dinning room)<br />
+        <br />
+        Everyone
+      </td>
+    </tr>
+
+    <tr>
+      <td colspan="2">
+        &nbsp;
+      </td>
+    </tr>
+    
+    <tr>
+      <th class="day" colspan="2"  >
+        Saturday, October 28
+      </th>
+    </tr>
+        
+    <tr class="special">
+      <td >9:00-9:30</td>
+      <td>Signup for Final Project groups<br />
+        <br />
+        Everyone
+      </td>
+    </tr>
+    
+    <tr class="workshop">
+      <td >All day</td>
+      <td>Group Projects<br />
+        <br />
+        Everyone
+      </td>
+    </tr>
+
+    <tr class="party">
+      <td >2:00</td>
+      <td>Group Photo (meet at the back door of Hershey)<br />
+        <br />
+        Everyone
+      </td>
+    </tr>
+    
+    <tr class="workshop">
+      <td >All day</td>
+      <td>Group Projects<br />
+        <br />
+        Everyone
+      </td>
+    </tr>    
+    
+    <tr>
+      <td colspan="2">
+        &nbsp;
+      </td>
+    </tr>
+    
+    <tr>
+      <th class="day" colspan="2"  >
+        Sunday, October 29
+      </th>
+    </tr>
+    
+    <tr class="workshop">
+      <td >All day</td>
+      <td>Group Projects<br />
+        <br />
+        Everyone
+      </td>
+    </tr>
+    
+    <tr>
+      <td colspan="2">
+        &nbsp;
+      </td>
+    </tr>
+    
+    <tr>
+      <th class="day" colspan="2"  >
+        Monday, October 30
+      </th>
+    </tr>
+    
+    <tr class="workshop">
+      <td >9:00-12:00</td>
+      <td>Group Projects<br />
+        <br />
+	Everyone
+      </td>
+    </tr>
+    
+    <tr class="meal">
+      <td ></td>
+      <td>lunch</td>
+    </tr>
+    
+    <tr class="special">
+      <td >2:00-4:00</td>
+      <td>Final Project wrap up<br />
+        <br />
+        Everyone
+      </td>
+    </tr>
+    
+    <tr class="special">
+      <td >4:00-6:00</td>
+      <td>Final Project Presentations - Hershey West <br />
+        <br />
+        Everyone
+      </td>
+    </tr>
+
+    <tr class="party">
+      <td>6:00-6:45</td><td>Open bar - Blackford Bar</td>
+    </tr>
+    
+    <tr class="party">
+      <td>6:45-10:00</td>
+      <td>Course banquet</td>
+    </tr>
+    
+    <tr>
+      <td colspan="2">
+        &nbsp;
+      </td>
+    </tr>
+    
+    <tr>
+      <th class="day" colspan="2"  >
+        Tuesday, October 31
+      </th>
+    </tr>
+    
+    <tr class="special">
+      <td >after breakfast</td>
+      <td>Depart<br />
+        <br />
+        <a href="#Everyone">Everyone</a>
+      </td>
+    </tr>
+    
+</tbody></table>
+
+</div>
+
+<!--schedule-->
+<hr />
+    <div id="curricula">
+      <h2>Books Used in the Course</h2>
+      
+      <dl>
+      <p>
+
+  </p></dd><dt><cite>Learning Python, 5th Edition</cite>
+  </dt><dd>Mark Lutz
+  </dd><dd>O'Reilly &amp; Associates
+      <p>
+
+</p></dd><dt><cite>The Linux Command Line</cite>
+  </dt><dd>William E. Shotts. Jr.
+  </dd><dd>No Starch Press
+      <p>
+
+  </p></dd><dt><cite>Python Cookbook, 3rd Edition</cite>
+  </dt><dd>Brian Jones, David Beazley
+  </dd><dd>O'Reilly &amp; Associates
+      <p>
+  
+</p></dd></dl>
+</div>
+
+<hr />
+<div id="faculty">
+<h2>Participants</h2>
+<table>
+<tbody><tr><th colspan="3"><a name="instructors">Instructors</a></th></tr>
+
+<tr>
+    <th ><a name="Simon">Simon Prochnik </a></th>
+    <td >Itrexon, South Sam Fransisco, CA</td>
+    <td >prochnik -- at -- gmail.com</td>
+</tr>
+
+<tr>
+    <th ><a name="Sofia">Sofia Robb </a></th>
+    <td >Stowers Institute for Medical Research, Kansas City, MO </td>
+    <td >sofia2341 -- at -- gmail.com</td>
+</tr>
+
+<tr><td colspan="3">&nbsp;</td></tr>
+<tr><td colspan="3">&nbsp;</td></tr>
+
+<tr><th colspan="3"><a name="TAs">Teaching Assistants</a></th></tr>
+
+<tr>
+    <th ><a name="Jessen">Jessen Bredeson</a></th>
+    <td >University of California, Berkeley, CA</td>
+    <td >jessenbredeson -- at -- berkeley.edu</td>
+</tr>
+<tr>
+    <th ><a name="Michael">Michael Campbell</a></th>
+    <td >Cold Spring Harbor Laboratory, Cold Spring Harbor, NY</td>
+    <td >mcampbel -- at -- cshl.edu</td>
+</tr>
+
+<tr>
+    <th ><a name="Xengie">Xengie Doan</a></th>
+    <td >Stowers Institute for Medical Research, Kansas City, MO </td>
+    <td > Xdo-- at -- stowers.org</tr>
+<tr>
+    <th ><a name="Lukas">Lukas Kuderna</a></th>
+    <td >Universitat Pompeu Fabra, Bracelona, SPAIN</td>
+    <td >lukas.kuderna -- at -- upf.edu>-- </td>
+</tr>
+<tr>
+    <th ><a name="Demitri">Demitri Muna</a></th>
+    <td >Cold Spring Harbor Laboratory, Cold Spring Harbor, NY</td>
+    <td >muna -- at -- cshl.edu</td>
+</tr>
+<tr>
+    <th ><a name="Deb">Deborah Triant</a></th>
+    <td >University of Florida</td>
+    <td >dtriant -- at -- virginia.edu</td>
+</tr>
+
+<tr><td colspan="3">&nbsp;</td></tr>
+<tr><td colspan="3">&nbsp;</td></tr>
+
+<tr><th colspan="3"><a name="lecturer">Guest Lecturers</a></th></tr>
+<!-- Uncomment these out when the schedule is finalized -->
+
+<tr>
+<th ><a name="ScottCain">Scott Cain</a></th>
+<td >Ontario Institute for Cancer Research, Medina, OH</td>
+<td >scott -- at -- scottcain.net</td>
+</tr>
+
+<tr>
+<th ><a name="KarenEilbeck">Karen Eilbeck</a></th>
+<td >University of Utah, Sale Lake City, UT</td>
+<td >keilbeck --at -- genetics.utah.edu</td>
+</tr>
+
+<tr>
+<th ><a name="BrianHaas">Brian Haas</a></th>
+<td >Broad Institute, Cambridge, MA</td>
+<td >bhaas -- at -- broadinstitute.org</td>
+</tr>
+
+<tr>
+<th ><a name="WilliamPearson">WilliamPearson</a></th>
+<td >University of California, Davis, CA</td>
+<td >wrp --at-- virginia.edu</td>
+</tr>
+
+<tr>
+<th ><a name="TomasMarques">Tomas Marques-Bonet</a></th>
+<td >Universitat Pompeu Fabra, Barcelona, Spain</td>
+<td >tomas.marques -- at -- upf.edu</td>
+</tr>
+
+<tr><td colspan="3">&nbsp;</td></tr>
+<tr><td colspan="3">&nbsp;</td></tr>
+
+<!-- Students 
+<tr><th colspan="3"><a name="students">Students</a></th></tr>
+
+<!-- Uncomment these out and replace with 2017 student list
+  use csv2html.pl script to make this section
+ 
+
+<TR><TH>Luke Henry</TH><TD>Princeton University</TD><TD>lucas.price.henry -- at -- gmail.com</TD></TR>
+<TR><TH>Ken Saville</TH><TD>Albion College</TD><TD>ksaville -- at -- albion.edu</TD></TR>
+<TR><TH>Emile Gluck-Thaler</TH><TD>The Ohio State University</TD><TD>gluckthaler.1 -- at -- osu.edu</TD></TR>
+<TR><TH>Courtney Hershberger</TH><TD>Cleveland Clinic Foundation</TD><TD>hershbc -- at -- ccf.org</TD></TR>
+<TR><TH>Carol Amato</TH><TD>University of Colorado Denver AMC</TD><TD>carol.amato -- at -- ucdenver.edu</TD></TR>
+<TR><TH>Sapan Patel</TH><TD>Memorial Sloan Kettering Cancer Center</TD><TD>sapanpharmacy -- at -- yahoo.com</TD></TR>
+<TR><TH>Damian Almiron Bonnin</TH><TD>Norris Cotton Cancer Center & Geisel School of Med</TD><TD>Damian.Almiron -- at -- dartmouth.edu</TD></TR>
+<TR><TH>Nicolai Krogh</TH><TD>University of Copenhagen</TD><TD>nicolai -- at -- sund.ku.dk</TD></TR>
+<TR><TH>Michael Drazer</TH><TD>The University of Chicago Medical Center</TD><TD>mdrazer -- at -- medicine.bsd.uchicago.edu</TD></TR>
+<TR><TH>Natasha Pacheco</TH><TD>University of Alabama at Birmingham</TD><TD>npacheco -- at -- uab.edu</TD></TR>
+<TR><TH>Alexander Pocock</TH><TD>University of Queensland</TD><TD>uqapococ -- at -- uq.edu.au</TD></TR>
+<TR><TH>Hassan Salem</TH><TD>Emory University</TD><TD>hssalem -- at -- emory.edu</TD></TR>
+<TR><TH>Pedro Lowenstein</TH><TD>The University of Michigan, Ann Arbor</TD><TD>pedrol -- at -- umich.edu</TD></TR>
+<TR><TH>Tam Quach</TH><TD>Feinstein Institute of Medical Research</TD><TD>tquach -- at -- nshs.edu</TD></TR>
+<TR><TH>Yi-Jyun Luo</TH><TD>Okinawa Institute of Science and Technology</TD><TD>locke.yj -- at -- gmail.com</TD></TR>
+<TR><TH>Kimberly Krautkramer</TH><TD>University of Wisconsin-Madison</TD><TD>kkrautkramer -- at -- wisc.edu</TD></TR>
+<TR><TH>Jessica Lyons</TH><TD>University of California, Berkeley</TD><TD>jblyons -- at -- berkeley.edu</TD></TR>
+<TR><TH>Shasta Webb</TH><TD>University of Calgary</TD><TD>shasta.webb -- at -- ucalgary.ca</TD></TR>
+<TR><TH>Katarzyna Lepeta</TH><TD>Nencki Institute of Experimental Biology</TD><TD>k.lepeta -- at -- nencki.gov.pl</TD></TR>
+<TR><TH>Karthickeyan Chella Krishnan</TH><TD>University of California, Los Angeles</TD><TD>kchellakrishnan -- at -- mednet.ucla.edu</TD></TR>
+<TR><TH>Masashi Yamaji</TH><TD>HHMI/The Rockefeller University</TD><TD>myamaji -- at -- rockefeller.edu</TD></TR>
+
+</tbody></table>
+</div>
+
+
+
+<!--faculty-->
+<p>
+    <a href="http://validator.w3.org/check?uri=referer"><img
+        src="http://www.w3.org/Icons/valid-xhtml10"
+        alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a>
+  </p>
+
+</body></html>
