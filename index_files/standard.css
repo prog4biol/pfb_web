@@ -82,6 +82,16 @@ TR.meal,TD.meal {
    margin: 0;
 }
 
+
+TR.sports,TD.sports {
+  background: #ffffcc;
+/*   background: #f5fafa; */
+   font-family: sans-serif;
+   padding: 0;
+   margin: 0;
+}
+
+
 TR.party,TD.party {
    background: #B9E2E5;
 /*   background: #d9e2e1; */
