@@ -1,0 +1,1000 @@
+  115  vi serve-cgi-bin.conf 
+  116  ls
+  117  cd ..
+  118  ls
+  119  vi apache2.conf 
+  120  grep LoadModule *.cong
+  121  grep LoadModule *.conf
+  122  grep LoadModule */*.conf
+  123  ls
+  124  cd sites-enabled/
+  125  ls
+  126  vi 000-default.conf 
+  127  ls
+  128  cd ..
+  129  ls
+  130  cat envvars 
+  131  ls
+  132  vi apache2.conf 
+  133  ls
+  134  cd mods-enabled/
+  135  ls
+  136  vi userdir.conf 
+  137  grep cgi *
+  138  ls
+  139  ls ../mods-available/
+  140  cat ../mods-available/cgi.load
+  141  a2enmod cgi
+  142  sudo a2enmod cgi
+  143  service apache2 restart
+  144  sudo service apache2 restart
+  145  cd /var/www
+  146  ls
+  147  cd html
+  148  ls
+  149  vi index.html 
+  150  mv index.html index.orig
+  151  sudo mv index.html index.orig
+  152  ls
+  153  vi index.html
+  154  sudo vi index.html
+  155  ls
+  156  sudo mkdir 2015
+  157  sudo mkdir 2014
+  158  sudo mkdir 2013
+  159  sudo mkdir 2012
+  160  ls
+  161  cd ..
+  162  ls
+  163  cd html/
+  164  ls
+  165  pwd
+  166  cd
+  167  ls
+  168  cd /etc/passwd
+  169  useradd
+  170  cat /etc/passwd
+  171  useradd
+  172  cd
+  173  cd /etc
+  174  ls
+  175  cd skel
+  176  ls
+  177  ls -alh
+  178  vi .bashrc
+  179  sudo vi .bashrc
+  180  mkdir /pfbhome/local
+  181  sudo mkdir /pfbhome/local
+  182  sudo mkdir /pfbhome/local/etc
+  183  sudo vi /pfbhome/local/etc/bashrc
+  184  cd /pfbhome/local
+  185  ls
+  186  sudo mkdir bin
+  187  sudo mkdir lib
+  188  ls
+  189  sudo mkdir src
+  190  cd src
+  191  ls
+  192  pwd
+  193  vi download_blast.sh
+  194  sudo vi download_blast.sh
+  195  ls
+  196  sudo sh download_blast.sh 
+  197  sudo vi download_blast.sh 
+  198  sudo sh download_blast.sh 
+  199  ls
+  200  cd ..
+  201  sudo chown -R ejr src
+  202  cd /etc
+  203  ls
+  204  vi sudoers
+  205  ls
+  206  sudo vi sudoers
+  207  sudo vi /etc/group
+  208  cd 
+  209  cd /pfbhome/
+  210  ls
+  211  cd local
+  212  ls
+  213  cd etc
+  214  ls
+  215  sudo vi bashrc 
+  216  sudo apt install libtool
+  217  which axps
+  218  sudo apt search axps
+  219  sudo apt search apxs
+  220  sudo apt install apache2-dev
+  221  ls
+  222  cd /etc
+  223  ls
+  224  cd apache2/
+  225  ls
+  226  cd mods-available/
+  227  ls
+  228  vi markdown.load
+  229  sudo vi markdown.load
+  230  ls /pfbhome/local/erc
+  231  ls /pfbhome/local/etc
+  232  sudo service apache2 restart
+  233  sudo a2enmod markdown
+  234  sudo service apache2 restart
+  235  ls
+  236  cd ..
+  237  cd mods-enabled/
+  238  ls
+  239  rm markdown.load 
+  240  sudo rm markdown.load 
+  241  sudo service apache2 restart
+  242  sudo apt install bioperl
+  243  ls
+  244  exit
+  245  ls
+  246  mkdir bakcup
+  247  mdkir backup
+  248  mkdir backup
+  249  rmdir bakcup/
+  250  ls
+  251  mv *.tgz backup/
+  252  ls
+  253  cd bkacup
+  254  cd backup
+  255  ls
+  256  pwd
+  257  ls
+  258  sudo mv * ~ejr
+  259  cd ~ejr
+  260  ls
+  261  mkdir backup
+  262  exit
+  263  ls
+  264  sudo bash
+  265  ls
+  266  rm -rf backup/
+  267  ls
+  268  cd /pfbhome/
+  269  ls
+  270  cd /etc
+  271  ls
+  272  pwd
+  273  ls
+  274  mount
+  275  cd /etc
+  276  ls
+  277  sudo vi /etc/passwd
+  278  sudo vi /etc/shadow
+  279  sudo vi /etc/group
+  280  cd /pfbhome/
+  281  ls
+  282  cd lcoal
+  283  ls
+  284  cd local
+  285  ls
+  286  cd etc
+  287  ls
+  288  cat bashrc
+  289  q!
+  290  ls
+  291  cd
+  292  ls
+  293  w
+  294  ls
+  295  w
+  296  top
+  297  ls
+  298  cd /tmp
+  299  ls
+  300  cd
+  301  ls
+  302  sudo vi /etc/fstab
+  303  sudo umount /pfbhome
+  304  sudo vi /etc/fstab
+  305  mount
+  306  cd /pfbhome
+  307  ls
+  308  cd 
+  309  pwd
+  310  df -h
+  311  ls
+  312  cd /var/www/html/
+  313  ls
+  314  ls data/
+  315  mkdir 2016
+  316  sudo mkdir 2016
+  317  ls
+  318  cp -r index* lecture_notes/ projectPresentationInstructions.txt run.pdf takeScriptsHome.txt data/ problem_sets/ review_sessions/ student_scripts_2016/ 2016/.
+  319  sudo cp -r index* lecture_notes/ projectPresentationInstructions.txt run.pdf takeScriptsHome.txt data/ problem_sets/ review_sessions/ student_scripts_2016/ 2016/.
+  320  ls
+  321  cd 2016
+  322  rm -rf student_scripts_2016
+  323  sudo rm -rf student_scripts_2016
+  324  ls
+  325  cd ..
+  326  ls student_scripts_2016/
+  327  ls student_scripts_2016/ejr/
+  328  ls student_scripts_2016/ejr/public_html/
+  329  rm -rf student_scripts_2016/
+  330  sudo rm -rf student_scripts_2016/
+  331  ls
+  332  du -h
+  333  du -f
+  334  df -h
+  335  ls
+  336  ll
+  337  cd /pfbhome
+  338  ll
+  339  cd /var/www/html/
+  340  ll
+  341  less index.html 
+  342  emacs index.html 
+  343  sudo emacs index.html 
+  344  cp index.html back_up_index.html
+  345  sudo cp index.html back_up_index.html
+  346  emacs index.html 
+  347  sudo emacs index.html
+  348  exit
+  349  cd /var/www/html/
+  350  ll
+  351  cd problem_sets/
+  352  ll
+  353  cd ..
+  354  ll
+  355  sudo su
+  356  ll
+  357  cd ~
+  358  ll
+  359  git
+  360  git clone https://github.com/srobb1/pfb2017.git
+  361  ll
+  362  cd pfb2017/
+  363  ll
+  364  ll files/
+  365  ll
+  366  ll pdfs/
+  367  cp pdfs/*problemset* /var/www/html/problem_sets/
+  368  sudo cp pdfs/*problemset* /var/www/html/problem_sets/
+  369  ll /var/www/html/problem_sets/
+  370  ll
+  371  cp pdfs/pfb2017.lectures.pdf /var/www/html/lecture_notes/
+  372  sudo cp pdfs/pfb2017.lectures.pdf /var/www/html/lecture_notes/
+  373  cd /var/www/html/
+  374  ll
+  375  cd lecture_notes/
+  376  ll
+  377  cd ../problem_sets/
+  378  ll
+  379  ll ../perl_problem_sets/
+  380  ll ../perl_problem_sets/Unix_I_problemSet.txt
+  381  cat ../perl_problem_sets/Unix_I_problemSet.txt
+  382  less ../perl_problem_sets/Unix_I_problemSet.txt
+  383  ll
+  384  cd ..
+  385  ll
+  386  mkdir files
+  387  sudo mkdir files
+  388  cp ~/pfb2017/files/* files/
+  389  sudo cp ~/pfb2017/files/* files/
+  390  ll
+  391  cd files/
+  392  ll
+  393  cd ..
+  394  mv files problem_sets/
+  395  sudo mv files problem_sets/
+  396  ll problem_sets/files/
+  397  cd problem_sets/
+  398  ll
+  399  ll ../lecture_notes/
+  400  exit
+  401  cd /var/www/html/
+  402  sudo emacs index.html
+  403  exit
+  404  cd pfb2017/
+  405  ll
+  406  git update
+  407  git pull origin master
+  408  ll
+  409  cd problemsets/
+  410  ll
+  411  cd /var/www/html/problem_sets/
+  412  ll
+  413  cp ~/pfb2017/problemsets/*.md .
+  414  sudo cp ~/pfb2017/problemsets/*.md .
+  415  ll
+  416  cd /var/www/html/
+  417  ll
+  418  cd problem_sets/
+  419  ll
+  420  cd ..
+  421  ll
+  422  emacs lecture_notes/
+  423  cd lecture_notes/
+  424  cp ~/pfb2017/problemsets/*.md .
+  425  sudo cp ~/pfb2017/problemsets/*.md .
+  426  cd ..
+  427  ll
+  428  sudo emacs index.html
+  429  cd lecture_notes/
+  430  ll
+  431  cd /var/www/html/
+  432  ll
+  433  cd 2016/
+  434  ll
+  435  cd ..
+  436  ll
+  437  sudo emacs index.html
+  438  cd /var/www/html/
+  439  emacs index.html
+  440  sudo emacs index.html
+  441  cd /var/www/html/
+  442  ll
+  443  sudo emacs index.html
+  444  clear
+  445  cd /var/www/html/
+  446  ll
+  447  emacs index.html
+  448  sudo emacs index.html
+  449  cd /var/www/html/
+  450  ll
+  451  sudo emacs index.html
+  452  clear
+  453  cd /var/www/html/
+  454  ll
+  455  emacs index.html
+  456  sudo emacs index.html
+  457  cd /var/www/html/
+  458  ll
+  459  emac index.html
+  460  sudo emacs index.html
+  461  clear
+  462  cd /var/www/html/
+  463  ll
+  464  emacs index.html
+  465  sudo emacs index.html
+  466  fg
+  467  exit
+  468  ll
+  469  cd /var/www/html/
+  470  sudo emacs index.html
+  471  ll
+  472  ll pfb2017/
+  473  ll
+  474  cd /var/www/html/
+  475  ll
+  476  cd data/
+  477  ll
+  478  cd ..
+  479  ll
+  480  cd problem_sets/
+  481  ll
+  482  cd files/
+  483  ll
+  484  cp ~/go.owl .
+  485  sudo cp ~/go.owl .
+  486  ll
+  487  emacs ../../index.html
+  488  sudo emacs ../../index.html
+  489  cd /var/www/html/problem_sets/files/
+  490  ll
+  491  pwd
+  492  less /var/www/html/problem_sets/files/go.owl cd ..
+  493  cd ..
+  494  ll
+  495  cd ..
+  496  ll
+  497  less problem_sets/files/go.owl 
+  498  cd /var/www/html/
+  499  ll
+  500  sudo emacs index.html
+  501  cd /var/www/html/
+  502  ll
+  503  emacs index.html
+  504  sudo emacs index.html
+  505  cd /var/www/html/
+  506  emacs index.html
+  507  sudo emacs index.html
+  508  exit
+  509  vi ~/.ssh/authorized_keys 
+  510  exit
+  511  sudo emacs /var/www/html/index.html
+  512  ll
+  513  sudo emacs /var/www/html/index.html
+  514  ls
+  515  cd /var/www/html/
+  516  ls
+  517  mkdir 2017
+  518  exit
+  519  df -h
+  520  cd /
+  521  ls
+  522  cd home
+  523  ls
+  524  cd ubuntu/
+  525  ls
+  526  dc ..
+  527  cd /var/www
+  528  ls
+  529  du -sh *
+  530  cd /tmp
+  531  ls
+  532  cd /
+  533  ls
+  534  cd pfbhome
+  535  ls
+  536  cd ..
+  537  du -sh *
+  538  sudo du -sh *
+  539  df -h
+  540  cd /var/www
+  541  ls
+  542  du -sh *
+  543  cd html/
+  544  ls
+  545  du -sh *
+  546  exit
+  547  ls
+  548  rm go.owl 
+  549  ls pfb2017/
+  550  ls -la
+  551  cd pfb2017/
+  552  ls -a
+  553  cd ..
+  554  ls
+  555  df -h
+  556  rm -rf pfb2017
+  557  df -h
+  558  cd /var/www/html/`
+  559  cd /var/www/html/
+  560  ls
+  561  du -h --max-depth=1
+  562  cd ..
+  563  cd
+  564  du -h --max-depth=1
+  565  udo du -h --max-depth=1
+  566  sudo du -h --max-depth=1
+  567  cd /
+  568  sudo du -h --max-depth=1
+  569  cd usr/
+  570  ls
+  571  ls -lt
+  572  sudo du -h --max-depth=1
+  573  ls -l src
+  574  cd ~/.ssh
+  575  vi authorized_keys 
+  576  cp authorized_keys authorized_keysBAK
+  577  vi authorized_keys
+  578  ls
+  579  cd ..
+  580  ls
+  581  cd ~
+  582  ls
+  583  cd /var/www/html/
+  584  ls
+  585  head projectPresentationInstructions.txt
+  586  ls
+  587  ls lecture_notes/
+  588  vi index.html
+  589  grep href index.html
+  590  ls
+  591  ls data/
+  592  mkdirtrash
+  593  mkdir trash
+  594  grep href index.html | grep data
+  595  ls
+  596  ls -lt data/
+  597  ls
+  598  ls -lt index_files/
+  599  ls -lt lecture_notes/
+  600  sudo mkdir trash
+  601  mv lecture_notes/* trash
+  602  sudo  mv lecture_notes/* trash
+  603  ls
+  604  sudo mv perl_* trash/.
+  605  ls problem_sets/
+  606  grep href index.html | grep problem_sets
+  607  grep href index.html | grep problem_sets | grep -v !
+  608  vi index.html
+  609  cd problem_sets/
+  610  ls
+  611  sudo mv *md ../trash/
+  612  sudo mv *pdf ../trash/
+  613  ls
+  614  cd files/
+  615  ls
+  616  cd ..
+  617  ls
+  618  cd ..
+  619  ls
+  620  ls review_sessions/
+  621  cata takeScriptsHome.txt 
+  622  cat takeScriptsHome.txt 
+  623  ls
+  624  ls lecture_notes/
+  625  ls problem_sets/
+  626  ls data/
+  627  cd data/
+  628  rm Perl*
+  629  udo rm Perl*
+  630  sudo rm Perl_*
+  631  ls
+  632  ls -lh
+  633  cd ..vi in
+  634  cd ..
+  635  vi index
+  636  vi index.html
+  637  sudo vi index.html
+  638  ls
+  639  rm -rf trash/
+  640  sudo rm -rf trash/
+  641  ls
+  642  df -h
+  643  exit
+  644  ls
+  645  exit
+  646  ls
+  647  cd /var/www/html/
+  648  ls
+  649  mkdir 2017
+  650  ls
+  651  ls -l
+  652  cd ..
+  653  ls
+  654  ls -l
+  655  sudo chown -R ubuntu:ubuntu html
+  656  ls
+  657  cd html/
+  658  ls
+  659  ls -l
+  660  mkdir 2017
+  661  cp -r data/ index_files/ index.html lecture_notes/ problem_sets/ projectPresentationInstructions.txt review_sessions/ run.pdf takeScriptsHome.txt 2017/.
+  662  ls
+  663  cd 2017
+  664  ls
+  665  ls index
+  666  ls index_files/
+  667  grep 'srobb1/pfb2017' index.html 
+  668  perl -p -e 's/srobb1\/pfb2017/prob4biol\/pfb2017/g' index.html > index2.html
+  669  perl -p -e 's/srobb1\/pfb2017/prog4biol\/pfb2017/g' index.html > index2.html
+  670  cp index.html index.htmlBAK
+  671  mv index2.html index.html
+  672  ls
+  673  cd ..
+  674  sl
+  675  ls
+  676  ls lecture_notes/
+  677  ls problem_sets/
+  678  ls problem_sets/files/
+  679  ls review_sessions/
+  680  mkdir 2018
+  681  rm -rf 2018
+  682  ls
+  683  perl -p -e 's/srobb1\/pfb2017/prog4biol\/pfb2018/g' index.html > index2.html
+  684  cp index.html index.htmlBAK
+  685  mv index2.html index.html
+  686  ls
+  687  cd /var
+  688  cd www/
+  689  ls
+  690  cd html/
+  691  ls
+  692  lesss index.html
+  693  less index.html
+  694  emacs index.html
+  695  cp index.html backup_2017_index.html
+  696  ls
+  697  emacs index.html
+  698  exit
+  699  ls
+  700  cd /var/www/
+  701  cd html/
+  702  ls
+  703  vi index.html
+  704  ls data/
+  705  ls
+  706  ls index
+  707  ls index_files/
+  708  vi index_files/standard.css 
+  709  vi index.html
+  710  exit
+  711  ls
+  712  cd /
+  713  ls
+  714  cd home/
+  715  cd /var/www/
+  716  ls
+  717  cd html/
+  718  ls
+  719  emacs index.html&
+  720  emacs index.html
+  721  exit
+  722  cd /var/www/html/
+  723  ls
+  724  vi index.html
+  725  ls
+  726  cat takeScriptsHome.txt index2
+  727  exit
+  728  cd /var/www/html/
+  729  ls
+  730  emacs index.html
+  731  exit
+  732  cd /var/www/html/
+  733  emacs index.html
+  734  ls
+  735  emacs index.html
+  736  ls
+  737  cd /var/www/html/
+  738  emacs index.html
+  739  exit
+  740  ls
+  741  cd /var/www/html/
+  742  ls
+  743  exit
+  744  cd /var/www/html/
+  745  ls
+  746  emacs index.html&
+  747  exit
+  748  cd /var/www/html/
+  749  ls
+  750  emacs index.html
+  751  exit
+  752  cd /var/www/html/
+  753  emacs index.html
+  754  exit
+  755  cd /var/www/html/
+  756  ls
+  757  vi index
+  758  vi index.html
+  759  exit
+  760  cd /var/www/html/
+  761  curl -OL https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/52dc7b32-ee7c-491a-ac49-12779ff663be/vi-help-sheet-01-large2.jpg
+  762  ls
+  763  mkdir 2018
+  764  mv vi-help-sheet-01-large2.jpg 2018/.
+  765  cd 2018
+  766  cd ..
+  767  vi index.html
+  768  exit
+  769  cd /var/www/html/
+  770  ls
+  771  emacs index.html
+  772  exit
+  773  cd /var/www/html/
+  774  emacs index.html
+  775  exit
+  776  cd /var/www/html/
+  777  vi index.html
+  778  vi index_files/standard.css 
+  779  vi index.html
+  780  vi index_files/standard.css 
+  781  vi index.html
+  782  vi index_files/standard.css 
+  783  vi index.html
+  784  vi index_files/standard.css 
+  785  vi index.html
+  786  cd /var/www/html/
+  787  ls
+  788  emacs index.html
+  789  exit
+  790  cd /var/www/html/
+  791  emacs index.html
+  792  exit
+  793  cd /var/www/html/
+  794  emacs index.html
+  795  exit
+  796  ls
+  797  cd /var/www/html/
+  798  emacs index.html
+  799  cd /var/www/html/
+  800  emacs index.html
+  801  exit
+  802  ls
+  803  cd /var/www/html/
+  804  emacs index.html
+  805  exit
+  806  cd /var/www/html/
+  807  emacs index.html
+  808  cd /var/www/html/
+  809  emacs index.html
+  810  exit
+  811  cd /var/www/html/
+  812  emacs index.html
+  813  cd ~
+  814  exit
+  815  cd ~
+  816  cd /var/www/html/
+  817  emacs index.html
+  818  exit
+  819  cd /var/www/html/
+  820  emacs index.html
+  821  exit
+  822  cd /var/www/html/
+  823  emacs index.html
+  824  exit
+  825  cd /var/www/html/
+  826  emacs index.html
+  827  exit
+  828  cd /var/www/html/
+  829  emacs index.html
+  830  exit
+  831  cd /var/www/html/
+  832  emacs index.html
+  833  vi index_files/standard.css 
+  834  cd index_files/
+  835  ls
+  836  cd /var/www/html/
+  837  ls
+  838  cd 2018/
+  839  ls
+  840  cd ..
+  841  ls
+  842  emacs index.html
+  843  exit
+  844  cd /var/www/html/
+  845  emacs index.html
+  846  exit
+  847  cd /var/www/html/
+  848  emacs index.html
+  849  exit
+  850  cd /var/www/html/
+  851  emacs index.html
+  852  exit
+  853  cd /var/www/html/
+  854  emacs index.html
+  855  exit
+  856  cd /var/www/html/
+  857  emacs index.html
+  858  exit
+  859  ls
+  860  cd /var/www/html/
+  861  emacs index.html
+  862  exit
+  863  cd /var/www/html/
+  864  vi index.html
+  865  exit
+  866  cd /var/www/html/
+  867  emacs index.html
+  868  exit
+  869  cd /var/www/html/
+  870  emacs index.html
+  871  cd /var/www/html/
+  872  emacs index.html
+  873  exit
+  874  ls
+  875  cd ..
+  876  ls
+  877  cd ..
+  878  ls
+  879  cd home/
+  880  ls
+  881  cd ubuntu/
+  882  ls
+  883  cd /var/www/
+  884  ls
+  885  cd html/
+  886  ls
+  887  cd 2016
+  888  ls
+  889  cd lecture_notes/
+  890  ls
+  891  cd /var/www/
+  892  ls
+  893  cd html/
+  894  ls
+  895  ls 2018
+  896  cp -r lecture_notes/ problem_sets/ review_sessions/ problem_sets/ 2018/.
+  897  ls
+  898  ls 2018
+  899  cp index.html 2018
+  900  ls
+  901  ls 2018
+  902  cp run.pdf 2018
+  903  cp projectPresentationInstructions.txt 2018
+  904  cp takeScriptsHome.txt 2018
+  905  ls
+  906  mv back* 2018
+  907  ls 2018
+  908  ls
+  909  mv index.htmlBAK 2018
+  910  ls
+  911  rm index.html~
+  912  ls
+  913  ls 2018
+  914  ls
+  915  vi projectPresentationInstructions.txt 
+  916  ls
+  917  cd problem_sets/
+  918  ls
+  919  cd files/
+  920  ls
+  921  cd ..
+  922  ls
+  923  cd ..
+  924  ls
+  925  vi index.html 
+  926  exit
+  927  cd /var/www/html/
+  928  ls
+  929  vi index.html 
+  930  cp -r index_files 2018
+  931  ls
+  932  vi index.html 
+  933  ls
+  934  cd /var/www/html/
+  935  ls
+  936  mkdir 2019
+  937  ls 2018
+  938  ls index.html 
+  939  vi index.html 
+  940  ls
+  941  ls index_files/
+  942  ls 2018
+  943  quit()
+  944  exit
+  945  cd /var/www/html/
+  946  ls
+  947  vi index.html 
+  948  cd 2018
+  949  ls
+  950  vi index.html
+  951  cd ..
+  952  ls
+  953  vi index.html 
+  954  ls ..
+  955  ls ../..
+  956  ls /
+  957  ls /var/www.html
+  958  ls /var/www/html
+  959  pwd
+  960  vi /var/www/html
+  961  vi index.html
+  962  cd /var/www/index
+  963  cd /var/www/html/
+  964  vi index.html 
+  965  cd /var/www/html/
+  966  vi index.html 
+  967  cd /var/www/html/
+  968  vi index.html 
+  969  vi /var/www/html/index.html 
+  970  clear
+  971  cd var/www/
+  972  cd /var/www/html/
+  973  vi index.html 
+  974  cd /var/www/html/
+  975  vi index.html 
+  976  cd /var/www/html/
+  977  ls
+  978  vi index.html 
+  979  exit
+  980  vi /var/www/html/index.html 
+  981  vi /var/www/html/index.html 
+  982  clear
+  983  vi /var/www/html/index.html 
+  984  clear
+  985  vi /var/www/html/index.html 
+  986  cd /var/www/html/
+  987  vi index.html 
+  988  celar
+  989  clear
+  990  vi /var/www/html/index.html 
+  991  vi /var/www/html/index.html vi /var/www/html/index.html 
+  992  clear
+  993  vi /var/www/html/index.html 
+  994  ls
+  995  cd /var/www/html/
+  996  ls
+  997  cd 2019
+  998  ls
+  999  cd ..
+ 1000  ls
+ 1001  cd data/
+ 1002  ls
+ 1003  cd ..
+ 1004  ls
+ 1005  ls index
+ 1006  ls index_files/
+ 1007  ls
+ 1008  ls index_files/
+ 1009  cp -r index_files/ lecture_notes/ data/ index.html problem_sets/ projectPresentationInstructions.txt review_sessions/ run.pdf takeScriptsHome.txt 2019/.
+ 1010  cd 201
+ 1011  cd 2019/
+ 1012  ls
+ 1013  cd ..
+ 1014  sl
+ 1015  ls
+ 1016  vi index.html 
+ 1017  cd ~/.ssh
+ 1018  ls
+ 1019  ssh-keygen -t ed25519 -C "sofia2341@gmail.com"
+ 1020  eval "$(ssh-agent -s)"
+ 1021  ssh-keygen -t ed25519 -C "sofia2341@gmail.com"
+ 1022  cat co
+ 1023  ls -l
+ 1024  touch ~/.ssh/config
+ 1025  vi config 
+ 1026  ls
+ 1027  cat id_ed25519.pub
+ 1028  ssh-keygen -t ed25519 -C "sofia2341@gmail.com"
+ 1029  cat /home/ubuntu/.ssh/id_ed25519.pub 
+ 1030  cd /var/www/
+ 1031  cd html/
+ 1032  ls
+ 1033  echo "# pfb_web" >> README.md
+ 1034  git init
+ 1035  git add README.md
+ 1036  git commit -m "first commit"
+ 1037  git branch -M main
+ 1038  git remote add origin git@github.com:prog4biol/pfb_web.git
+ 1039  git push -u origin main
+ 1040  ls
+ 1041  vi README.md 
+ 1042  ls
+ 1043  ls data/
+ 1044  ls -lth data/
+ 1045  cd ..
+ 1046  cd html/
+ 1047  ls
+ 1048  cd .git/
+ 1049  ls
+ 1050  cd hooks/
+ 1051  ls
+ 1052  vi pre-commit.sh
+ 1053  ls
+ 1054  cd ../..
+ 1055  ls
+ 1056  ls -lth * 
+ 1057  ls -lth */*
+ 1058  git add -A
+ 1059  git commit -m 'adding past files'
+ 1060  cd /var/www/html/
+ 1061  ls
+ 1062  git push
+ 1063  git rm --cached 2016/lecture_notes/oldNotes/CSHL_PFB2014_NotesAndLectures.pdf
+ 1064  git rm --cached 2017/problem_sets/files/go.owl
+ 1065  git commit --amend -CHEAD
+ 1066  ls
+ 1067  git remote -v
+ 1068  git push
+ 1069  cd /var/www/html/
+ 1070  lsgit rm --cached 2018/problem_sets/files/go.owl
+ 1071  git commit --amend -CHEAD
+ 1072  git rm --cached 2018/problem_sets/files/go.owl
+ 1073  git commit --amend -CHEAD
+ 1074  git push
+ 1075  rm 2019/problem_sets/files/go.owl
+ 1076  git rm --cached 2019/problem_sets/files/go.owl
+ 1077  git commit --amend -CHEAD
+ 1078  cd /var/www/html/
+ 1079  ls
+ 1080  vi index.html 
+ 1081  _9
+ 1082  vi index.html 
+ 1083  [A
+ 1084  vi index.html 
+ 1085  git status
+ 1086  rm 2016/lecture_notes/oldNotes/CSHL_PFB2014_NotesAndLectures.pdf 2017/problem_sets/files/go.owl 2018/problem_sets/files/go.owl
+ 1087  git add index.html 
+ 1088  git commit -m 'updated calendar for 2022'
+ 1089  git push
+ 1090  git rm --cached problem_sets/files/go.owl
+ 1091  git commit --amend -CHEAD
+ 1092  git push
+ 1093  cd /var/www/html/
+ 1094  vi .gitignore 
+ 1095  git rm --cached problem_sets/files/go.owl
+ 1096  git status
+ 1097  vi .gitignore 
+ 1098  git remote -v
+ 1099  git add -
+ 1100  git add -A
+ 1101  git commit -m 'adding gitignore
+ 1102  git commit -m 'adding gitignore'
+ 1103  git push
+ 1104  git rm --cached problem_sets/files/go.owl
+ 1105  git commit --amend -CHEAD
+ 1106  git push
+ 1107  git rm problem_sets/files/go.owl
+ 1108  rm problem_sets/files/go.owl
+ 1109  git commit --amend -CHEAD
+ 1110  git push
+ 1111  rm -rf .git
+ 1112  history
+ 1113  /init
+ 1114  history > tmp
