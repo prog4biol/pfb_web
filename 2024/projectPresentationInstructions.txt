@@ -1,0 +1,27 @@
+Final Project Presentations
+===========================
+
+At 4pm each group will make an informal presentation about their project lasting about 10 min
+
+  -  Informal presentation
+  —  No Powerpoint is needed
+  -  Use whiteboards to show and discuss data 
+  -  Code can be displayed from the terminal
+  -  Websites can be demonstrated from a computer
+
+Please be sure to include
+
+1. Layout your problem
+
+2. Describe the strategy including 
+   - bioinformatic tools used
+   - pipeline described
+   - the purpose of any scripts that were written
+   - highlight any cool coding solutions
+   - no need to show all your code
+
+3. Describe any challenges and the solutions that were used or ideas on how to solve these issues in the future
+
+4. The results
+
+ 
